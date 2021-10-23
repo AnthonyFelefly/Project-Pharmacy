@@ -3,8 +3,14 @@ import './App.css';
 import {  Navbar, NavbarBrand } from 'reactstrap';
 import { Component } from 'react';
 import Catalogue from './components/CatalogueComponent';
-
+import {PRODUCTS} from './shared/products.js'
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.state={
+      products:PRODUCTS
+    };
+  }
   render() {
     return (
       <div >
@@ -13,7 +19,7 @@ class App extends Component {
             <NavbarBrand href="/">Pharmacy Absolute Care</NavbarBrand>
           </div>
         </Navbar>
-        <Catalogue />
+        <Catalogue products={this.state.products} />
       </div>
     );
   }
