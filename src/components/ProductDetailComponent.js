@@ -36,6 +36,8 @@ class ProductDetail extends Component{
                             <p>{product.application}</p>
                             <p className="desc">Price:</p>
                             <p>{product.price}</p>
+                            <p className="desc">Quantity in stock:</p>
+                            <p>{product.quantity}</p>
                         {/*<CardText>{product.description}</CardText>*/}
                         </CardBody>
                     </Card>
