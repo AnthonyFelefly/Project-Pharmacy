@@ -1,19 +1,29 @@
 import React,{Component} from 'react';
-import {Card,CardImg,CardImgOverlay,CardText,CardBody,CardTitle} from 'reactstrap'
+import {Card,CardImg,CardImgOverlay,CardText,CardBody,CardTitle,CardSubtitle} from 'reactstrap'
 import "../App.css"
 import { PRODUCTS } from '../shared/products';
 
 class ProductDetail extends Component{
     constructor(props){
         super(props);
+        this.DivToScroll=React.createRef();
+    }
+    
+    componentDidUpdate(){
+        if(this.DivToScroll.current){
+        this.DivToScroll.current.scrollIntoView({ 
+            behavior: "smooth", 
+            block: "nearest"
+         })}
     }
     renderProductImage(product){
         if(product!=null){
             return(
-                <div className="col-12 col-md-5 m-1">
+                <div ref={this.DivToScroll} className="col-12 col-md-5 m-1">
                 <Card >
                     <CardImg width="100%"  src={product.image} alt={product.name} />
-                    <CardTitle>{product.name}</CardTitle>
+                    <CardTitle className="m-1">{product.name}</CardTitle>
+                    <CardSubtitle className="m-1">{product.category}</CardSubtitle>
                 </Card>
                 </div>
             );
@@ -26,7 +36,7 @@ class ProductDetail extends Component{
     renderProductDetail(product){
         if (product!=null){
             return(
-                <div className='col-12 col-md-5 m-1'>
+                <div className='col-12 col-md-6'>
                     <Card>
                         <CardBody>
                             <CardTitle>{product.name}</CardTitle>
@@ -59,6 +69,7 @@ class ProductDetail extends Component{
 
         const ProductImage = this.renderProductImage(product);
         const ProductDetail=this.renderProductDetail(product);
+     
 
         return (
             <div className='container'>
