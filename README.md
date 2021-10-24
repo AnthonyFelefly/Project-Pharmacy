@@ -20,7 +20,9 @@ b. Make sure yarn in installed. If not, run the below command after :
 ```[bash]
          yarn add bootstrap@4.0.0
          yarn add reactstrap@5.0.0
-         yarn add react-popper@0.9.2 
+         yarn add react-popper@0.9.2
+         yarn add font-awesome@4.7.0
+         yarn add bootstrap-social@5.1.1
 ```
 4-Finally, Run these commands to start the application:
 ```[bash]
