@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
-import {Card,CardImg,CardImgOverlay,CardText,CardBody,CardTitle,CardSubtitle} from 'reactstrap'
-import "../App.css"
-import { PRODUCTS } from '../shared/products';
+import {Card,CardImg,CardBody,CardTitle,CardSubtitle} from 'reactstrap'
+import "../App.css";
+
 
 class ProductDetail extends Component{
     constructor(props){

@@ -10,7 +10,7 @@ b. Make sure yarn in installed. If not, run the below command after :
 ```[bash]
          npm install -g yarn 
 ```
-2-Gt the front-end code And use yan to resolve dependencies. In order to do open a folder of your choice and open a terminal or command line window in this folder path in which you will run these commands:
+2-Get the front-end code And use yarn to resolve dependencies. In order to do so, open a folder of your choice, then open a terminal or command line window in this folder path in which you will run these commands:
 ```[bash]
          git clone https://github.com/AnthonyFelefly/Project-Pharmacy.git
          cd Project-Pharmacy
@@ -18,9 +18,8 @@ b. Make sure yarn in installed. If not, run the below command after :
 ```
 3-Resolve additional dependencies by running these commands also:
 ```[bash]
-         yarn add bootstrap@4.0.0
-         yarn add reactstrap@5.0.0
-         yarn add react-popper@0.9.2 
+         yarn add font-awesome@4.7.0
+         yarn add bootstrap-social@5.1.1
 ```
 4-Finally, Run these commands to start the application:
 ```[bash]
