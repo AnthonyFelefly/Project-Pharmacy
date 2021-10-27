@@ -7,7 +7,7 @@ import { Button} from 'reactstrap';
         return(
             <Card>
                 <CardHeader>{product.name}</CardHeader>
-                <CardImg width="100%" object src={product.image} alt={product.name} />
+                <CardImg width="100%"  src={product.image} alt={product.name} />
                 <CardFooter className='text-center'>
                     <Button  style={{background:"#2ab89e"}} onClick={()=>onClick(product.id)} position="absolute">See Details</Button>
                 </CardFooter>

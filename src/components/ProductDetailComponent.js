@@ -1,25 +1,11 @@
-import React,{Component} from 'react';
+import React,{useEffect} from 'react';
 import {Card,CardImg,CardBody,CardTitle,CardSubtitle} from 'reactstrap'
 import "../App.css";
 
-
-class ProductDetail extends Component{
-    constructor(props){
-        super(props);
-        this.DivToScroll=React.createRef();
-    }
-    
-    componentDidUpdate(){
-        if(this.DivToScroll.current){
-        this.DivToScroll.current.scrollIntoView({ 
-            behavior: "smooth", 
-            block: "nearest"
-         })}
-    }
-    renderProductImage(product){
+     function RenderProductImage({product}){
         if(product!=null){
             return(
-                <div ref={this.DivToScroll} className="col-12 col-md-5 m-1">
+                <div className="col-12 col-md-5 m-1">
                 <Card >
                     <CardImg width="100%"  src={product.image} alt={product.name} />
                     <CardTitle className="m-1">{product.name}</CardTitle>
@@ -33,8 +19,9 @@ class ProductDetail extends Component{
             <div></div>
         }
     }
-    renderProductDetail(product){
+    function RenderProductDetail({product}){
         if (product!=null){
+            
             return(
                 <div className='col-12 col-md-6'>
                     <Card>
@@ -58,22 +45,25 @@ class ProductDetail extends Component{
             return(<div></div>);
         }
     }
-    render(){
-        const product = this.props.product
-
-        console.log(product);
-
+    const ProductDetail=(product)=>{
+        const DivToScroll=React.createRef();
+         
+        useEffect(()=>{
+            if(DivToScroll.current){
+                DivToScroll.current.scrollIntoView({ 
+                    behavior: "smooth", 
+                    block: "nearest"
+                 })}
+        })
         if (product == null) {
             return (<div></div>);
         }
 
-        const ProductImage = this.renderProductImage(product);
-        const ProductDetail=this.renderProductDetail(product);
-     
-
+        const ProductImage =RenderProductImage(product);
+        const ProductDetail=RenderProductDetail(product);
         return (
             <div className='container'>
-            <div className='row'>
+            <div ref={DivToScroll} className='row'>
                 {ProductImage}
                 {ProductDetail}
             </div>
@@ -82,5 +72,6 @@ class ProductDetail extends Component{
         )
     }
 
-}
 export default ProductDetail;
+
+
