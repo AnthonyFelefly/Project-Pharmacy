@@ -5,7 +5,7 @@ import "../App.css";
      function RenderProductImage({product}){
         if(product!=null){
             return(
-                <div className="col-12 col-md-5 m-1">
+                <div className="col-12 col-md-5 m-2">
                 <Card >
                     <CardImg width="100%"  src={product.image} alt={product.name} />
                     <CardTitle className="m-1">{product.name}</CardTitle>
@@ -23,7 +23,7 @@ import "../App.css";
         if (product!=null){
             
             return(
-                <div className='col-12 col-md-6'>
+                <div className='col-12 col-md-6 m-2'>
                     <Card>
                         <CardBody>
                             <CardTitle>{product.name}</CardTitle>
@@ -47,6 +47,7 @@ import "../App.css";
     }
     const ProductDetail=(product)=>{
         const DivToScroll=React.createRef();
+       
          
         useEffect(()=>{
             if(DivToScroll.current){
@@ -58,6 +59,7 @@ import "../App.css";
         if (product == null) {
             return (<div></div>);
         }
+        
 
         const ProductImage =RenderProductImage(product);
         const ProductDetail=RenderProductDetail(product);
