@@ -3,13 +3,16 @@
 import { Component } from 'react';
 import Main from './components/MainComponent'
 import './App.css';
+import {BrowserRouter as Router} from"react-router-dom";
 
 class App extends Component {
   render() {
     return (
-      <div >
-        <Main />
-      </div>
+      <Router>
+        <div >
+          <Main />
+        </div>
+      </Router>
     );
   }
 }

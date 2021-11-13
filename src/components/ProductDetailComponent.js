@@ -31,8 +31,10 @@ import "../App.css";
                             <p>{product.description}</p>
                             <p className="desc">Application:</p>
                             <p>{product.application}</p>
+                        
                             <p className="desc">Price:</p>
                             <p>{product.price}</p>
+                           
                             <p className="desc">Quantity in stock:</p>
                             <p>{product.quantity}</p>
                         {/*<CardText>{product.description}</CardText>*/}
