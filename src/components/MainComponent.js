@@ -4,15 +4,18 @@ import { Component } from 'react';
 import Home from './HomeComponent';
 import Catalogue from './CatalogueComponent';
 import {PRODUCTS} from '../shared/products.js';
+import { CATEGORIES } from '../shared/categories';
 import ProductDetail from './ProductDetailComponent';
 import NavBar from "./NavbarComponent";
 import Footer from './FooterComponent';
-import {Switch,Route,Redirect} from'react-router-dom';
+import Contact from "./ContactComponent";
+import {Switch,Route,Redirect,useParams} from'react-router-dom';
 class Main extends Component {
   constructor(props){
     super(props);
     this.state={
       products:PRODUCTS,
+      categories:CATEGORIES,
       selectedProduct:null
     };
   }
@@ -20,7 +23,7 @@ class Main extends Component {
     this.setState({selectedProduct:productId});
 
   }
-  
+ 
   render() {
     const HomePage=()=>{
       return(
@@ -42,6 +45,9 @@ class Main extends Component {
             <Catalogue products={this.state.products} onClick={(productId)=>this.onProductSelect(productId)}/>
             <ProductDetail product={this.state.products.filter((product)=>product.id===this.state.selectedProduct)[0]} onclick={0}/>
             </div>
+          </Route>
+          <Route exact path="/contactus">
+            <Contact/>
           </Route>
           <Redirect to="/home" />
         </Switch>

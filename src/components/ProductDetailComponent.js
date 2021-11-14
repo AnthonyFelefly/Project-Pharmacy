@@ -1,17 +1,30 @@
 import React,{useEffect} from 'react';
-import {Card,CardImg,CardBody,CardTitle,CardSubtitle} from 'reactstrap'
+import {Card,CardImg,CardBody,CardTitle,CardSubtitle,Breadcrumb,BreadcrumbItem} from 'reactstrap'
+import { CATEGORIES } from '../shared/categories';
+import { Link } from 'react-router-dom';
 import "../App.css";
+import { Button } from '@material-ui/core';
+const category=CATEGORIES;
+
 
      function RenderProductImage({product}){
         if(product!=null){
-            return(
+            return(<>
+                <div className="row">
+                <h3>{product.name}</h3>
+                <hr/>
+
+                </div>
+            
                 <div className="col-md-5 mt-4">
                 <Card >
                     <CardImg width="100%"  src={product.image} alt={product.name} />
                     <CardTitle className="m-1">{product.name}</CardTitle>
-                    <CardSubtitle className="m-1">{product.category}</CardSubtitle>
+                    <CardSubtitle className="m-1">{(category.filter((cat)=>cat.id===product.category)[0]).description}</CardSubtitle>
                 </Card>
                 </div>
+                </>
+                
             );
 
         }
@@ -49,6 +62,8 @@ import "../App.css";
     }
     const ProductDetail=(product)=>{
         const DivToScroll=React.createRef();
+        
+        /* const DivToScroll=React.createRef(); */
        
          
         useEffect(()=>{
@@ -67,10 +82,11 @@ import "../App.css";
         const ProductDetail=RenderProductDetail(product);
         return (
             <div className='container'>
-            <div ref={DivToScroll} className='row'>
+                 
+                <div ref={DivToScroll} className='row'>
                 {ProductImage}
                 {ProductDetail}
-            </div>
+                </div>
             </div>
             
         )
