@@ -1,10 +1,12 @@
 import { MDBBtn } from 'mdbreact';
 import React from 'react';
 import {Card,CardImg, CardText, CardBody, CardTitle} from 'reactstrap';
+import { CATEGORIES } from '../shared/categories';
 
 
 
     function RenderCatalogueItem({ product, onClick}){
+        const category=CATEGORIES;
         return(<>
             
               <Card  elevation={5}>
@@ -12,7 +14,7 @@ import {Card,CardImg, CardText, CardBody, CardTitle} from 'reactstrap';
                 <CardImg className="mt-2"width="100%"  src={product.image} alt={product.name} />
                 <CardBody >
                     <CardTitle style={{"font-size":"medium"}}>{product.name}</CardTitle>
-                    <CardText>{product.category}</CardText>
+                    <CardText>{(category.filter((cat)=>cat.id===product.category)[0]).description}</CardText>
                     <div className="text-center">
                     <MDBBtn   className=" teal accent-4 ml-auto mr-auto " onClick={()=>onClick(product.id)} position="absolute">See Details</MDBBtn>
                     </div>

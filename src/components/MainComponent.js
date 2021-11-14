@@ -7,6 +7,7 @@ import {PRODUCTS} from '../shared/products.js';
 import ProductDetail from './ProductDetailComponent';
 import NavBar from "./NavbarComponent";
 import Footer from './FooterComponent';
+import Contact from "./ContactComponent";
 import {Switch,Route,Redirect} from'react-router-dom';
 class Main extends Component {
   constructor(props){
@@ -37,6 +38,9 @@ class Main extends Component {
             <Catalogue products={this.state.products} onClick={(productId)=>this.onProductSelect(productId)}/>
             <ProductDetail product={this.state.products.filter((product)=>product.id===this.state.selectedProduct)[0]} onclick={0}/>
             </div>
+          </Route>
+          <Route exact path="/contactus">
+            <Contact/>
           </Route>
           <Redirect to="/home" />
         </Switch>

@@ -47,9 +47,9 @@ class NavBar extends Component{
                     </div>
                     <Collapse isOpen={this.state.isNavOpen} navbar>
                     <div className="container ml-0 " float="left">
-                        <Nav navbar   className="ml-0">
+                        <Nav navbar   className="ml-0" >
                             
-                                <NavLink className='nav-link' to='/home'>
+                                <NavLink className='nav-link ' to='/home'>
                                     <span ></span> Home
                                 </NavLink>
                             

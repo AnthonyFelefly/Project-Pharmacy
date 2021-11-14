@@ -1,6 +1,9 @@
 import React,{useEffect} from 'react';
 import {Card,CardImg,CardBody,CardTitle,CardSubtitle} from 'reactstrap'
+import { CATEGORIES } from '../shared/categories';
 import "../App.css";
+const category=CATEGORIES;
+
 
      function RenderProductImage({product}){
         if(product!=null){
@@ -9,7 +12,7 @@ import "../App.css";
                 <Card >
                     <CardImg width="100%"  src={product.image} alt={product.name} />
                     <CardTitle className="m-1">{product.name}</CardTitle>
-                    <CardSubtitle className="m-1">{product.category}</CardSubtitle>
+                    <CardSubtitle className="m-1">{(category.filter((cat)=>cat.id===product.category)[0]).description}</CardSubtitle>
                 </Card>
                 </div>
             );
