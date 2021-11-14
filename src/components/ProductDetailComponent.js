@@ -5,7 +5,7 @@ import "../App.css";
      function RenderProductImage({product}){
         if(product!=null){
             return(
-                <div className="col-12 col-md-5 m-4">
+                <div className="col-md-5 mt-4">
                 <Card >
                     <CardImg width="100%"  src={product.image} alt={product.name} />
                     <CardTitle className="m-1">{product.name}</CardTitle>
@@ -23,7 +23,7 @@ import "../App.css";
         if (product!=null){
             
             return(
-                <div className='col-12 col-md-6 m-4'>
+                <div className='col-md-6 m-4'>
                     <Card>
                         <CardBody>
                             <CardTitle>{product.name}</CardTitle>
