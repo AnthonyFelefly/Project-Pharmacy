@@ -1,10 +1,15 @@
 import React,{Component} from 'react';
 import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, Jumbotron,
     Button, Modal, ModalHeader, ModalBody,
-    Form, FormGroup, Input, Label } from 'reactstrap';
-import{NavLink} from'react-router-dom';
+    Form, FormGroup, Input, Label, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, UncontrolledDropdown, NavDropdown } from 'reactstrap';
+import{NavLink,Link} from'react-router-dom';
 import LoginPage from './Login';
+import { CATEGORIES } from '../shared/categories';
 import RegisterPage from './Register';
+import {
+    MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBFormInline,
+    MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem
+    } from "mdbreact";
 
 class NavBar extends Component{
     constructor(props){
@@ -12,12 +17,15 @@ class NavBar extends Component{
         this.state={
             isNavOpen:false,
             isModalOpen:false,
-            isRegModalOpen:false
+            isRegModalOpen:false,
+            categories:CATEGORIES,
         };
         this.toggleNav=this.toggleNav.bind(this);
         this.toggleModal=this.toggleModal.bind(this);
         this.toggleRegModal=this.toggleRegModal.bind(this);
         }
+    
+    
     toggleNav(){
         this.setState({
             isNavOpen: !this.state.isNavOpen
@@ -33,7 +41,14 @@ class NavBar extends Component{
           isRegModalOpen: !this.state.isRegModalOpen
         });
       }
+    
     render(){
+        const categoryDropDown=this.state.categories.map((cat)=>{
+            return(
+                <NavLink to={`/catalogue/${cat.id}`}>
+                      <MDBDropdownItem>{cat.description}</MDBDropdownItem>
+                </NavLink>
+            );});
         return(
             <>
             
@@ -56,11 +71,16 @@ class NavBar extends Component{
                                 <NavLink className='nav-link' to='/aboutus'>
                                     <span ></span> About Us
                                 </NavLink>
-                            
-                                <NavLink className='nav-link' to='/catalogue'>
-                                    <span></span> Products
-                                </NavLink>
-                           
+                                <MDBDropdown>
+                                    <MDBDropdownToggle nav caret disabled>
+                                        <span className="mr-2">Products</span>
+                                    </MDBDropdownToggle>
+                                    <MDBDropdownMenu>
+                                        {categoryDropDown}
+                                    </MDBDropdownMenu>
+                                </MDBDropdown>
+                               
+          
                                 <NavLink className='nav-link' to='/contactus'>
                                     <span ></span> Contact Us
                                 </NavLink>

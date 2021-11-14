@@ -30,30 +30,26 @@ class Main extends Component {
         <Home/>
       );
     }
-    /* const ProductwithId=()=>{
-      let {productId}=useParams();
-      const selectedProduct=this.state.products.filter((product)=>product.id===parseInt(productId,10))[0];
+    const ProductByCategory=()=>{
+      let {catId}=useParams();
+      const cat=this.state.categories.filter((categ)=>categ.id===parseInt(catId,10))[0];
       return(
         <>
-        <ProductDetail product={selectedProduct} 
-        categ={(this.state.categories.filter((cat)=>cat.id===selectedProduct.category)[0]).description}
-        />
-        <img src={selectedProduct.image}>
-        </img>
+        <Catalogue products={this.state.products.filter((product)=>product.category===cat.id)} onClick={(productId)=>this.onProductSelect(productId)}/>
+            <ProductDetail product={this.state.products.filter((product)=>product.id===this.state.selectedProduct)[0]} onclick={0}/>
         </>
 
       );
 
-    } */
+    } 
     return (
       <div >
         <NavBar/>
         <Switch>
           <Route path="/home" component={HomePage}/>
-          <Route exact path='/catalogue' >
+          <Route exact path='/catalogue/:catId' >
             <div>
-            <Catalogue products={this.state.products} onClick={(productId)=>this.onProductSelect(productId)}/>
-            <ProductDetail product={this.state.products.filter((product)=>product.id===this.state.selectedProduct)[0]} onclick={0}/>
+            <ProductByCategory/>
             </div>
           </Route>
           <Route exact path="/contactus">

@@ -2,7 +2,7 @@ export const PRODUCTS=[
      {
             id: 0,
             name:'Effaclar Gel',
-            image: 'assets/images/effaclar.png',
+            image: '/assets/images/effaclar.png',
             category: 0,
             label:'Face',
             price:'21.14$',
@@ -12,7 +12,7 @@ export const PRODUCTS=[
          {
             id: 1,
             name:'Ictyane Hydra',
-            image: 'assets/images/Ictyane-Ducray.png',
+            image: '/assets/images/Ictyane-Ducray.png',
             category: 0,
             label:'Face',
             price:'18.07$',
@@ -22,7 +22,7 @@ export const PRODUCTS=[
             {
             id: 2,
             name:'MP Combat Whey',
-            image: 'assets/images/MP-combatWhey.png',
+            image: '/assets/images/MP-combatWhey.png',
             category: 2,
             label:'Whey protein',
             price:'64.99$',
@@ -32,7 +32,7 @@ export const PRODUCTS=[
          {
             id: 3,
             name:'MP Creatine',
-            image: 'assets/images/MP-creatine.png',
+            image: '/assets/images/MP-creatine.png',
             category: 2,
             label:'Creatine',
             price:'12.99$',
@@ -42,7 +42,7 @@ export const PRODUCTS=[
          {
             id: 4,
             name:'Naso Cleanse',
-            image: 'assets/images/NasoCleanse.png',
+            image: '/assets/images/NasoCleanse.png',
             category: 1,
             label:'',
             price:'13.00$',
@@ -52,7 +52,7 @@ export const PRODUCTS=[
          {
             id: 5,
             name:'Arnican Gel',
-            image: 'assets/images/ArnicanGel.png',
+            image: '/assets/images/ArnicanGel.png',
             category: 3,
             label:'',
             price:'5.00$',
