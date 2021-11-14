@@ -1,5 +1,5 @@
 
-
+import AboutUs from './AboutUs';
 import { Component } from 'react';
 import Home from './HomeComponent';
 import Catalogue from './CatalogueComponent';
@@ -27,11 +27,16 @@ class Main extends Component {
         <Home/>
       );
     }
+    const AboutPage=()=>{
+      return(
+        <AboutUs/>
+      );}
     return (
       <div >
         <NavBar/>
         <Switch>
           <Route path="/home" component={HomePage}/>
+          <Route path="/AboutUs" component={AboutPage}/>
           <Route exact path='/catalogue' >
             <div>
             <Catalogue products={this.state.products} onClick={(productId)=>this.onProductSelect(productId)}/>
