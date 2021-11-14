@@ -3,9 +3,9 @@ import { MDBCol, MDBContainer, MDBRow, MDBFooter } from "mdbreact";
 import{Button} from 'reactstrap';
 import { Link } from "react-router-dom";
 
-function Footer(props) {
+function Footer() {
   return (
-    <MDBFooter  color="teal" className="font-small lighten-1 pt-4 mt-4">
+    <MDBFooter  color="teal" className="lighten-1 font-small  pt-4 mt-4">
       <MDBContainer className="text-center text-md-left">
         <MDBRow className="my-4">
           <MDBCol md="4" lg="4">
@@ -68,6 +68,7 @@ function Footer(props) {
                 color="facebook"
                 type="button"
                 href="http://www.facebook.com/profile.php?id="
+                active
             >
                 {" "}
                 <span className="btn-inner--icon">
@@ -79,6 +80,7 @@ function Footer(props) {
                 color="twitter"
                 type="button"
                 href="http://twitter.com/"
+                active
             >
                 {" "}
                 <span className="btn-inner--icon">
@@ -90,6 +92,7 @@ function Footer(props) {
                 color="instagram"
                 type="button"
                 href="http://instagram.com/"
+                active
             >
                 {" "}
                 <span className="btn-inner--icon">
@@ -101,6 +104,7 @@ function Footer(props) {
                 color="youtube"
                 type="button"
                 href="http://youtube.com/"
+                active
             >
                 {" "}
                 <span className="btn-inner--icon">

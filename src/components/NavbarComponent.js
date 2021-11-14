@@ -1,7 +1,11 @@
 import React,{Component} from 'react';
+<<<<<<< HEAD
 import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, Jumbotron,
     Button, Modal, ModalHeader, ModalBody,
     Form, FormGroup, Input, Label } from 'reactstrap';
+=======
+import {  Navbar, NavbarBrand,Nav,NavbarToggler,Collapse } from 'reactstrap';
+>>>>>>> 9fe91022a2c60c23329864db688c3eb321010ae8
 import{NavLink} from'react-router-dom';
 import LoginPage from './Login';
 import RegisterPage from './Register';
@@ -46,8 +50,8 @@ class NavBar extends Component{
                     </NavbarBrand>
                     </div>
                     <Collapse isOpen={this.state.isNavOpen} navbar>
-                    <div className="container">
-                        <Nav navbar   className="ml-2">
+                    <div className="container ">
+                        <Nav navbar   className="mr-auto">
                             
                                 <NavLink className='nav-link' to='/home'>
                                     <span ></span> Home
@@ -67,9 +71,15 @@ class NavBar extends Component{
                             
                         </Nav>
                         </div>
+<<<<<<< HEAD
                         <div className="col-auto ml-2" float="right">
                         <Nav className="nav navbar-nav navbar-right">
                         <NavItem className='nav-link' onClick={this.toggleRegModal} float="right">
+=======
+                        <div className="container col-md-auto " float="right">
+                        <Nav className="nav navbar-nav navbar-right ">
+                            <NavLink className='nav-link ' to='/contactus' float="right">
+>>>>>>> 9fe91022a2c60c23329864db688c3eb321010ae8
                                 <span className="fa fa-user-plus"></span> Sign Up
                             </NavItem>
                             <NavItem className='nav-link' onClick={this.toggleModal}>
