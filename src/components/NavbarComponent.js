@@ -1,20 +1,38 @@
 import React,{Component} from 'react';
-import {  Navbar, NavbarBrand,Nav,NavbarToggler,Collapse,NavItem,Jumbotron } from 'reactstrap';
+import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, Jumbotron,
+    Button, Modal, ModalHeader, ModalBody,
+    Form, FormGroup, Input, Label } from 'reactstrap';
 import{NavLink} from'react-router-dom';
+import LoginPage from './Login';
+import RegisterPage from './Register';
 
 class NavBar extends Component{
     constructor(props){
         super(props);
         this.state={
-            isNavOpen:false
+            isNavOpen:false,
+            isModalOpen:false,
+            isRegModalOpen:false
         };
         this.toggleNav=this.toggleNav.bind(this);
+        this.toggleModal=this.toggleModal.bind(this);
+        this.toggleRegModal=this.toggleRegModal.bind(this);
         }
     toggleNav(){
         this.setState({
             isNavOpen: !this.state.isNavOpen
         });
     };
+    toggleModal() {
+        this.setState({
+          isModalOpen: !this.state.isModalOpen
+        });
+      }
+    toggleRegModal() {
+        this.setState({
+          isRegModalOpen: !this.state.isRegModalOpen
+        });
+      }
     render(){
         return(
             <>
@@ -51,17 +69,26 @@ class NavBar extends Component{
                         </div>
                         <div className="col-auto ml-2" float="right">
                         <Nav className="nav navbar-nav navbar-right">
-                            <NavLink className='nav-link' to='/contactus' float="right">
+                        <NavItem className='nav-link' onClick={this.toggleRegModal} float="right">
                                 <span className="fa fa-user-plus"></span> Sign Up
-                            </NavLink>
-                            <NavLink className='nav-link' to='/contactus'>
+                            </NavItem>
+                            <NavItem className='nav-link' onClick={this.toggleModal}>
                                 <span className="fa fa-sign-in"></span> Login
-                            </NavLink>
+                            </NavItem>
                         </Nav>
                         </div>
                         
                         </Collapse>
-                
+                    <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}  >
+                        <ModalBody>
+                            <LoginPage />
+                        </ModalBody>
+                    </Modal>
+                    <Modal isOpen={this.state.isRegModalOpen} toggle={this.toggleRegModal}  >
+                        <ModalBody>
+                            <RegisterPage />
+                        </ModalBody>
+                    </Modal>
             </Navbar>
             </>
             
