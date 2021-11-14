@@ -1,18 +1,24 @@
 import React from 'react';
-import {Card,CardImg,CardHeader,CardFooter} from 'reactstrap'
+import {Card,CardImg,CardHeader,CardFooter, CardText, CardBody, CardTitle} from 'reactstrap'
 import "../App.css"
 import { Button} from 'reactstrap';
 
+
+
     function RenderCatalogueItem({ product, onClick}){
-        return(
-            <Card>
-                <CardHeader>{product.name}</CardHeader>
-                <CardImg width="100%"  src={product.image} alt={product.name} />
-                <CardFooter className='text-center'>
-                    <Button  style={{background:"#2ab89e"}} onClick={()=>onClick(product.id)} position="absolute">See Details</Button>
-                </CardFooter>
-            </Card>
-        );
+        return(<>
+            
+              <Card>
+                
+                <CardImg className="mt-2"width="100%"  src={product.image} alt={product.name} />
+                <CardBody >
+                    <CardTitle style={{"font-size":"medium"}}>{product.name}</CardTitle>
+                    <CardText>{product.category}</CardText>
+                    <div className="text-center">
+                    <Button  color="teal accent-2" className="ml-auto mr-auto accent-2" onClick={()=>onClick(product.id)} position="absolute">See Details</Button>
+                    </div>
+                </CardBody>
+            </Card></>); 
     };
     const Catalogue =(props)=>{
         const menu=props.products.map((product)=>{

@@ -1,50 +1,124 @@
-import React from 'react';
-import {Link} from "react-router-dom";
+import React from "react";
+import { MDBCol, MDBContainer, MDBRow, MDBFooter } from "mdbreact";
+import{Button} from 'reactstrap';
+import { Link } from "react-router-dom";
 
-function Footer(props){
-    return(
-        <div className="footer">
-        <div className="container">
-            <div className="row justify-content-center">             
-                <div className="col-4 offset-1 col-sm-2">
-                    <h5>Links</h5>
-                    <ul className="list-unstyled">
-                        <li><Link to="/home">Home</Link></li>
-                        <li><Link to="/aboutus">About Us</Link></li>
-                        <li><Link to="/catalogue">Products</Link></li>
-                        <li><Link to="/contactus">Contact Us</Link></li>
-                    </ul>
-                </div>
-                <div className="col-7 col-sm-5">
-                    <h5>Our Address</h5>
-                    <address>
-                      Beirut<br />
-		              Lebanon<br />
-		              <i className="fa fa-mobile-phone fa-lg"></i> : +961 76860453<br />
-		              <i className="fa fa-mobile-phone fa-lg"></i> : +961 71098020<br />
-		              <i className="fa fa-at fa-lg"></i> : <a href="mailto:PharmacyAbsoluteCare@gmail.com">
-                      PharmacyAbsoluteCare@gmail.com</a>
-                    </address>
-                </div>
-                <div className="col-12 col-sm-4 align-self-center">
-                    <div className="text-center">
-                        <a className="btn btn-social-icon btn-google m-1" href="http://google.com/+"><i className="fa fa-google-plus"></i></a>
-                        <a className="btn btn-social-icon btn-facebook m-1" href="http://www.facebook.com/profile.php?id="><i className="fa fa-facebook"></i></a>
-                        <a className="btn btn-social-icon btn-linkedin m-1" href="http://www.linkedin.com/in/"><i className="fa fa-linkedin"></i></a>
-                        <a className="btn btn-social-icon btn-twitter m-1" href="http://twitter.com/"><i className="fa fa-twitter"></i></a>
-                        <a className="btn btn-social-icon btn-google m-1" href="http://youtube.com/"><i className="fa fa-youtube"></i></a>
-                        <a className="btn btn-social-icon m-1" href="mailto:"><i className="fa fa-envelope-o"></i></a>
-                    </div>
-                </div>
+function Footer(props) {
+  return (
+    <MDBFooter  color="teal" className="font-small lighten-1 pt-4 mt-4">
+      <MDBContainer className="text-center text-md-left">
+        <MDBRow className="my-4">
+          <MDBCol md="4" lg="4">
+            <h5 className="text-uppercase mb-4 font-weight-bold">
+              Pharmacy Absolute Care
+            </h5>
+            <p>
+            A better way to shop for health and beauty!
+            </p>
+            <p>
+            Covid-19 made visiting stores a hard task, long waiting
+            queues, missing products and fear of contamination.
+            Thats why Pharmacy Absolute Care gives you the possibility
+            to shop online with ease.
+              {" "}
+            </p>
+          </MDBCol>
+          <hr className="clearfix w-100 d-md-none" />
+          <MDBCol md="2" lg="2" className="ml-auto">
+            <h5 className="text-uppercase mb-4 font-weight-bold">Links</h5>
+            <ul className="list-unstyled">
+              <p>
+                <li><Link to="/home">Home</Link></li>
+              </p>
+              <p>
+                <li><Link to="/aboutus">About Us</Link></li>
+              </p>
+              <p>
+                <li><Link to="/catalogue">Products</Link></li>
+              </p>
+              <p>
+              <li><Link to="/contactus">Contact Us</Link></li>
+              </p>
+            </ul>
+          </MDBCol>
+          <hr className="clearfix w-100 d-md-none" />
+          <MDBCol md="5" lg="3">
+            <h5 className="text-uppercase mb-4 font-weight-bold">Address</h5>
+            <p>
+              <i className="fas fa-map-marked-alt mr-3" /> Beirut Souks, BEIRUT, LB.
+            </p>
+            <p>
+              <i className="fas fa-mobile-alt mr-3" /> +961 76/860453
+            </p>
+            <p>
+              <i className="fas fa-mobile-alt mr-3" /> +961 71/098020
+            </p>
+            <p>
+              <i className="fas fa-at mr-3" ></i>: <a href="mailto:PharmacyAbsCare@gmail.com">PharmacyAbsCare@gmail.com</a>
+            </p>
+          </MDBCol>
+          <hr className="clearfix w-100 d-md-none" />
+          <MDBCol md="2" lg="2" className="text-center">
+            <h5 className="text-uppercase mb-4 font-weight-bold">
+              Follow us
+            </h5>
+            <div className="mt-2 ">
+            <Button
+                className="btn btn-facebook m-1 rounded-circle"
+                color="facebook"
+                type="button"
+                href="http://www.facebook.com/profile.php?id="
+            >
+                {" "}
+                <span className="btn-inner--icon">
+                <i className="fab fa-facebook" ></i>
+                </span>
+            </Button>
+            <Button
+                className="btn btn-twitter m-1 rounded-circle"
+                color="twitter"
+                type="button"
+                href="http://twitter.com/"
+            >
+                {" "}
+                <span className="btn-inner--icon">
+                <i className="fab fa-twitter"></i>
+                </span>
+            </Button>
+            <Button
+                className="btn  btn-instagram m-1 rounded-circle"
+                color="instagram"
+                type="button"
+                href="http://instagram.com/"
+            >
+                {" "}
+                <span className="btn-inner--icon">
+                <i className="fab fa-instagram"></i>
+                </span>
+            </Button>
+            <Button
+                className="btn  btn-google m-1 rounded-circle"
+                color="youtube"
+                type="button"
+                href="http://youtube.com/"
+            >
+                {" "}
+                <span className="btn-inner--icon">
+                <i className="fab fa-youtube"></i>
+                </span>
+            </Button>
             </div>
-            <div className="row justify-content-center">             
-                <div className="col-auto">
-                    <p>© Copyright 2021 Pharmacy Absolute Care</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    );
+          </MDBCol>
+          <hr className="clearfix w-100 d-md-none" />
+        </MDBRow>
+      </MDBContainer>
+      <div className="footer-copyright text-center py-3">
+        <MDBContainer fluid>
+          &copy; {new Date().getFullYear()} Copyright: Pharmacy Absolute Care{" "}
+        </MDBContainer>
+      </div>
+    </MDBFooter>
+  );
 }
+
 export default Footer;

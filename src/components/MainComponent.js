@@ -5,7 +5,7 @@ import Home from './HomeComponent';
 import Catalogue from './CatalogueComponent';
 import {PRODUCTS} from '../shared/products.js';
 import ProductDetail from './ProductDetailComponent';
-import Header from "./HeaderComponent";
+import NavBar from "./NavbarComponent";
 import Footer from './FooterComponent';
 import {Switch,Route,Redirect} from'react-router-dom';
 class Main extends Component {
@@ -29,7 +29,7 @@ class Main extends Component {
     }
     return (
       <div >
-        <Header/>
+        <NavBar/>
         <Switch>
           <Route path="/home" component={HomePage}/>
           <Route exact path='/catalogue' >
