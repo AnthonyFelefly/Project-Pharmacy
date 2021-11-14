@@ -1,7 +1,7 @@
 import { MDBCardTitle, MDBCol, MDBContainer, MDBJumbotron, MDBRow } from 'mdbreact';
 import React from 'react';
 
-function Home(props){
+function Home(){
     return(
         <MDBContainer>
         <MDBRow>

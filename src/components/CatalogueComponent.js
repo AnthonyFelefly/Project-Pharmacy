@@ -1,25 +1,24 @@
+import { MDBBtn } from 'mdbreact';
 import React from 'react';
-import {Card,CardImg,CardHeader,CardFooter, CardText, CardBody, CardTitle} from 'reactstrap'
-import "../App.css"
-import { Button} from 'reactstrap';
+import {Card,CardImg, CardText, CardBody, CardTitle} from 'reactstrap';
 
 
 
     function RenderCatalogueItem({ product, onClick}){
         return(<>
             
-              <Card>
+              <Card  elevation={5}>
                 
                 <CardImg className="mt-2"width="100%"  src={product.image} alt={product.name} />
                 <CardBody >
                     <CardTitle style={{"font-size":"medium"}}>{product.name}</CardTitle>
                     <CardText>{product.category}</CardText>
                     <div className="text-center">
-                    <Button  color="teal accent-2" className="ml-auto mr-auto accent-2" onClick={()=>onClick(product.id)} position="absolute">See Details</Button>
+                    <MDBBtn   className=" teal accent-4 ml-auto mr-auto " onClick={()=>onClick(product.id)} position="absolute">See Details</MDBBtn>
                     </div>
                 </CardBody>
             </Card></>); 
-    };
+    };  
     const Catalogue =(props)=>{
         const menu=props.products.map((product)=>{
             return(

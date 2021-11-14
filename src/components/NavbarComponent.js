@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {  Navbar, NavbarBrand,Nav,NavbarToggler,Collapse,NavItem,Jumbotron } from 'reactstrap';
+import {  Navbar, NavbarBrand,Nav,NavbarToggler,Collapse } from 'reactstrap';
 import{NavLink} from'react-router-dom';
 
 class NavBar extends Component{
@@ -28,8 +28,8 @@ class NavBar extends Component{
                     </NavbarBrand>
                     </div>
                     <Collapse isOpen={this.state.isNavOpen} navbar>
-                    <div className="container">
-                        <Nav navbar   className="ml-2">
+                    <div className="container ">
+                        <Nav navbar   className="mr-auto">
                             
                                 <NavLink className='nav-link' to='/home'>
                                     <span ></span> Home
@@ -49,9 +49,9 @@ class NavBar extends Component{
                             
                         </Nav>
                         </div>
-                        <div className="col-auto ml-2" float="right">
-                        <Nav className="nav navbar-nav navbar-right">
-                            <NavLink className='nav-link' to='/contactus' float="right">
+                        <div className="container col-md-auto " float="right">
+                        <Nav className="nav navbar-nav navbar-right ">
+                            <NavLink className='nav-link ' to='/contactus' float="right">
                                 <span className="fa fa-user-plus"></span> Sign Up
                             </NavLink>
                             <NavLink className='nav-link' to='/contactus'>
