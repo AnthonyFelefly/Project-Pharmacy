@@ -46,8 +46,8 @@ class NavBar extends Component{
                     </NavbarBrand>
                     </div>
                     <Collapse isOpen={this.state.isNavOpen} navbar>
-                    <div className="container ">
-                        <Nav navbar   className="mr-auto">
+                    <div className="container ml-0 " float="left">
+                        <Nav navbar   className="ml-0">
                             
                                 <NavLink className='nav-link' to='/home'>
                                     <span ></span> Home
@@ -67,14 +67,19 @@ class NavBar extends Component{
                             
                         </Nav>
                         </div>
-                        <div className="col-auto ml-2" float="right">
+                        <div className="container col-auto mr-auto " float="right">
                         <Nav className="nav navbar-nav navbar-right">
                         <NavItem className='nav-link' onClick={this.toggleRegModal} float="right">
+                        <Button className="teal lighten-1" style={{padding:"8px 32px"}}>
                                 <span className="fa fa-user-plus"></span> Sign Up
+                        </Button>
                             </NavItem>
                             <NavItem className='nav-link' onClick={this.toggleModal}>
+                            <Button className="teal lighten-1" style={{padding:"8px 32px"}}>
                                 <span className="fa fa-sign-in"></span> Login
+                                </Button>
                             </NavItem>
+                            
                         </Nav>
                         </div>
                         
