@@ -84,6 +84,7 @@ class RegisterPage extends Component {
 
           </MDBRow>
           </div>
+          <MDBRow>
           <MDBCol md='4' className='mb-3'>
             <div className='custom-control custom-checkbox pl-3'>
               <input
@@ -101,6 +102,24 @@ class RegisterPage extends Component {
               </div>
             </div>
           </MDBCol>
+          <MDBCol md='4' className='mb-3'>
+            <div className='custom-control custom-checkbox pl-3'>
+              <input
+                className='custom-control-input'
+                type='checkbox'
+                value=''
+                id='invalidAge'
+                required
+              />
+              <label className='custom-control-label' htmlFor='invalidAge'>
+                I confirm that i am 18 years old or over.
+              </label>
+              <div className='invalid-feedback'>
+                You must agree before submitting.
+              </div>
+            </div>
+          </MDBCol>
+          </MDBRow>
           <div className="text-center">
           <MDBBtn color='primary' type='submit'>
             Register
