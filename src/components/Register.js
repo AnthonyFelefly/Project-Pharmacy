@@ -13,9 +13,8 @@ return (
             success="right" />
           <MDBInput label="Your email" icon="envelope" group type="email" validate error="wrong"
             success="right" />
-          <MDBInput label="Confirm your email" icon="exclamation-triangle" group type="text" validate
-            error="wrong" success="right" />
           <MDBInput label="Your password" icon="lock" group type="password" validate />
+          <MDBInput label="Confirm your password" icon="exclamation-triangle" group type="password" validate/>
         </div>
         <div className="text-center">
           <MDBBtn color="primary">Register</MDBBtn>

@@ -1,5 +1,5 @@
 
-
+import AboutUs from './AboutUs';
 import { Component } from 'react';
 import Home from './HomeComponent';
 import Catalogue from './CatalogueComponent';
@@ -49,6 +49,10 @@ class Main extends Component {
       );
 
     } 
+    const AboutPage=()=>{
+      return(
+        <AboutUs/>
+      );}
     return (
       <div >
         <NavBar/>
@@ -69,6 +73,7 @@ class Main extends Component {
           <Route exact path="/contactus">
             <Contact/>
           </Route>
+          <Route path="/aboutus" component={AboutPage}/>
           <Redirect to="/home" />
         </Switch>
         <Footer/>
