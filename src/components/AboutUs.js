@@ -1,5 +1,5 @@
 import React from 'react';
-import { MDBCardGroup,MDBTypography,MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol, MDBRow,MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
+import { MDBCardGroup,MDBTypography, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 
 
 function AboutUs(){
