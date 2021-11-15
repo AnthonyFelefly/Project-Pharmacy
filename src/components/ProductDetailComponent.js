@@ -1,26 +1,19 @@
-import React,{useEffect} from 'react';
+import React from 'react';
 import {Card,CardImg,CardBody,CardTitle,CardSubtitle,Breadcrumb,BreadcrumbItem} from 'reactstrap'
-import { CATEGORIES } from '../shared/categories';
 import { Link } from 'react-router-dom';
 import "../App.css";
-import { Button } from '@material-ui/core';
-const category=CATEGORIES;
 
 
-     function RenderProductImage({product}){
+
+     function RenderProductImage({product,categ}){
         if(product!=null){
             return(<>
-                <div className="row">
-                <h3>{product.name}</h3>
-                <hr/>
-
-                </div>
             
-                <div className="col-md-5 mt-4">
+                <div className="col-md-6 col-lg-5 mt-4 ml-4">
                 <Card >
                     <CardImg width="100%"  src={product.image} alt={product.name} />
                     <CardTitle className="m-1">{product.name}</CardTitle>
-                    <CardSubtitle className="m-1">{(category.filter((cat)=>cat.id===product.category)[0]).description}</CardSubtitle>
+                    <CardSubtitle className="m-1">{categ.description}</CardSubtitle>
                 </Card>
                 </div>
                 </>
@@ -36,7 +29,7 @@ const category=CATEGORIES;
         if (product!=null){
             
             return(
-                <div className='col-md-6 m-4'>
+                <div className='col-md-6 col-lg-6 m-4'>
                     <Card>
                         <CardBody>
                             <CardTitle>{product.name}</CardTitle>
@@ -60,13 +53,15 @@ const category=CATEGORIES;
             return(<div></div>);
         }
     }
-    const ProductDetail=(product)=>{
-        const DivToScroll=React.createRef();
-        
+    const ProductDetail=(props)=>{
+        const product=props.product;
+        console.log(product);
+        const categ=props.categ;
         /* const DivToScroll=React.createRef(); */
+        
        
          
-        useEffect(()=>{
+       /*  useEffect(()=>{
             if(DivToScroll.current){
                 DivToScroll.current.scrollIntoView({ 
                     behavior: "smooth", 
@@ -75,17 +70,30 @@ const category=CATEGORIES;
         })
         if (product == null) {
             return (<div></div>);
-        }
+        } */
         
 
-        const ProductImage =RenderProductImage(product);
-        const ProductDetail=RenderProductDetail(product);
+        /* const ProductImage =RenderProductImage(product,categ);
+        const ProductDetail=RenderProductDetail(product); */
         return (
             <div className='container'>
+                <div className="row">
+                <div className='container col-sm-6 ml-0 mt-2'>
+                    <Breadcrumb>
+
+                        <BreadcrumbItem><Link to={`/catalogue/${categ.id}`}>Products{'>'} {categ.description}</Link></BreadcrumbItem>
+                        <BreadcrumbItem active>{product.name}</BreadcrumbItem>
+                    </Breadcrumb>
+                    </div>
+                    <div className="col-12">
+                        <h3>{product.name}</h3>
+                        <hr />
+                    </div>                
+                </div>
                  
-                <div ref={DivToScroll} className='row'>
-                {ProductImage}
-                {ProductDetail}
+                <div className='row'>
+                <RenderProductImage product={product} categ={categ}/>
+                <RenderProductDetail product={product}/>
                 </div>
             </div>
             

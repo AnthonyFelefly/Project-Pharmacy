@@ -16,13 +16,9 @@ class Main extends Component {
     this.state={
       products:PRODUCTS,
       categories:CATEGORIES,
-      selectedProduct:null
     };
   }
-  onProductSelect(productId){
-    this.setState({selectedProduct:productId});
-
-  }
+  
  
   render() {
     const HomePage=()=>{
@@ -32,11 +28,22 @@ class Main extends Component {
     }
     const ProductByCategory=()=>{
       let {catId}=useParams();
-      const cat=this.state.categories.filter((categ)=>categ.id===parseInt(catId,10))[0];
+      const cat=this.state.categories.filter((categ)=>categ.id===parseInt(catId,10));
       return(
         <>
-        <Catalogue products={this.state.products.filter((product)=>product.category===cat.id)} onClick={(productId)=>this.onProductSelect(productId)}/>
-            <ProductDetail product={this.state.products.filter((product)=>product.id===this.state.selectedProduct)[0]} onclick={0}/>
+        <Catalogue products={this.state.products.filter((product)=>product.category===cat[0].id)} categ={cat}/>
+        </>
+
+      );
+
+    } 
+    const ProductWithId=()=>{
+      let {catId,productId}=useParams();
+      const cat=this.state.categories.filter((categ)=>categ.id===parseInt(catId,10))[0];
+      const product=this.state.products.filter((product)=>product.id===parseInt(productId,10))[0];
+      return(
+        <>
+        <ProductDetail product={product} categ={cat}/>
         </>
 
       );
@@ -47,10 +54,17 @@ class Main extends Component {
         <NavBar/>
         <Switch>
           <Route path="/home" component={HomePage}/>
+          <Route exact path='/catalogue'>
+          <Catalogue products={this.state.products} categ={this.state.categories}/>
+            
+            </Route>
           <Route exact path='/catalogue/:catId' >
             <div>
             <ProductByCategory/>
             </div>
+          </Route>
+          <Route exact path='/catalogue/:catId/:productId'>
+            <ProductWithId/>
           </Route>
           <Route exact path="/contactus">
             <Contact/>

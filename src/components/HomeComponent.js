@@ -1,4 +1,4 @@
-import { MDBCardTitle, MDBCol, MDBContainer, MDBJumbotron, MDBRow } from 'mdbreact';
+import {MDBCol, MDBContainer, MDBJumbotron, MDBRow } from 'mdbreact';
 import React from 'react';
 
 function Home(){

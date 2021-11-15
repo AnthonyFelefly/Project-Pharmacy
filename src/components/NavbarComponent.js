@@ -1,13 +1,10 @@
 import React,{Component} from 'react';
-import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, Jumbotron,
-    Button, Modal, ModalHeader, ModalBody,
-    Form, FormGroup, Input, Label, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, UncontrolledDropdown, NavDropdown } from 'reactstrap';
-import{NavLink,Link} from'react-router-dom';
+import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem,Button, Modal, ModalBody } from 'reactstrap';
+import{NavLink} from'react-router-dom';
 import LoginPage from './Login';
 import { CATEGORIES } from '../shared/categories';
 import RegisterPage from './Register';
 import {
-    MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBFormInline,
     MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem
     } from "mdbreact";
 
@@ -76,6 +73,9 @@ class NavBar extends Component{
                                         <span className="mr-2">Products</span>
                                     </MDBDropdownToggle>
                                     <MDBDropdownMenu>
+                                    <NavLink to='/catalogue/'>
+                                        <MDBDropdownItem>All</MDBDropdownItem>
+                                    </NavLink>
                                         {categoryDropDown}
                                     </MDBDropdownMenu>
                                 </MDBDropdown>

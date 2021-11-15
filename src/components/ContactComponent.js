@@ -8,10 +8,12 @@ function Contact(props) {
     return(
         <div className="container">
              <div className="row">
+                 <div className='container col-sm-6 ml-0 mt-2'>
                     <Breadcrumb>
                         <BreadcrumbItem><Link to='/home'>Home</Link></BreadcrumbItem>
                         <BreadcrumbItem active>Contact Us</BreadcrumbItem>
                     </Breadcrumb>
+                    </div>
                     <div className="col-12">
                         <h3>Contact Us</h3>
                         <hr/>
@@ -37,8 +39,8 @@ function Contact(props) {
                 </div>
                 <div className="col-12 col-sm-11 offset-sm-1">
                     <div className="btn-group" role="group">
-                        <a role="button" className="btn btn-primary" href="tel:+85212345678"><i className="fa fa-phone"></i> Call</a>
-                        <a role="button" className="btn btn-info"><i className="fa fa-skype"></i> Skype</a>
+                        <a role="button" className="btn btn-primary" href='/'><i className="fa fa-phone"></i> Call</a>
+                        <a role="button" className="btn btn-info" href="/"><i className="fa fa-skype"></i> Skype</a>
                         <a role="button" className="btn btn-success" href="mailto:confusion@food.net"><i className="fa fa-envelope-o"></i> Email</a>
                     </div>
                 </div>
