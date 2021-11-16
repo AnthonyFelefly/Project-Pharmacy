@@ -53,33 +53,33 @@ class Contact extends Component {
                     </div>
                     <div className="container ml-auto mr-auto">
                 <div className='row m-4'>
-                    <Col md={4} >
+                    <Col md={4} className="mb-2" >
                         
-                    <Card cassName="col-xl-4 col-lg-4 col-md-4" height="400px" width="400px">
+                    <Card cassName="col-xl-4 col-lg-4 col-md-4 " height="400px" width="400px">
                         
-                    <CardImg src="/assets/images/mail.png"/>
+                    <CardImg src="/assets/images/mail.png" style={{height:"320px"}}/>
                     <CardText className="contact text-center mb-30 mt-2">  
                         <h3>Mail Us Here</h3>
                         <p>PharmacyAbsCare@hotmail.com</p>
                     </CardText>
                     </Card>
                     </Col>
-                    <Col md={4} >
+                    <Col md={4} className="mb-2">
                         
-                    <Card cassName="col-xl-4 col-lg-4 col-md-4" height="400px" width="400px">
+                    <Card cassName="col-xl-4 col-lg-4 col-md-4 " height="400px" width="400px">
                         
-                    <CardImg src="/assets/images/phone.png" style={{height:"325px"}}/>
+                    <CardImg src="/assets/images/phone.png" style={{height:"320px"}}/>
                     <CardText className="contact text-center mb-30 mt-2">  
                         <h3>Call Us Here</h3>
                         <p>+961 71098020</p>
                     </CardText>
                     </Card>
                     </Col>
-                    <Col md={4} >
+                    <Col md={4} className="mb-2">
                         
-                        <Card cassName="col-xl-4 col-lg-4 col-md-4" height="400px" width="400px">
+                        <Card cassName="col-xl-4 col-lg-4 col-md-4 m-2" height="400px" width="400px">
                             
-                        <CardImg src="/assets/images/locationpin.png"/>
+                        <CardImg src="/assets/images/locationpin.png" style={{height:"320px"}}/>
                         <CardText className="contact text-center mb-30 mt-2">  
                             <h3>Visit Us Here</h3>
                             <p>Beirut Souks, Beirut, LEBANON</p>
