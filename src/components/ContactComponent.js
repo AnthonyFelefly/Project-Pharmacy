@@ -24,11 +24,17 @@ class Contact extends Component {
             }
 
         }
+        this.isActive=true;
+        this.num=0;
         this.handleSubmit=this.handleSubmit.bind(this);
         this.handleInputChange=this.handleInputChange.bind(this);
         this.handleBlur=this.handleBlur.bind(this);
-    }
-   
+        this.validate=this.validate.bind(this);
+        }
+   componentDidUpdate(){
+       if(this.state.touched.firstname&&this.state.touched.lastname&&this.state.touched.telnum&&this.state.touched.email&&this.state.touched.message){
+       this.num=1;}
+   }
     handleInputChange(event){
         const target=event.target;
         const value=target.type==='checkbox' ?target.checked:target.value;
@@ -91,13 +97,19 @@ class Contact extends Component {
             errors.email="Please input a valid email address";
 
         }
-        
+       
         
         return errors;       
     }
     
     render(){
+
         const errors=this.validate(this.state.firstname,this.state.lastname,this.state.telnum,this.state.email,this.state.message);
+        if(errors.firstname===''&&errors.lastname===''&&errors.telnum===''&&errors.email===''&&errors.message===''&&this.num===1){
+            this.isActive=false;
+        }else{
+            this.isActive=true;
+        }
         return( 
             <>
             <div className="container">
@@ -228,7 +240,7 @@ class Contact extends Component {
                             </FormGroup>
                             <FormGroup row>
                                 <Col md={{size:10,offset:2}}>
-                                    <Button type="submit" color="default">
+                                    <Button type="submit" color="default" disabled={this.isActive}>
                                     Submit
                                     </Button>
                                 </Col>
