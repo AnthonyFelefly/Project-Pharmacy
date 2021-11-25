@@ -8,7 +8,7 @@ import { CATEGORIES } from '../shared/categories';
 import ProductDetail from './ProductDetailComponent';
 import NavBar from "./NavbarComponent";
 import Footer from './FooterComponent';
-import Contact from "./NewContactComponent";
+import Contact from "./ContactComponent";
 import {Switch,Route,Redirect,useParams} from'react-router-dom';
 class Main extends Component {
   constructor(props){
