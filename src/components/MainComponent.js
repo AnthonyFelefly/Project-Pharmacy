@@ -3,22 +3,25 @@ import AboutUs from './AboutUs';
 import { Component } from 'react';
 import Home from './HomeComponent';
 import Catalogue from './CatalogueComponent';
-import {PRODUCTS} from '../shared/products.js';
-import { CATEGORIES } from '../shared/categories';
+
 import ProductDetail from './ProductDetailComponent';
 import NavBar from "./NavbarComponent";
 import Footer from './FooterComponent';
 import Contact from "./ContactComponent";
-import {Switch,Route,Redirect,useParams} from'react-router-dom';
+import {Switch,Route,Redirect,useParams, withRouter} from'react-router-dom';
+import {connect} from 'react-redux';
+
+const mapStateToProps=state=>{
+  return {
+    products: state.products,
+    categories: state.categories
+  }
+}
 class Main extends Component {
   constructor(props){
     super(props);
-    this.state={
-      products:PRODUCTS,
-      categories:CATEGORIES,
-    };
+    
   }
-  
  
   render() {
     const HomePage=()=>{
@@ -28,10 +31,10 @@ class Main extends Component {
     }
     const ProductByCategory=()=>{
       let {catId}=useParams();
-      const cat=this.state.categories.filter((categ)=>categ.id===parseInt(catId,10));
+      const cat=this.props.categories.filter((categ)=>categ.id===parseInt(catId,10));
       return(
         <>
-        <Catalogue products={this.state.products.filter((product)=>product.category===cat[0].id)} categ={cat}/>
+        <Catalogue products={this.props.products.filter((product)=>product.category===cat[0].id)} categ={cat}/>
         </>
 
       );
@@ -39,8 +42,8 @@ class Main extends Component {
     } 
     const ProductWithId=()=>{
       let {catId,productId}=useParams();
-      const cat=this.state.categories.filter((categ)=>categ.id===parseInt(catId,10))[0];
-      const product=this.state.products.filter((product)=>product.id===parseInt(productId,10))[0];
+      const cat=this.props.categories.filter((categ)=>categ.id===parseInt(catId,10))[0];
+      const product=this.props.products.filter((product)=>product.id===parseInt(productId,10))[0];
       return(
         <>
         <ProductDetail product={product} categ={cat}/>
@@ -59,7 +62,7 @@ class Main extends Component {
         <Switch>
           <Route path="/home" component={HomePage}/>
           <Route exact path='/catalogue'>
-          <Catalogue products={this.state.products} categ={this.state.categories}/>
+          <Catalogue products={this.props.products} categ={this.props.categories}/>
             
             </Route>
           <Route exact path='/catalogue/:catId' >
@@ -81,4 +84,4 @@ class Main extends Component {
     );
   }
 }
-export default Main;
+export default withRouter(connect(mapStateToProps)(Main));
