@@ -6,7 +6,7 @@ import {Control,LocalForm, Errors} from "react-redux-form";
 
 const required=(val)=>val&&val.length;//check if the legnth of value is greater then zero
 const maxLength=(len)=>((val)=>(!(val)||(val.length <=len )));
-const minLength=(len)=>((val)=>(!val)||(val)&&(val.length >=len ));
+const minLength=(len)=>((val)=>(!val)||((val)&&(val.length >=len )));
 const isNumber=(val)=>(!val)||(!isNaN(Number(val)));//to check if the value is a number
 const validEmail=(val)=>(!val)||(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val));
 class Contact extends Component {

@@ -3,13 +3,14 @@ import AboutUs from './AboutUs';
 import { Component } from 'react';
 import Home from './HomeComponent';
 import Catalogue from './CatalogueComponent';
-
+import AdminPage from './AdminPage';
 import ProductDetail from './ProductDetailComponent';
 import NavBar from "./NavbarComponent";
 import Footer from './FooterComponent';
 import Contact from "./ContactComponent";
 import {Switch,Route,Redirect,useParams, withRouter} from'react-router-dom';
 import {connect} from 'react-redux';
+import { addProduct } from '../redux/ActionCreators';
 
 const mapStateToProps=state=>{
   return {
@@ -17,6 +18,10 @@ const mapStateToProps=state=>{
     categories: state.categories
   }
 }
+const mapDispatchToProps=(dispatch)=>({
+  addProduct:(productName,category,description,application,quantity,price)=> dispatch(addProduct(productName,category,description,application,quantity,price))
+
+});
 class Main extends Component {
   constructor(props){
     super(props);
@@ -58,7 +63,7 @@ class Main extends Component {
       );}
     return (
       <div >
-        <NavBar/>
+        <NavBar categories={this.props.categories}/>
         <Switch>
           <Route path="/home" component={HomePage}/>
           <Route exact path='/catalogue'>
@@ -76,6 +81,9 @@ class Main extends Component {
           <Route exact path="/contactus">
             <Contact/>
           </Route>
+          <Route exact path="/admin">
+            <AdminPage categories={this.props.categories} addProduct={this.props.addProduct}/>
+          </Route>
           <Route path="/aboutus" component={AboutPage}/>
           <Redirect to="/home" />
         </Switch>
@@ -84,4 +92,4 @@ class Main extends Component {
     );
   }
 }
-export default withRouter(connect(mapStateToProps)(Main));
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Main));

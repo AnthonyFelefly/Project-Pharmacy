@@ -2,7 +2,6 @@ import React,{Component} from 'react';
 import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem,Button, Modal, ModalBody } from 'reactstrap';
 import{NavLink} from'react-router-dom';
 import LoginPage from './Login';
-import { CATEGORIES } from '../shared/categories';
 import RegisterPage from './Register';
 import {
     MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem
@@ -15,7 +14,7 @@ class NavBar extends Component{
             isNavOpen:false,
             isModalOpen:false,
             isRegModalOpen:false,
-            categories:CATEGORIES,
+            categories:this.props.categories,
         };
         this.toggleNav=this.toggleNav.bind(this);
         this.toggleModal=this.toggleModal.bind(this);
@@ -83,6 +82,9 @@ class NavBar extends Component{
           
                                 <NavLink className='nav-link' to='/contactus'>
                                     <span ></span> Contact Us
+                                </NavLink>
+                                <NavLink className='nav-link' to='/admin'>
+                                    <span ></span> Admin
                                 </NavLink>
                             
                         </Nav>
