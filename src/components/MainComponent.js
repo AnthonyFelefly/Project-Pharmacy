@@ -11,7 +11,7 @@ import Contact from "./ContactComponent";
 import {Switch,Route,Redirect,useParams, withRouter} from'react-router-dom';
 import {connect} from 'react-redux';
 import { addProduct ,fetchProducts} from '../redux/ActionCreators';
-
+import {actions} from 'react-redux-form';
 const mapStateToProps=state=>{
   return {
     products: state.products,
@@ -20,7 +20,8 @@ const mapStateToProps=state=>{
 }
 const mapDispatchToProps=(dispatch)=>({
   addProduct:(productName,category,description,application,quantity,price)=> dispatch(addProduct(productName,category,description,application,quantity,price)),
-  fetchProducts: () => { dispatch(fetchProducts())}
+  fetchProducts: () => { dispatch(fetchProducts())},
+  resetMessageForm:()=>{dispatch(actions.reset('message'))}
 
 });
 class Main extends Component {
@@ -89,7 +90,7 @@ class Main extends Component {
             <ProductWithId/>
           </Route>
           <Route exact path="/contactus">
-            <Contact/>
+            <Contact resetMessageForm={this.props.resetMessageForm}/>
           </Route>
           <Route exact path="/admin">
             <AdminPage categories={this.props.categories} addProduct={this.props.addProduct}/>

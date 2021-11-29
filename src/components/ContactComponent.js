@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import { Link } from 'react-router-dom';
 import { Breadcrumb, BreadcrumbItem,Button,Label,Col,CardImg,Card,CardText,Row } from 'reactstrap';
-import {Control,LocalForm, Errors} from "react-redux-form";
+import {Control,Form, Errors,actions} from "react-redux-form";
 
 
 const required=(val)=>val&&val.length;//check if the legnth of value is greater then zero
@@ -20,7 +20,7 @@ class Contact extends Component {
        
         console.log('Current stete is'+JSON.stringify(values));
         alert("Submitted successfully "+ values.firstname);
-        
+        this.props.resetMessageForm();
         
     }
     
@@ -83,7 +83,7 @@ class Contact extends Component {
                         <h3>Send Us A message</h3>
                     </div>
                     <div className='col-12 col-md-9'>
-                        <LocalForm onSubmit={(values)=>this.handleSubmit(values)}>
+                        <Form model='message' onSubmit={(values)=>this.handleSubmit(values)}>
                             <Row className="form-group">
                                 <Label htmlFor='firstname' md={2}>First Name</Label>
                                 <Col md={10}>
@@ -203,7 +203,7 @@ class Contact extends Component {
                                     </Button>
                                 </Col>
                             </Row>
-                        </LocalForm>
+                        </Form>
                     
                 </div>
             </div>
