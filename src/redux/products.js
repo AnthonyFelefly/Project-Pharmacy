@@ -10,9 +10,9 @@ export const Products=(state={
     switch(action.type){
         case ActionTypes.ADD_PRODUCT:
             var product=action.payload;
-            product.id=state.length;
+            product.id=state.products.length;
             console.log(product);
-            return state.concat(product)
+            return {...state,isLoading:false,errMess:null,products:state.products.concat(product)}
         case ActionTypes.ADD_PRODUCTS:
             return {...state,isLoading:false,errMess:null,products:action.payload};
 
