@@ -2,11 +2,30 @@ import React from 'react';
 import {Card,CardImg,CardBody,CardTitle,CardSubtitle,Breadcrumb,BreadcrumbItem} from 'reactstrap'
 import { Link } from 'react-router-dom';
 import "../App.css";
+import {Loading} from "./LoadingComponent";
 
 
+     function RenderProductImage({product,categ,isLoading,errMess}){
+        if(isLoading){
+            return(
+                <div className='container'>
+                    <div className='row'>
+                        <Loading/>
+                    </div>
+                </div>)
 
-     function RenderProductImage({product,categ}){
-        if(product!=null){
+        }
+        else if(errMess){
+            return(
+                <div className='container'>
+                    <div className="row">
+                        <h4>{errMess}</h4>
+                    </div>
+
+                </div>
+            )
+        }
+        else if(product!=null){
             return(<>
             
                 <div className="col-md-6 col-lg-5 mt-4 ml-4">
@@ -25,8 +44,27 @@ import "../App.css";
             <div></div>
         }
     }
-    function RenderProductDetail({product}){
-        if (product!=null){
+    function RenderProductDetail({product,isLoading,errMess}){
+        if(isLoading){
+            return(
+                <div className='container'>
+                    <div className='row'>
+                        <Loading/>
+                    </div>
+                </div>)
+
+        }
+        else if(errMess){
+            return(
+                <div className='container'>
+                    <div className="row">
+                        <h4>{errMess}</h4>
+                    </div>
+
+                </div>
+            )
+        }
+        else if (product!=null){
             
             return(
                 <div className='col-md-6 col-lg-6 m-4'>
@@ -57,6 +95,25 @@ import "../App.css";
         const product=props.product;
         console.log(product);
         const categ=props.categ;
+        if(props.isLoading){
+            return(
+                <div className='container  col-md-12'>
+                    <div className='row  '>
+                        <Loading/>
+                    </div>
+                </div>)
+            
+        }
+        else if(props.errMess){
+            return(
+                <div className='container'>
+                    <div className="row">
+                        <h4>{props.errMess}</h4>
+                    </div>
+
+                </div>
+            )
+        }
         /* const DivToScroll=React.createRef(); */
         
        
@@ -79,7 +136,7 @@ import "../App.css";
             <div className='container'>
                 <div className="row">
                 <div className='container col-sm-6 ml-0 mt-2'>
-                    <Breadcrumb>
+                     <Breadcrumb>
 
                         <BreadcrumbItem><Link to={`/catalogue/${categ.id}`}>Products{'>'} {categ.description}</Link></BreadcrumbItem>
                         <BreadcrumbItem active>{product.name}</BreadcrumbItem>
@@ -92,8 +149,8 @@ import "../App.css";
                 </div>
                  
                 <div className='row'>
-                <RenderProductImage product={product} categ={categ}/>
-                <RenderProductDetail product={product}/>
+                <RenderProductImage product={product} categ={categ} isLoading={props.isLoading} errMess={props.errMess}/>
+                <RenderProductDetail product={product} isLoading={props.isLoading} errMess={props.errMess}/>
                 </div>
             </div>
             

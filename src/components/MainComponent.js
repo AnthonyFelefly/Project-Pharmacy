@@ -10,7 +10,7 @@ import Footer from './FooterComponent';
 import Contact from "./ContactComponent";
 import {Switch,Route,Redirect,useParams, withRouter} from'react-router-dom';
 import {connect} from 'react-redux';
-import { addProduct } from '../redux/ActionCreators';
+import { addProduct ,fetchProducts} from '../redux/ActionCreators';
 
 const mapStateToProps=state=>{
   return {
@@ -19,13 +19,17 @@ const mapStateToProps=state=>{
   }
 }
 const mapDispatchToProps=(dispatch)=>({
-  addProduct:(productName,category,description,application,quantity,price)=> dispatch(addProduct(productName,category,description,application,quantity,price))
+  addProduct:(productName,category,description,application,quantity,price)=> dispatch(addProduct(productName,category,description,application,quantity,price)),
+  fetchProducts: () => { dispatch(fetchProducts())}
 
 });
 class Main extends Component {
   constructor(props){
     super(props);
     
+  }
+  componentDidMount(){
+    this.props.fetchProducts();
   }
  
   render() {
@@ -39,7 +43,9 @@ class Main extends Component {
       const cat=this.props.categories.filter((categ)=>categ.id===parseInt(catId,10));
       return(
         <>
-        <Catalogue products={this.props.products.filter((product)=>product.category===cat[0].id)} categ={cat}/>
+        <Catalogue products={this.props.products.products.filter((product)=>product.category===cat[0].id)} categ={cat}
+          productsLoading={this.props.products.isLoading}
+          productsErrMess={this.props.products.errMess}/>
         </>
 
       );
@@ -48,10 +54,12 @@ class Main extends Component {
     const ProductWithId=()=>{
       let {catId,productId}=useParams();
       const cat=this.props.categories.filter((categ)=>categ.id===parseInt(catId,10))[0];
-      const product=this.props.products.filter((product)=>product.id===parseInt(productId,10))[0];
+      const product=this.props.products.products.filter((product)=>product.id===parseInt(productId,10))[0];
       return(
         <>
-        <ProductDetail product={product} categ={cat}/>
+        <ProductDetail product={product} categ={cat}
+          isLoading={this.props.products.isLoading}
+          ErrMess={this.props.products.errMess}/>
         </>
 
       );
@@ -67,7 +75,9 @@ class Main extends Component {
         <Switch>
           <Route path="/home" component={HomePage}/>
           <Route exact path='/catalogue'>
-          <Catalogue products={this.props.products} categ={this.props.categories}/>
+          <Catalogue products={this.props.products.products} categ={this.props.categories}
+            productsLoading={this.props.products.isLoading}
+            productsErrMess={this.props.products.errMess}/>
             
             </Route>
           <Route exact path='/catalogue/:catId' >

@@ -2,7 +2,7 @@ import { MDBBtn } from 'mdbreact';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {Card,CardImg, CardText, CardBody, CardTitle,Breadcrumb,BreadcrumbItem} from 'reactstrap';
-
+import {Loading} from './LoadingComponent';
 
 
     function RenderCatalogueItem({ product,categ}){
@@ -32,7 +32,26 @@ import {Card,CardImg, CardText, CardBody, CardTitle,Breadcrumb,BreadcrumbItem} f
             )
 
         });
-        if (props.categ.length===1){
+        if (props.productsLoading){
+            return(
+                <div className='container'>
+                    <div className='row'>
+                        <Loading/>
+                    </div>
+                </div>)
+
+        }
+        else if(props.productsErrMess){
+            return(
+                <div className='container'>
+                    <div className="row">
+                        <h4>{props.productsErrMess}</h4>
+                    </div>
+
+                </div>
+            )
+        }
+        else if (props.categ.length===1){
             return(
                 <div className="container">
                 <div className="row">
@@ -53,32 +72,31 @@ import {Card,CardImg, CardText, CardBody, CardTitle,Breadcrumb,BreadcrumbItem} f
                 </div>
             </div>
 
-        );
+        );};
 
-        
-        };
-        return(
-            <div className="container">
-                <div className="row">
-                <div className='container col-sm-6 ml-0 mt-2'>
-                    <Breadcrumb>
-                        <BreadcrumbItem><Link to='/home'>Home</Link></BreadcrumbItem>
-                        <BreadcrumbItem active>Products{'>'} All </BreadcrumbItem>
-                    </Breadcrumb>
+       
+            return(
+                <div className="container">
+                    <div className="row">
+                    <div className='container col-sm-6 ml-0 mt-2'>
+                        <Breadcrumb>
+                            <BreadcrumbItem><Link to='/home'>Home</Link></BreadcrumbItem>
+                            <BreadcrumbItem active>Products{'>'} All </BreadcrumbItem>
+                        </Breadcrumb>
+                        </div>
+                        <div className="col-12">
+                            <h3>Products</h3>
+                            <hr/>
+                        </div>
                     </div>
-                    <div className="col-12">
-                        <h3>Products</h3>
-                        <hr/>
+                    <div className="row">
+                        {menu}
+                    </div>
+                    <div className="row">
                     </div>
                 </div>
-                <div className="row">
-                    {menu}
-                </div>
-                <div className="row">
-                </div>
-            </div>
 
-        );
+            );
     }
 
 export default Catalogue;

@@ -68,7 +68,7 @@ function Home(){
         </div>
         <div className='container col-3 mb-5 mt-5'>
             <MDBCol >
-              <MDBIcon icon="shopping-cart" size="3x" style={{"justify-content":"center"}}/>
+              <MDBIcon icon="shopping-cart" size="3x" style={{justifyContent:"center"}}/>
             
               <h5 className="font-weight-bold mb-3">Wide variety of products</h5>
             </MDBCol>
