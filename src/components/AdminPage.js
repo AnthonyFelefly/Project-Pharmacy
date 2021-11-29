@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import { Card, CardImg, CardBody, Button, Modal, ModalHeader, ModalBody,
     Label, Row, Col, CardTitle } from "reactstrap";
-import { Control, LocalForm, Errors } from 'react-redux-form';
+import { Control, Form, Errors } from 'react-redux-form';
 
 const required=(val)=>val&&val.length;//check if the legnth of value is greater then zero
 const maxLength=(len)=>((val)=>(!(val)||(val.length <=len )));
@@ -29,6 +29,7 @@ class AdminPage extends Component {
         const cat=this.props.categories.filter((categ)=>categ.description===values.category)[0];
         const category=cat.id;
         this.props.addProduct(values.productName,category,values.description,values.application,values.quantity,values.price);
+        this.props.resetProductForm();
     }
     render(){
         const categoryDropDown=this.state.categories.map((cat)=>{
@@ -48,7 +49,7 @@ class AdminPage extends Component {
             <Modal isOpen={this.state.isModelOpen} toggle={this.toggleModal}>
             <ModalHeader toggle={this.toggleModal}>Add Product</ModalHeader>
             <ModalBody>
-                <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
+                <Form model="product" onSubmit={(values) => this.handleSubmit(values)}>
                 <Row className="form-group">
                         <Label htmlFor="productName" md={12}>Product Name</Label>
                         <Col md={12}>
@@ -149,7 +150,7 @@ class AdminPage extends Component {
                             </Row>              
                    
                     <Button type="submit" value="submit" color="primary">Submit</Button>                            
-                </LocalForm>
+                </Form>
             </ModalBody>
         </Modal>
 </>);

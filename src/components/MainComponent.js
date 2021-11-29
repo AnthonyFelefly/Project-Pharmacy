@@ -21,8 +21,8 @@ const mapStateToProps=state=>{
 const mapDispatchToProps=(dispatch)=>({
   addProduct:(productName,category,description,application,quantity,price)=> dispatch(addProduct(productName,category,description,application,quantity,price)),
   fetchProducts: () => { dispatch(fetchProducts())},
-  resetMessageForm:()=>{dispatch(actions.reset('message'))}
-
+  resetMessageForm:()=>{dispatch(actions.reset('message'))},
+  resetProductForm:()=>{dispatch(actions.reset('product'))}
 });
 class Main extends Component {
   constructor(props){
@@ -93,7 +93,7 @@ class Main extends Component {
             <Contact resetMessageForm={this.props.resetMessageForm}/>
           </Route>
           <Route exact path="/admin">
-            <AdminPage categories={this.props.categories} addProduct={this.props.addProduct}/>
+            <AdminPage categories={this.props.categories} addProduct={this.props.addProduct} resetProductForm={this.props.resetProductForm}/>
           </Route>
           <Route path="/aboutus" component={AboutPage}/>
           <Redirect to="/home" />

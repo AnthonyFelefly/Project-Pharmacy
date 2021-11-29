@@ -8,3 +8,11 @@ export const InitialMessage={
     message:''
 
 }
+export const InitialProduct={
+    productName:'',
+    category:null,
+    description:'',
+    application:'',
+    quantity:'',
+    price:''
+}
