@@ -22,10 +22,25 @@ export const addCategory=(description)=>({
 
 export const fetchProducts=()=>(dispatch)=>{
     dispatch(productsLoading(true));
-   return fetch(baseUrl+"products")
+   return fetch(baseUrl+"productss")
+   .then(response=>{
+       if(response.ok){
+           return response;
+       }else{
+           var error=new Error('Error '+response.status+': '+response.statusText);
+            error.response=response;
+            throw error;
+        }
+   },
+   error=>{
+       var errmess=new Error(error.message);
+       throw errmess;
+   })
    .then(response=>response.json())
-   .then(products=>dispatch(addProducts(products)));
-    
+   .then(products=>dispatch(addProducts(products)))
+   .catch(error=>dispatch(productsFailed(error.message)));
+
+
 }
 
 
@@ -45,8 +60,23 @@ export const addProducts=(products)=>({
 export const fetchCategories=()=>(dispatch)=>{
     dispatch(categoriesLoading(true));
    return fetch(baseUrl+"categories")
+   .then(response=>{
+    if(response.ok){
+        return response;
+    }else{
+        var error=new Error('Error '+response.status+': '+response.statusText);
+         error.response=response;
+         throw error;
+     }
+},
+error=>{
+    var errmess=new Error(error.message);
+    throw errmess;
+})
    .then(response=>response.json())
-   .then(categories=>dispatch(addCategories(categories)));
+   .then(categories=>dispatch(addCategories(categories)))
+   .catch(error=>dispatch(categoriesFailed(error.message)));
+;
     
 }
 export const categoriesLoading=()=>({
@@ -64,8 +94,23 @@ export const addCategories=(categories)=>({
 export const fetchUsers=()=>(dispatch)=>{
     dispatch(usersLoading(true));
    return fetch(baseUrl+"users")
+   .then(response=>{
+    if(response.ok){
+        return response;
+    }else{
+        var error=new Error('Error '+response.status+': '+response.statusText);
+         error.response=response;
+         throw error;
+     }
+},
+error=>{
+    var errmess=new Error(error.message);
+    throw errmess;
+})
    .then(response=>response.json())
-   .then(users=>dispatch(addUsers(users)));
+   .then(users=>dispatch(addUsers(users)))
+   .catch(error=>dispatch(usersFailed(error.message)));
+;
     
 }
 

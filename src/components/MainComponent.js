@@ -13,6 +13,7 @@ import {connect} from 'react-redux';
 import { addProduct ,fetchProducts,fetchCategories,fetchUsers,addCategory} from '../redux/ActionCreators';
 import {actions} from 'react-redux-form';
 import { Loading } from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
 const mapStateToProps=state=>{
   return {
     products: state.products,
@@ -88,14 +89,17 @@ class Main extends Component {
       );}
       if(this.props.categories.isLoading){
         return(
-            <div className='container'>
-                <div className='row'>
+            <div className='container m-2'>
+              <div className='row'>
+                <img src={baseUrl+'/images/loadingImg.png'} className="ml-auto mr-auto"style={{width:"600px",height:"auto"}} alt="Your Page Is loading"/>
+              </div>
+                <div className='row mt-4'>
                     <Loading/>
                 </div>
             </div>)
 
     }
-    else if(this.props.products.errMess){
+    else if(this.props.categories.errMess){
         return(
             <div className='container'>
                 <div className="row">
