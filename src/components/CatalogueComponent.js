@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {Card,CardImg, CardText, CardBody, CardTitle,Breadcrumb,BreadcrumbItem} from 'reactstrap';
 import {Loading} from './LoadingComponent';
-
+import {baseUrl } from '../shared/baseUrl';
 
     function RenderCatalogueItem({ product,categ}){
         const category=(categ.filter((cat)=>cat.id===product.category)[0]);
@@ -11,7 +11,7 @@ import {Loading} from './LoadingComponent';
             
               <Card  elevation={5}>
                 
-                <CardImg className="mt-2"width="100%"  src={product.image} alt={product.name} />
+                <CardImg className="mt-2"width="100%"  src={baseUrl+product.image} alt={product.name} />
                 <CardBody >
                     <CardTitle style={{"font-size":"medium"}}>{product.name}</CardTitle>
                     <CardText>{category.description}</CardText>

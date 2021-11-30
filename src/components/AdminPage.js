@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import { Card, CardImg, CardBody, Button, Modal, ModalHeader, ModalBody,
     Label, Row, Col, CardTitle } from "reactstrap";
 import { Control, Form, Errors } from 'react-redux-form';
+import { baseUrl } from '../shared/baseUrl';
 
 const required=(val)=>val&&val.length;//check if the legnth of value is greater then zero
 const maxLength=(len)=>((val)=>(!(val)||(val.length <=len )));
@@ -40,7 +41,7 @@ class AdminPage extends Component {
         <>
         
             <Card  elevation={5} className="col-md-4 m-2"onClick={this.toggleModal}>
-                <CardImg className="mt-2" style={{width:"auto",height:"auto"}} src='/assets/images/AddProduct.png' alt="Add a new Product" />
+                <CardImg className="mt-2" style={{width:"auto",height:"auto"}} src={baseUrl+"/images/AddProduct.png"} alt="Add a new Product" />
                 <CardBody >
                     <CardTitle style={{"font-size":"medium"}}>Add A New Product</CardTitle>
                 </CardBody>

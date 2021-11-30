@@ -14,14 +14,18 @@ class NavBar extends Component{
             isNavOpen:false,
             isModalOpen:false,
             isRegModalOpen:false,
-            categories:this.props.categories,
         };
         this.toggleNav=this.toggleNav.bind(this);
         this.toggleModal=this.toggleModal.bind(this);
         this.toggleRegModal=this.toggleRegModal.bind(this);
         }
     
-    
+    componentDidMount(){
+        console.log(this.props.categories);
+    }
+    componentDidUpdate(){
+        console.log(this.props.categories);
+    }
     toggleNav(){
         this.setState({
             isNavOpen: !this.state.isNavOpen
@@ -39,12 +43,13 @@ class NavBar extends Component{
       }
     
     render(){
-        const categoryDropDown=this.state.categories.map((cat)=>{
+        const categoryDropDown=this.props.categories.map((cat)=>{
             return(
                 <NavLink to={`/catalogue/${cat.id}`}>
                       <MDBDropdownItem>{cat.description}</MDBDropdownItem>
                 </NavLink>
             );});
+            
         return(
             <>
             

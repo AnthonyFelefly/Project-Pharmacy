@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import { Link } from 'react-router-dom';
 import { Breadcrumb, BreadcrumbItem,Button,Label,Col,CardImg,Card,CardText,Row } from 'reactstrap';
 import {Control,Form, Errors,actions} from "react-redux-form";
-
+import { baseUrl } from '../shared/baseUrl';
 
 const required=(val)=>val&&val.length;//check if the legnth of value is greater then zero
 const maxLength=(len)=>((val)=>(!(val)||(val.length <=len )));
@@ -47,7 +47,7 @@ class Contact extends Component {
                         
                     <Card cassName="col-xl-4 col-lg-4 col-md-4 " height="400px" width="400px">
                         
-                    <CardImg src="/assets/images/mail.png" style={{height:"320px"}}/>
+                    <CardImg src={baseUrl+"/images/mail.png" }style={{height:"320px"}}/>
                     <CardText className="contact text-center mb-30 mt-2">  
                         <h3>Mail Us Here</h3>
                         <p>PharmacyAbsCare@hotmail.com</p>
@@ -58,7 +58,7 @@ class Contact extends Component {
                         
                     <Card cassName="col-xl-4 col-lg-4 col-md-4 " height="400px" width="400px">
                         
-                    <CardImg src="/assets/images/phone.png" style={{height:"320px"}}/>
+                    <CardImg src={baseUrl+"/images/phone.png" }style={{height:"320px"}}/>
                     <CardText className="contact text-center mb-30 mt-2">  
                         <h3>Call Us Here</h3>
                         <p>+961 71098020</p>
@@ -69,7 +69,7 @@ class Contact extends Component {
                         
                         <Card cassName="col-xl-4 col-lg-4 col-md-4 m-2" height="400px" width="400px">
                             
-                        <CardImg src="/assets/images/locationpin.png" style={{height:"320px"}}/>
+                        <CardImg src={baseUrl+"/images/locationpin.png"} style={{height:"320px"}}/>
                         <CardText className="contact text-center mb-30 mt-2">  
                             <h3>Visit Us Here</h3>
                             <p>Beirut Souks, Beirut, LEBANON</p>

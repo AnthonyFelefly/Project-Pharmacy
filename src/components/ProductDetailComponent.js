@@ -3,7 +3,7 @@ import {Card,CardImg,CardBody,CardTitle,CardSubtitle,Breadcrumb,BreadcrumbItem} 
 import { Link } from 'react-router-dom';
 import "../App.css";
 import {Loading} from "./LoadingComponent";
-
+import {baseUrl} from "../shared/baseUrl";
 
      function RenderProductImage({product,categ,isLoading,errMess}){
         if(isLoading){
@@ -30,7 +30,7 @@ import {Loading} from "./LoadingComponent";
             
                 <div className="col-md-6 col-lg-5 mt-4 ml-4">
                 <Card >
-                    <CardImg width="100%"  src={product.image} alt={product.name} />
+                    <CardImg width="100%"  src={baseUrl+product.image} alt={product.name} />
                     <CardTitle className="m-1">{product.name}</CardTitle>
                     <CardSubtitle className="m-1">{categ.description}</CardSubtitle>
                 </Card>

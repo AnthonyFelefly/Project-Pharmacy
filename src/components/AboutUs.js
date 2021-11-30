@@ -1,6 +1,6 @@
 import React from 'react';
 import { MDBCardGroup,MDBTypography, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
-
+import {baseUrl} from "../shared/baseUrl";
 
 function AboutUs(){
     return(
@@ -12,7 +12,7 @@ function AboutUs(){
         <MDBCardGroup column="auto">
           <div className="col-auto m-2">
       <MDBCard >
-        <MDBCardImage style={{width:"auto",height:"300px"}} src="assets/images/Store.png" alt="MDBCard image cap" top hover
+        <MDBCardImage style={{width:"auto",height:"300px"}} src={baseUrl+"images/Store.png"} alt="MDBCard image cap" top hover
           overlay="white-slight" />
         <MDBCardBody>
           <MDBCardTitle tag="h5">Locally Owned</MDBCardTitle>
@@ -25,7 +25,7 @@ function AboutUs(){
 
       <div className=" col-auto m-2">
       <MDBCard >
-        <MDBCardImage style={{width:"370px",height:"300px"}} src="assets/images/Delivery.png" alt="MDBCard image cap" top hover
+        <MDBCardImage style={{width:"370px",height:"300px"}} src={baseUrl+"/images/Delivery.png"} alt="MDBCard image cap" top hover
           overlay="white-slight" />
         <MDBCardBody>
           <MDBCardTitle tag="h5">Home Delivery</MDBCardTitle>
@@ -37,7 +37,7 @@ function AboutUs(){
       </div>
       <div className="col-auto m-2">
       <MDBCard >
-        <MDBCardImage style={{width:"300px",height:"300px"}} src="assets/images/Call.png" alt="MDBCard image cap" top hover
+        <MDBCardImage style={{width:"300px",height:"300px"}} src={baseUrl+"/images/Call.png"} alt="MDBCard image cap" top hover
           overlay="white-slight" />
         <MDBCardBody>
           <MDBCardTitle tag="h5">Personalized Care</MDBCardTitle>

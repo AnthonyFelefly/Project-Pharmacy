@@ -1,6 +1,7 @@
 import {MDBCol, MDBIcon, MDBCarousel, MDBCarouselCaption, MDBCarouselInner, MDBCarouselItem, MDBView, MDBMask, MDBContainer } from
 "mdbreact";
 import React from 'react';
+import {baseUrl} from '../shared/baseUrl';
 
 function Home(){
     return(
@@ -18,7 +19,7 @@ function Home(){
             <MDBView>
               <img
                 className="d-block w-100"
-                src="assets/images/JumbotronBg.png"
+                src={baseUrl+"/images/JumbotronBg.png"}
                 alt="First slide"
               />
             <MDBMask />
@@ -32,7 +33,7 @@ function Home(){
             <MDBView>
               <img
                 className="d-block w-100"
-                src="assets/images/Vaccine.png"
+                src={baseUrl+"/images/Vaccine.png"}
                 alt="Second slide"
               />
             <MDBMask />
@@ -46,7 +47,7 @@ function Home(){
             <MDBView>
               <img
                 className="d-block w-100"
-                src="assets/images/Home.png"
+                src={baseUrl+"/images/Home.png"}
                 alt="Third slide"
               />
             <MDBMask overlay="black-slight" />
