@@ -29,7 +29,7 @@ class AdminPage extends Component {
         this.toggleModal();
         const cat=this.props.categories.filter((categ)=>categ.description===values.category)[0];
         const category=cat.id;
-        this.props.addProduct(values.productName,category,values.description,values.application,values.quantity,values.price);
+        this.props.postProduct(values.productName,category,values.description,values.application,values.quantity,values.price);
         this.props.resetProductForm();
     }
     render(){

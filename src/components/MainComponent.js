@@ -10,7 +10,7 @@ import Footer from './FooterComponent';
 import Contact from "./ContactComponent";
 import {Switch,Route,Redirect,useParams, withRouter} from'react-router-dom';
 import {connect} from 'react-redux';
-import { addProduct ,fetchProducts,fetchCategories,fetchUsers,addCategory} from '../redux/ActionCreators';
+import { postProduct ,fetchProducts,fetchCategories,fetchUsers,addCategory} from '../redux/ActionCreators';
 import {actions} from 'react-redux-form';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
@@ -22,7 +22,7 @@ const mapStateToProps=state=>{
   }
 }
 const mapDispatchToProps=(dispatch)=>({
-  addProduct:(productName,category,description,application,quantity,price)=> dispatch(addProduct(productName,category,description,application,quantity,price)),
+  postProduct:(productName,category,description,application,quantity,price)=> dispatch(postProduct(productName,category,description,application,quantity,price)),
   addCategory:(description)=> dispatch(addCategory(description)),
   fetchProducts: () => { dispatch(fetchProducts())},
   fetchCategories: () => { dispatch(fetchCategories())},
@@ -141,7 +141,7 @@ class Main extends Component {
             <AdminPage categories={this.props.categories.categories}
             categoriesLoading={this.props.categories.isLoading}
             categoriesErrMess={this.props.categories.errMess}
-            addProduct={this.props.addProduct} addCategory={this.props.addCategory} resetProductForm={this.props.resetProductForm}/>
+            postProduct={this.props.postProduct} addCategory={this.props.addCategory} resetProductForm={this.props.resetProductForm}/>
           </Route>
           <Route path="/aboutus" component={AboutPage}/>
           <Redirect to="/home" />

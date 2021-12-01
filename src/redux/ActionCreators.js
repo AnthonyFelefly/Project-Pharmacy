@@ -1,17 +1,42 @@
 import * as ActionTypes from './ActionTypes';
 import {baseUrl} from "../shared/baseUrl";
-export const addProduct=(productName,category,description,application,quantity,price)=>({
+export const addProduct=(product)=>({
     type:ActionTypes.ADD_PRODUCT,
-    payload:{
-        name:productName,
-        category:category,
-        description:description,
-        application:application,
-        quantity:quantity,
-        price:price+"$"
-
-    }
+    payload:product
 });
+export const postProduct=(productName,category,description,application,quantity,price)=>(dispatch)=>{
+    const newProduct={
+            name:productName,
+            category:category,
+            description:description,
+            application:application,
+            quantity:quantity,
+            price:price+"$"
+    };
+    return fetch(baseUrl+'products',{
+        method:'POST',
+        body: JSON.stringify(newProduct),
+        headers:{
+            'Content-Type':'application/json'
+        },
+        credentials:'same-origin'
+    }).then(response=>{
+        if(response.ok){
+            return response;
+        }else{
+            var error=new Error('Error '+response.status+': '+response.statusText);
+             error.response=response;
+             throw error;
+         }
+    },
+    error=>{
+        var errmess=new Error(error.message);
+        throw errmess;
+    }) .then(response=>response.json())
+    .then(response=>dispatch(addProduct(response)))
+    .catch(error=>{ console.log("Post Products ",error.message);
+            alert("Your Product could not be added\nError: "+error.message);});
+}
 export const addCategory=(description)=>({
     type:ActionTypes.ADD_CATEGORY,
     payload:{
