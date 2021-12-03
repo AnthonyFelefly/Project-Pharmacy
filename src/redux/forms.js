@@ -16,3 +16,6 @@ export const InitialProduct={
     quantity:'',
     price:''
 }
+export const InitialCategory={
+    categoryName:'',
+}

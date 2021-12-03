@@ -3,14 +3,14 @@ import AboutUs from './AboutUs';
 import { Component } from 'react';
 import Home from './HomeComponent';
 import Catalogue from './CatalogueComponent';
-import AdminPage from './AdminPage';
+import AdminPage from './AdminPageComponent';
 import ProductDetail from './ProductDetailComponent';
 import NavBar from "./NavbarComponent";
 import Footer from './FooterComponent';
 import Contact from "./ContactComponent";
 import {Switch,Route,Redirect,useParams, withRouter} from'react-router-dom';
 import {connect} from 'react-redux';
-import { postProduct ,fetchProducts,fetchCategories,fetchUsers,addCategory} from '../redux/ActionCreators';
+import { postProduct ,fetchProducts,fetchCategories,fetchUsers,postCategory} from '../redux/ActionCreators';
 import {actions} from 'react-redux-form';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
@@ -23,11 +23,12 @@ const mapStateToProps=state=>{
 }
 const mapDispatchToProps=(dispatch)=>({
   postProduct:(productName,category,description,application,quantity,price)=> dispatch(postProduct(productName,category,description,application,quantity,price)),
-  addCategory:(description)=> dispatch(addCategory(description)),
+  postCategory:(categoryName)=> dispatch(postCategory(categoryName)),
   fetchProducts: () => { dispatch(fetchProducts())},
   fetchCategories: () => { dispatch(fetchCategories())},
   fetchUsers: () => { dispatch(fetchUsers())},
   resetMessageForm:()=>{dispatch(actions.reset('message'))},
+  resetCategoryForm:()=>{dispatch(actions.reset('category'))},
   resetProductForm:()=>{dispatch(actions.reset('product'))}
 });
 class Main extends Component {
@@ -139,8 +140,7 @@ class Main extends Component {
           </Route>
           <Route exact path="/admin">
             <AdminPage categories={this.props.categories.categories}
-            categoriesLoading={this.props.categories.isLoading}
-            categoriesErrMess={this.props.categories.errMess}
+            products={this.props.products.products} postCategory={this.props.postCategory} resetCategoryForm={this.props.resetCategoryForm}
             postProduct={this.props.postProduct} addCategory={this.props.addCategory} resetProductForm={this.props.resetProductForm}/>
           </Route>
           <Route path="/aboutus" component={AboutPage}/>

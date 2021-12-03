@@ -3,12 +3,11 @@ import { Card, CardImg, CardBody, Button, Modal, ModalHeader, ModalBody,
     Label, Row, Col, CardTitle } from "reactstrap";
 import { Control, Form, Errors } from 'react-redux-form';
 import { baseUrl } from '../shared/baseUrl';
-
 const required=(val)=>val&&val.length;//check if the legnth of value is greater then zero
 const maxLength=(len)=>((val)=>(!(val)||(val.length <=len )));
 const minLength=(len)=>((val)=>(!val)||((val)&&(val.length >=len )));
 const isNumber=(val)=>(!val)||(!isNaN(Number(val)));//to check if the value is a number
-class AdminPage extends Component {
+class AddProductC extends Component {
     constructor(props){
         super(props);
         this.state={
@@ -26,11 +25,15 @@ class AdminPage extends Component {
         });
     }
     handleSubmit(values) {
-        this.toggleModal();
         const cat=this.props.categories.filter((categ)=>categ.description===values.category)[0];
         const category=cat.id;
+        if (this.props.products.filter((product)=>product.name===values.productName)[0]!=null){
+            alert("This product already exist, please add a non existing product");    
+        }
+        else{
         this.props.postProduct(values.productName,category,values.description,values.application,values.quantity,values.price);
         this.props.resetProductForm();
+        this.toggleModal();}
     }
     render(){
         const categoryDropDown=this.state.categories.map((cat)=>{
@@ -40,7 +43,7 @@ class AdminPage extends Component {
             return(
         <>
         
-            <Card  elevation={5} className="col-md-4 m-2"onClick={this.toggleModal}>
+            <Card  elevation={5} className="col-md-4 m-2" onClick={this.toggleModal}>
                 <CardImg className="mt-2" style={{width:"auto",height:"auto"}} src={baseUrl+"/images/AddProduct.png"} alt="Add a new Product" />
                 <CardBody >
                     <CardTitle style={{"font-size":"medium"}}>Add A New Product</CardTitle>
@@ -151,11 +154,11 @@ class AdminPage extends Component {
                             </Row>              
                    
                     <Button type="submit" value="submit" color="primary">Submit</Button>                            
-                </Form>
+                </Form> 
             </ModalBody>
         </Modal>
 </>);
     }
 }
 
-export default AdminPage;
+export default AddProductC;

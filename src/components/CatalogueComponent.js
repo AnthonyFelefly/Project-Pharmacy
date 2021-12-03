@@ -5,8 +5,27 @@ import {Card,CardImg, CardText, CardBody, CardTitle,Breadcrumb,BreadcrumbItem} f
 import {Loading} from './LoadingComponent';
 import {baseUrl } from '../shared/baseUrl';
 
-    function RenderCatalogueItem({ product,categ}){
+    function RenderCatalogueItem({ product,categ,isLoading,errMess}){
         const category=(categ.filter((cat)=>cat.id===product.category)[0]);
+        if (isLoading){
+            return(
+                <div className='container'>
+                    <div className='row'>
+                        <Loading/>
+                    </div>
+                </div>)
+
+        }
+        else if(errMess){
+            return(
+                <div className='container'>
+                    <div className="row">
+                        <h4>{errMess}</h4>
+                    </div>
+
+                </div>
+            )
+        }
         return(<>
             
               <Card  elevation={5}>
@@ -27,7 +46,7 @@ import {baseUrl } from '../shared/baseUrl';
         const menu=props.products.map((product)=>{
             return(
                 <div key={product.id} className="col-12 col-md-3 m-4 ">
-                <RenderCatalogueItem product={product} categ={props.categ} />
+                <RenderCatalogueItem product={product} categ={props.categ} isLoading={props.productsLoading} errMess={props.productsErrMess} />
                 </div>
             )
 
@@ -75,7 +94,7 @@ import {baseUrl } from '../shared/baseUrl';
         );};
 
        
-            return(
+     return(
                 <div className="container">
                     <div className="row">
                     <div className='container col-sm-6 ml-0 mt-2'>

@@ -33,17 +33,10 @@ export const postProduct=(productName,category,description,application,quantity,
         var errmess=new Error(error.message);
         throw errmess;
     }) .then(response=>response.json())
-    .then(response=>dispatch(addProduct(response)))
+    .then(response=>{dispatch(addProduct(response));console.log(response)})
     .catch(error=>{ console.log("Post Products ",error.message);
             alert("Your Product could not be added\nError: "+error.message);});
 }
-export const addCategory=(description)=>({
-    type:ActionTypes.ADD_CATEGORY,
-    payload:{
-        description:description,
-
-    }
-});
 
 export const fetchProducts=()=>(dispatch)=>{
     dispatch(productsLoading(true));
@@ -81,6 +74,38 @@ export const addProducts=(products)=>({
     type: ActionTypes.ADD_PRODUCTS,
     payload:products
 });
+export const addCategory=(category)=>({
+    type:ActionTypes.ADD_CATEGORY,
+    payload:category
+});
+export const postCategory=(categoryName)=>(dispatch)=>{
+    const newCategory={
+      description:categoryName
+    };
+    return fetch(baseUrl+"categories",{
+        method:'POST',
+        body: JSON.stringify(newCategory),
+        headers:{
+            'Content-Type':'application/json'
+        },
+        credentials:'same-origin'
+    }).then(response=>{
+        if(response.ok){
+            return response;
+        }else{
+            var error=new Error('Error '+response.status+': '+response.statusText);
+             error.response=response;
+             throw error;
+         }
+    },
+    error=>{
+        var errmess=new Error(error.message);
+        throw errmess;
+    }) .then(response=>response.json())
+    .then(response=>dispatch(addCategory(response)))
+    .catch(error=>{ console.log("Post Products ",error.message);
+            alert("Your Product could not be added\nError: "+error.message);});
+}
 
 export const fetchCategories=()=>(dispatch)=>{
     dispatch(categoriesLoading(true));
@@ -151,4 +176,10 @@ export const usersFailed=(errmess)=>({
 export const addUsers=(users)=>({
     type: ActionTypes.ADD_USERS,
     payload:users
+});
+
+
+export const loginRequest=(idUser)=>({
+    type:ActionTypes.LOGIN_REQUEST,
+    payload:idUser
 });
