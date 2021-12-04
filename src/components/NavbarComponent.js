@@ -53,7 +53,7 @@ class NavBar extends Component{
         return(
             <>
             
-            <Navbar className="navbar " dark expand='md'>
+            <Navbar className="navbar col-sm-auto" dark expand='md'>
                    <div className="mt-2">
                     <NavbarToggler onClick={this.toggleNav}/>
                     <NavbarBrand className="mr-auto mt-auto mb-auto" href="/">

@@ -37,6 +37,58 @@ export const postProduct=(productName,category,description,application,quantity,
     .catch(error=>{ console.log("Post Products ",error.message);
             alert("Your Product could not be added\nError: "+error.message);});
 }
+export const deleteProduct=(productId)=>(dispatch)=>{
+    return fetch(baseUrl+'products/'+productId,{
+        method:'DELETE',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        credentials:'same-origin'
+    }).then(response=>{
+        if(response.ok){
+            return response;
+        }else{
+            var error=new Error('Error '+response.status+': '+response.statusText);
+             error.response=response;
+             throw error;
+         }
+    },
+    error=>{
+        var errmess=new Error(error.message);
+        throw errmess;
+    }) .then(response=>response.json())
+    .then(response=>{dispatch(fetchProducts())})
+    .catch(error=>{ console.log("Delete Products ",error.message);
+            alert("Your Product could not be deleted\nError: "+error.message);});
+}
+export const deleteCategory=(categoryId)=>(dispatch)=>{
+    return fetch(baseUrl+'categories/'+categoryId,{
+        method:'DELETE',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        credentials:'same-origin'
+    }).then(response=>{
+        if(response.ok){
+            return response;
+        }else{
+            var error=new Error('Error '+response.status+': '+response.statusText);
+             error.response=response;
+             throw error;
+         }
+    },
+    error=>{
+        var errmess=new Error(error.message);
+        throw errmess;
+    }) .then(response=>response.json())
+    .then(response=>{dispatch(fetchCategories())})
+    .catch(error=>{ console.log("Delete Categories ",error.message);
+            alert("This Category could not be deleted\nError: "+error.message);});
+}
+
+
+
+
 
 export const fetchProducts=()=>(dispatch)=>{
     dispatch(productsLoading(true));

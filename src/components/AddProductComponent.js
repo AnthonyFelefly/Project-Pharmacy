@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import { Card, CardImg, CardBody, Button, Modal, ModalHeader, ModalBody,
-    Label, Row, Col, CardTitle } from "reactstrap";
+    Label, Row, Col, CardTitle, CardText } from "reactstrap";
 import { Control, Form, Errors } from 'react-redux-form';
 import { baseUrl } from '../shared/baseUrl';
 const required=(val)=>val&&val.length;//check if the legnth of value is greater then zero
@@ -43,10 +43,10 @@ class AddProductC extends Component {
             return(
         <>
         
-            <Card  elevation={5} className="col-md-4 m-2" onClick={this.toggleModal}>
-                <CardImg className="mt-2" style={{width:"auto",height:"auto"}} src={baseUrl+"/images/AddProduct.png"} alt="Add a new Product" />
-                <CardBody >
-                    <CardTitle style={{"font-size":"medium"}}>Add A New Product</CardTitle>
+            <Card  elevation={5} className="col-sm-auto col-md-5 m-4" onClick={this.toggleModal}>
+                <CardImg className="mt-2" style={{width:"sm-100px md-350px",height:"sm-100px md-350px"}} src={baseUrl+"/images/AddProduct.png"} alt="Add a new Product" />
+                <CardBody>
+                    <CardTitle style={{"font-size":"medium","font-family": "Verdana"}}>Add A New Product</CardTitle>
                 </CardBody>
             </Card>
 
@@ -75,6 +75,7 @@ class AddProductC extends Component {
                         />
                         </Col>
                     </Row>
+                   
                     <Row className="form-group">
                         <Label htmlfor="category" md={12}>Product Category</Label>
                         <Col md={12}>

@@ -10,7 +10,7 @@ import Footer from './FooterComponent';
 import Contact from "./ContactComponent";
 import {Switch,Route,Redirect,useParams, withRouter} from'react-router-dom';
 import {connect} from 'react-redux';
-import { postProduct ,fetchProducts,fetchCategories,fetchUsers,postCategory} from '../redux/ActionCreators';
+import { postProduct ,fetchProducts,fetchCategories,fetchUsers,postCategory,deleteProduct,deleteCategory} from '../redux/ActionCreators';
 import {actions} from 'react-redux-form';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
@@ -27,9 +27,13 @@ const mapDispatchToProps=(dispatch)=>({
   fetchProducts: () => { dispatch(fetchProducts())},
   fetchCategories: () => { dispatch(fetchCategories())},
   fetchUsers: () => { dispatch(fetchUsers())},
+  deleteProduct:(productId)=>{dispatch(deleteProduct(productId))},
+  deleteCategory:(categoryId)=>{dispatch(deleteCategory(categoryId))},
   resetMessageForm:()=>{dispatch(actions.reset('message'))},
   resetCategoryForm:()=>{dispatch(actions.reset('category'))},
-  resetProductForm:()=>{dispatch(actions.reset('product'))}
+  resetProductForm:()=>{dispatch(actions.reset('product'))},
+  resetDeleteCategoryForm:()=>{dispatch(actions.reset('dcategory'))},
+  resetDeleteProductForm:()=>{dispatch(actions.reset('dproduct'))}
 });
 class Main extends Component {
   constructor(props){
@@ -40,6 +44,7 @@ class Main extends Component {
     this.props.fetchProducts();
     this.props.fetchCategories();
     this.props.fetchUsers();
+   
     
   }
   componentDidUpdate(){
@@ -113,8 +118,8 @@ class Main extends Component {
     return (
       
       
-      <div >
-        <NavBar categories={this.props.categories.categories}
+      <div className="col-sm-full">
+        <NavBar className="col-sm-full ml-2" categories={this.props.categories.categories}
         categoriesLoading={this.props.categories.isLoading}
         categoriesErrMess={this.props.categories.errMess}/>
         <Switch>
@@ -139,9 +144,10 @@ class Main extends Component {
             <Contact resetMessageForm={this.props.resetMessageForm}/>
           </Route>
           <Route exact path="/admin">
-            <AdminPage categories={this.props.categories.categories}
+            <AdminPage categories={this.props.categories.categories} deleteCategory={this.props.deleteCategory} resetDeleteCategoryForm={this.props.resetDeleteCategoryForm}
             products={this.props.products.products} postCategory={this.props.postCategory} resetCategoryForm={this.props.resetCategoryForm}
-            postProduct={this.props.postProduct} addCategory={this.props.addCategory} resetProductForm={this.props.resetProductForm}/>
+            postProduct={this.props.postProduct} addCategory={this.props.addCategory} resetProductForm={this.props.resetProductForm}
+            resetDeleteProductForm={this.props.resetDeleteProductForm} deleteProduct={ this.props.deleteProduct}/>
           </Route>
           <Route path="/aboutus" component={AboutPage}/>
           <Redirect to="/home" />

@@ -8,7 +8,7 @@ export const InitialMessage={
     message:''
 
 }
-export const InitialProduct={
+export const InitialAddProduct={
     productName:'',
     category:null,
     description:'',
@@ -16,6 +16,14 @@ export const InitialProduct={
     quantity:'',
     price:''
 }
-export const InitialCategory={
+export const InitialAddCategory={
     categoryName:'',
+}
+export const InitialDeleteCategory={
+    category:null,
+    agree:false
+}
+export const InitialDeleteProduct={
+    product:null,
+    agree:false
 }
