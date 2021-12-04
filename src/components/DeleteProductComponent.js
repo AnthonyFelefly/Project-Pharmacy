@@ -23,8 +23,8 @@ export class DeleteProductC extends Component {
         });
     }
     handleSubmit(values) {
-        console.log(values.agree);
-        if(values.product===true){
+        console.log(values.product);
+       if(values.product===null){
             alert("Please Select A Product from the corresponding List");
             return;
 
@@ -32,7 +32,7 @@ export class DeleteProductC extends Component {
         const productToDelete=this.props.products.filter(prod=>prod.name===values.product)[0];
         console.log(productToDelete.id);
         this.props.deleteProduct(productToDelete.id);
-      this.props.resetDeleteProductForm();
+      this.props.resetDeleteProductForm(); 
       this.toggleModal();
     }
     render(){

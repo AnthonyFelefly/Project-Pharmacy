@@ -23,6 +23,11 @@ export class DeleteCategoryC extends Component {
         });
     }
     handleSubmit(values) {
+        if(values.category===null){
+             alert("Please Select A Product from the corresponding List");
+             return;
+ 
+         }
       
         const categoryToDelete=this.props.categories.filter(cat=>cat.description===values.category)[0];
         const productsAssociated=this.props.products.filter(prod=>prod.category===categoryToDelete.id);

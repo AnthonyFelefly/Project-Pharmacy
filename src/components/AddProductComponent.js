@@ -25,6 +25,11 @@ class AddProductC extends Component {
         });
     }
     handleSubmit(values) {
+        if(values.category===null){
+            alert("Please Select A Category for the Product from the corresponding List");
+            return;
+
+        }
         const cat=this.props.categories.filter((categ)=>categ.description===values.category)[0];
         const category=cat.id;
         if (this.props.products.filter((product)=>product.name===values.productName)[0]!=null){
