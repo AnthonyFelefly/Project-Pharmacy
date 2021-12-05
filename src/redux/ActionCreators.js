@@ -235,3 +235,33 @@ export const loginRequest=(idUser)=>({
     type:ActionTypes.LOGIN_REQUEST,
     payload:idUser
 });
+
+
+
+
+export const addToCart=(productId)=>({
+    type:ActionTypes.ADD_TO_CART,
+    payload:{
+        productId:productId
+    }
+
+})
+export const removeFromCart=(productId)=>({
+    type:ActionTypes.REMOVE_FROM_CART,
+    payload:{
+        productId:productId
+    }
+
+})
+export const adjust_qty=(productId,value)=>({
+    type:ActionTypes.ADJUST_QTY_CART,
+    payload:{
+        productId:productId,
+        quantity:value
+    }
+
+})
+export const loadCurrentItem=(product)=>({
+    type:ActionTypes.LOAD_CURRENT_ITEM,
+    payload:product
+});

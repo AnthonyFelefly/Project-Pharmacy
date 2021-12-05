@@ -10,10 +10,12 @@ import Footer from './FooterComponent';
 import Contact from "./ContactComponent";
 import {Switch,Route,Redirect,useParams, withRouter} from'react-router-dom';
 import {connect} from 'react-redux';
-import { postProduct ,fetchProducts,fetchCategories,fetchUsers,postCategory,deleteProduct,deleteCategory} from '../redux/ActionCreators';
+import { postProduct ,fetchProducts,fetchCategories,fetchUsers
+  ,postCategory,deleteProduct,deleteCategory, addToCart} from '../redux/ActionCreators';
 import {actions} from 'react-redux-form';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
+import Cart from './CartComponent';
 const mapStateToProps=state=>{
   return {
     products: state.products,
@@ -29,6 +31,7 @@ const mapDispatchToProps=(dispatch)=>({
   fetchUsers: () => { dispatch(fetchUsers())},
   deleteProduct:(productId)=>{dispatch(deleteProduct(productId))},
   deleteCategory:(categoryId)=>{dispatch(deleteCategory(categoryId))},
+  addToCart:(productId)=>{dispatch(addToCart(productId))},
   resetMessageForm:()=>{dispatch(actions.reset('message'))},
   resetCategoryForm:()=>{dispatch(actions.reset('category'))},
   resetProductForm:()=>{dispatch(actions.reset('product'))},
@@ -44,12 +47,12 @@ class Main extends Component {
     this.props.fetchProducts();
     this.props.fetchCategories();
     this.props.fetchUsers();
+    
+    
    
     
   }
-  componentDidUpdate(){
-    console.log(this.props.categories.categories);
-  }
+  
  
   render() {
     const HomePage=()=>{
@@ -62,11 +65,12 @@ class Main extends Component {
       const cat=this.props.categories.categories.filter((categ)=>categ.id===parseInt(catId,10));
       return(
         <>
-        <Catalogue products={this.props.products.products.filter((product)=>product.category===cat[0].id)} categ={cat}
+        <Catalogue add={this.props.addToCart} products={this.props.products.products.filter((product)=>product.category===cat[0].id)} categ={cat}
           productsLoading={this.props.products.isLoading}
           productsErrMess={this.props.products.errMess}
           categoriesLoading={this.props.categories.isLoading}
-          categoriesErrMess={this.props.categories.errMess}/>
+          categoriesErrMess={this.props.categories.errMess}
+           />
         </>
 
       );
@@ -119,15 +123,19 @@ class Main extends Component {
       
       
       <div className="col-sm-full">
-        <NavBar className="col-sm-full ml-2" categories={this.props.categories.categories}
+        <NavBar className="col-sm-full ml-2" categories={this.props.categories.categories}  cart={this.props.products.cart}
         categoriesLoading={this.props.categories.isLoading}
         categoriesErrMess={this.props.categories.errMess}/>
         <Switch>
           <Route path="/home" component={HomePage}/>
+          <Route path="/cart" >
+            <Cart products={this.props.products}></Cart>  
+          </Route>
           <Route exact path='/catalogue'>
           <Catalogue products={this.props.products.products} categ={this.props.categories.categories}
             productsLoading={this.props.products.isLoading}
             productsErrMess={this.props.products.errMess}
+            add={this.props.addToCart}
             categoriesLoading={this.props.categories.isLoading}
             categoriesErrMess={this.props.categories.errMess}/>
             

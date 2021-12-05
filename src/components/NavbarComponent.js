@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem,Button, Modal, ModalBody } from 'reactstrap';
 import{NavLink} from'react-router-dom';
 import LoginPage from './Login';
+import styles from './styles/Cart.module.css'
 import RegisterPage from './Register';
 import {
     MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem
@@ -14,7 +15,10 @@ class NavBar extends Component{
             isNavOpen:false,
             isModalOpen:false,
             isRegModalOpen:false,
+            
+
         };
+        this.cartCounter=0;
         this.toggleNav=this.toggleNav.bind(this);
         this.toggleModal=this.toggleModal.bind(this);
         this.toggleRegModal=this.toggleRegModal.bind(this);
@@ -22,9 +26,14 @@ class NavBar extends Component{
     
     componentDidMount(){
         console.log(this.props.categories);
+        
     }
     componentDidUpdate(){
         console.log(this.props.categories);
+        let count=1;
+        this.props.cart.forEach(item=>count+=item.quantity);
+        this.cartCounter=count;
+        
     }
     toggleNav(){
         this.setState({
@@ -96,10 +105,15 @@ class NavBar extends Component{
                         </div>
                         <div className="container col-auto mr-auto " float="right">
                         <Nav className="nav navbar-nav navbar-right">
-                        <NavItem className='nav-link' onClick={this.toggleRegModal} float="right">
-                        <Button className="teal lighten-1" style={{padding:"8px 32px"}}>
+                            <NavLink className='nav-link mt-auto mb-auto' style={{width:"40px"}}to='/cart'>
+                                <div className={styles.navbar__cart}>
+                            <span className="fa fa-shopping-cart fa-lg"><div className={styles.cart__counter}>{this.cartCounter}</div></span>
+                            </div>
+                            </NavLink>
+                            <NavItem className='nav-link' onClick={this.toggleRegModal} float="right">
+                                <Button className="teal lighten-1" style={{padding:"8px 32px"}}>
                                 <span className="fa fa-user-plus"></span> Sign Up
-                        </Button>
+                                </Button>
                             </NavItem>
                             <NavItem className='nav-link' onClick={this.toggleModal}>
                             <Button className="teal lighten-1" style={{padding:"8px 32px"}}>

@@ -1,11 +1,12 @@
 import { MDBBtn } from 'mdbreact';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {Card,CardImg, CardText, CardBody, CardTitle,Breadcrumb,BreadcrumbItem} from 'reactstrap';
+import {Card,CardImg, CardText, CardBody, CardTitle,Breadcrumb,BreadcrumbItem, Row} from 'reactstrap';
 import {Loading} from './LoadingComponent';
 import {baseUrl } from '../shared/baseUrl';
-
-    function RenderCatalogueItem({ product,categ,isLoading,errMess}){
+    
+    function RenderCatalogueItem({ product,categ,isLoading,errMess,add}){
+        console.log(product.id);
         const category=(categ.filter((cat)=>cat.id===product.category)[0]);
         if (isLoading){
             return(
@@ -35,9 +36,13 @@ import {baseUrl } from '../shared/baseUrl';
                     <CardTitle style={{"font-size":"medium"}}>{product.name}</CardTitle>
                     <CardText>{category.description}</CardText>
                     <div className="text-center">
+                        <Row>
+                    <MDBBtn    className=" teal accent-4 ml-auto mr-auto " onClick={()=>add(product.id)}style={{width:"150px"}} position="absolute">Add To Cart</MDBBtn>
                     <Link to={`/catalogue/${category.id}/${product.id}`} >  
-                    <MDBBtn   className=" teal accent-4 ml-auto mr-auto " position="absolute">See Details</MDBBtn>
+                    <MDBBtn   className=" teal accent-4 ml-auto mr-auto " style={{width:"150px"}} position="absolute" >See Details</MDBBtn>
                     </Link>
+                    </Row>
+                    
                     </div>
                 </CardBody>
             </Card></>); 
@@ -46,7 +51,7 @@ import {baseUrl } from '../shared/baseUrl';
         const menu=props.products.map((product)=>{
             return(
                 <div key={product.id} className="col-12 col-md-3 m-4 ">
-                <RenderCatalogueItem product={product} categ={props.categ} isLoading={props.productsLoading} errMess={props.productsErrMess} />
+                <RenderCatalogueItem product={product} categ={props.categ}  add={props.add}isLoading={props.productsLoading} errMess={props.productsErrMess} />
                 </div>
             )
 
@@ -71,13 +76,14 @@ import {baseUrl } from '../shared/baseUrl';
             )
         }
         else if (props.categ.length===1){
+            
             return(
                 <div className="container">
                 <div className="row">
                 <div className='container col-sm-6 ml-0 mt-2'>
                     <Breadcrumb>
                         <BreadcrumbItem><Link to='/home'>Home</Link></BreadcrumbItem>
-                        <BreadcrumbItem active>Products{`> ${(props.categ[0]).description}`}</BreadcrumbItem>
+                        <BreadcrumbItem active >Products{`> ${(props.categ[0]).description}`}</BreadcrumbItem>
                     </Breadcrumb></div>
                     <div className="col-12">
                         <h3>Products</h3>
