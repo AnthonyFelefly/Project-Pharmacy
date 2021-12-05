@@ -15,25 +15,29 @@ class NavBar extends Component{
             isNavOpen:false,
             isModalOpen:false,
             isRegModalOpen:false,
+            curTime : null
             
 
         };
         this.cartCounter=0;
+        this.interval=null;
         this.toggleNav=this.toggleNav.bind(this);
         this.toggleModal=this.toggleModal.bind(this);
         this.toggleRegModal=this.toggleRegModal.bind(this);
         }
+       
     
     componentDidMount(){
-        console.log(this.props.categories);
+        this.interval = setInterval(() => this.setState({ time: Date.now() }), 200);
         
     }
+    componentDidUnmount(){
+        clearInterval(this.interval);
+    }
     componentDidUpdate(){
-        console.log(this.props.categories);
-        let count=1;
+        let count=0;
         this.props.cart.forEach(item=>count+=item.quantity);
-        this.cartCounter=count;
-        
+        this.cartCounter=count;    
     }
     toggleNav(){
         this.setState({

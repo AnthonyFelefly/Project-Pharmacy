@@ -11,7 +11,7 @@ import Contact from "./ContactComponent";
 import {Switch,Route,Redirect,useParams, withRouter} from'react-router-dom';
 import {connect} from 'react-redux';
 import { postProduct ,fetchProducts,fetchCategories,fetchUsers
-  ,postCategory,deleteProduct,deleteCategory, addToCart} from '../redux/ActionCreators';
+  ,postCategory,deleteProduct,deleteCategory, addToCart,removeFromCart} from '../redux/ActionCreators';
 import {actions} from 'react-redux-form';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
@@ -32,6 +32,7 @@ const mapDispatchToProps=(dispatch)=>({
   deleteProduct:(productId)=>{dispatch(deleteProduct(productId))},
   deleteCategory:(categoryId)=>{dispatch(deleteCategory(categoryId))},
   addToCart:(productId)=>{dispatch(addToCart(productId))},
+  removeFromCart:(productId)=>{dispatch(removeFromCart(productId))},
   resetMessageForm:()=>{dispatch(actions.reset('message'))},
   resetCategoryForm:()=>{dispatch(actions.reset('category'))},
   resetProductForm:()=>{dispatch(actions.reset('product'))},
@@ -129,7 +130,7 @@ class Main extends Component {
         <Switch>
           <Route path="/home" component={HomePage}/>
           <Route path="/cart" >
-            <Cart products={this.props.products}></Cart>  
+            <Cart  cart={this.props.products.cart} removeFromCart={this.props.removeFromCart}></Cart>  
           </Route>
           <Route exact path='/catalogue'>
           <Catalogue products={this.props.products.products} categ={this.props.categories.categories}
