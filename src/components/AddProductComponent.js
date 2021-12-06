@@ -84,10 +84,18 @@ class AddProductC extends Component {
                     <Row className="form-group">
                         <Label htmlfor="category" md={12}>Product Category</Label>
                         <Col md={12}>
-                            <Control.select model=".category" name="category" className="form-control">
+                            <Control.select model=".category" name="category" className="form-control" required>
                             <option value="" selected disabled>Choose here</option>
                                {categoryDropDown}
                             </Control.select>
+                        </Col>
+                    </Row>
+                    <Row className="form-group">
+                        <Label htmlfor="image" md={12}>Upload Product Image</Label>
+                        <Col md={12}>
+                            <Control.file model=".image" name="image" className="form-control" required>
+                           
+                            </Control.file>
                         </Col>
                     </Row>
                     <Row className="form-group">

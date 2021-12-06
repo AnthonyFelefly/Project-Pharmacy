@@ -84,7 +84,7 @@ class Main extends Component {
       const product=this.props.products.products.filter((product)=>product.id===parseInt(productId,10))[0];
       return(
         <>
-        <ProductDetail product={product} categ={cat}
+        <ProductDetail product={product} categ={cat} add={this.props.addToCart} 
           isLoading={this.props.products.isLoading}
           ErrMess={this.props.products.errMess}
           categoriesLoading={this.props.categories.isLoading}

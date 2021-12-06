@@ -4,8 +4,10 @@ import { Link } from 'react-router-dom';
 import "../App.css";
 import {Loading} from "./LoadingComponent";
 import {baseUrl} from "../shared/baseUrl";
+import { MDBBtn } from 'mdbreact';
 
-     function RenderProductImage({product,categ,isLoading,errMess}){
+
+     function RenderProductImage({product,categ,isLoading,errMess,add}){
         if(isLoading){
             return(
                 <div className='container'>
@@ -33,6 +35,7 @@ import {baseUrl} from "../shared/baseUrl";
                     <CardImg width="100%"  src={baseUrl+product.image} alt={product.name} />
                     <CardTitle className="m-1">{product.name}</CardTitle>
                     <CardSubtitle className="m-1">{categ.description}</CardSubtitle>
+                    <MDBBtn    className=" teal accent-4 mt-4 ml-auto mr-auto " onClick={()=>add(product.id)}style={{width:"150px"}} position="absolute">Add To Cart</MDBBtn>
                 </Card>
                 </div>
                 </>
@@ -149,7 +152,7 @@ import {baseUrl} from "../shared/baseUrl";
                 </div>
                  
                 <div className='row'>
-                <RenderProductImage product={product} categ={categ} isLoading={props.isLoading} errMess={props.errMess}/>
+                <RenderProductImage product={product} add={props.add} categ={categ} isLoading={props.isLoading} errMess={props.errMess}/>
                 <RenderProductDetail product={product} isLoading={props.isLoading} errMess={props.errMess}/>
                 </div>
             </div>
