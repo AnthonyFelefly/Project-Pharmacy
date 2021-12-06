@@ -3,7 +3,7 @@ import { Card, CardImg, CardBody, Button, Modal, ModalHeader, ModalBody,
     Label, Row, Col, CardTitle, CardText } from "reactstrap";
 import { Control, Form, Errors } from 'react-redux-form';
 import { baseUrl } from '../shared/baseUrl';
-import axios, { post } from"axios";
+
 const required=(val)=>val&&val.length;//check if the legnth of value is greater then zero
 const maxLength=(len)=>((val)=>(!(val)||(val.length <=len )));
 const minLength=(len)=>((val)=>(!val)||((val)&&(val.length >=len )));
