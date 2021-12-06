@@ -30,6 +30,7 @@ class AddCategoryC extends Component {
         }
         else{
         this.props.postCategory(val.categoryName);
+        this.props.resetCategoryForm();
         this.toggleModal();}
     }
     render(){

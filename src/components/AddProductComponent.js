@@ -25,6 +25,9 @@ class AddProductC extends Component {
     }
     handleFile(e){
         let file=e.target.files;
+        let reader=new FileReader();
+        reader.readAsDataURL(file[0]);
+        reader.onload=(e)=>{console.log(e.target.result)}
         this.setState({image:file})
     }
     handleUpload(values,category){
