@@ -4,14 +4,15 @@ export const addProduct=(product)=>({
     type:ActionTypes.ADD_PRODUCT,
     payload:product
 });
-export const postProduct=(productName,category,description,application,quantity,price)=>(dispatch)=>{
+export const postProduct=(productName,category,description,application,quantity,price,image)=>(dispatch)=>{
     const newProduct={
             name:productName,
             category:category,
             description:description,
+            image:image,
             application:application,
             quantity:quantity,
-            price:price+"$"
+            price:price
     };
     return fetch(baseUrl+'products',{
         method:'POST',

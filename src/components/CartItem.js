@@ -15,7 +15,7 @@ const CartItem = ({itemData,rmFromCart,adjust_qty}) => {
       <img
         className={styles.cartItem__image}
         style={{width:"200px",height:"auto"}}
-        src={baseUrl+itemData.image}
+        src={itemData.image}
         alt={itemData.name}
       />
       <div className={styles.cartItem__details}>

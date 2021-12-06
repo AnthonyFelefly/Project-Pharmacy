@@ -24,7 +24,7 @@ const mapStateToProps=state=>{
   }
 }
 const mapDispatchToProps=(dispatch)=>({
-  postProduct:(productName,category,description,application,quantity,price)=> dispatch(postProduct(productName,category,description,application,quantity,price)),
+  postProduct:(productName,category,description,application,quantity,price,image)=> dispatch(postProduct(productName,category,description,application,quantity,price,image)),
   postCategory:(categoryName)=> dispatch(postCategory(categoryName)),
   fetchProducts: () => { dispatch(fetchProducts())},
   fetchCategories: () => { dispatch(fetchCategories())},

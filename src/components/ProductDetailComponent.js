@@ -32,7 +32,7 @@ import { MDBBtn } from 'mdbreact';
             
                 <div className="col-md-6 col-lg-5 mt-4 ml-4">
                 <Card >
-                    <CardImg width="100%"  src={baseUrl+product.image} alt={product.name} />
+                    <CardImg width="100%"  src={product.image} alt={product.name} />
                     <CardTitle className="m-1">{product.name}</CardTitle>
                     <CardSubtitle className="m-1">{categ.description}</CardSubtitle>
                     <MDBBtn    className=" teal accent-4 mt-4 ml-auto mr-auto " onClick={()=>add(product.id)}style={{width:"150px"}} position="absolute">Add To Cart</MDBBtn>

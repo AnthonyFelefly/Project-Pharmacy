@@ -31,7 +31,7 @@ import {baseUrl } from '../shared/baseUrl';
             
               <Card  elevation={5}>
                 
-                <CardImg className="mt-2"width="100%"  src={baseUrl+product.image} alt={product.name} />
+                <CardImg className="mt-2"width="100%"  src={product.image} alt={product.name} />
                 <CardBody >
                     <CardTitle style={{"font-size":"medium"}}>{product.name}</CardTitle>
                     <CardText>{category.description}</CardText>

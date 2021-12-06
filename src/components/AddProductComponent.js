@@ -3,6 +3,7 @@ import { Card, CardImg, CardBody, Button, Modal, ModalHeader, ModalBody,
     Label, Row, Col, CardTitle, CardText } from "reactstrap";
 import { Control, Form, Errors } from 'react-redux-form';
 import { baseUrl } from '../shared/baseUrl';
+import axios, { post } from"axios";
 const required=(val)=>val&&val.length;//check if the legnth of value is greater then zero
 const maxLength=(len)=>((val)=>(!(val)||(val.length <=len )));
 const minLength=(len)=>((val)=>(!val)||((val)&&(val.length >=len )));
@@ -11,13 +12,30 @@ class AddProductC extends Component {
     constructor(props){
         super(props);
         this.state={
+            image:'',
             isModelOpen:false,
             categories:this.props.categories
         };
         this.toggleModal=this.toggleModal.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleFile=this.handleFile.bind(this);
+        this.handleUpload=this.handleUpload.bind(this);
 
 
+    }
+    handleFile(e){
+        let file=e.target.files;
+        this.setState({image:file})
+    }
+    handleUpload(values,category){
+        let file=this.state.image
+        let reader=new FileReader();
+        reader.readAsDataURL(file[0]);
+        reader.onload=(e)=>{
+            this.props.postProduct(values.productName,category,values.description,values.application,values.quantity,values.price,e.target.result);
+
+        }
+        
     }
     toggleModal() {
         this.setState({
@@ -36,7 +54,8 @@ class AddProductC extends Component {
             alert("This product already exist, please add a non existing product");    
         }
         else{
-        this.props.postProduct(values.productName,category,values.description,values.application,values.quantity,values.price);
+          this.handleUpload(values,category);
+        
         this.props.resetProductForm();
         this.toggleModal();}
     }
@@ -93,7 +112,7 @@ class AddProductC extends Component {
                     <Row className="form-group">
                         <Label htmlfor="image" md={12}>Upload Product Image</Label>
                         <Col md={12}>
-                            <Control.file model=".image" name="image" className="form-control" required>
+                            <Control.file model=".image" name="image" className="form-control" onChange={(e)=>this.handleFile(e)} required>
                            
                             </Control.file>
                         </Col>
