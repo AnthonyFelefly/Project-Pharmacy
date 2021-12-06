@@ -37,7 +37,7 @@ export const Products=(state={
 
         case ActionTypes.ADJUST_QTY_CART:
             return {...state,
-            cart:state.cart.map(item=>item.id===action.payload.productId?{...item,quantity:action.payload.quantity}:item)};
+            cart:state.cart.map(item=>item.id===action.payload.productId?{...item,quantity:+action.payload.quantity}:item)};
 
         case ActionTypes.LOAD_CURRENT_ITEM:
             return {...state,currentProduct:action.payload};

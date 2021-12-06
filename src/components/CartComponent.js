@@ -5,7 +5,7 @@ import styles from "./styles/Cart.module.css";
 
 import CartItem from "./CartItem";
 
-const Cart = ({cart,removeFromCart}) => {
+const Cart = ({cart,removeFromCart,adjust_qty}) => {
   const [totalPrice,setTotalPrice]=useState(0);
   const [totalItems,setTotalItems]=useState(0);
 
@@ -24,7 +24,7 @@ const Cart = ({cart,removeFromCart}) => {
     <div className={styles.cart}>
       <div className={styles.cart__items}>
         {cart.map(item=>
-        <CartItem key={item.id} itemData={item} rmFromCart={removeFromCart} />
+        <CartItem key={item.id} itemData={item} rmFromCart={removeFromCart} adjust_qty={adjust_qty} />
         )}
       </div>
       <div className={styles.cart__summary}>
