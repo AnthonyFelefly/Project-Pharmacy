@@ -27,3 +27,12 @@ export const InitialDeleteProduct={
     product:null,
     agree:false
 }
+export const InitialUserUp={
+    firstName:"",
+    lastName:"",
+    password:"",
+    email:"",
+    telnum:"",
+    date:null
+
+}

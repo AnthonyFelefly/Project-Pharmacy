@@ -1,13 +1,14 @@
 import * as ActionTypes from './ActionTypes';
 
-
 export const Users=(state={
     isLoading:true,
     errMess:null,
     users:[]
-
 }, action)=>{
     switch(action.type){
+        case ActionTypes.ADD_USER:
+            var user=action.payload;
+            return {...state,isLoading:false,errMess:null,users:state.users.concat(user)}
         case ActionTypes.ADD_USERS:
             return {...state,isLoading:false,errMess:null,users:action.payload};
 

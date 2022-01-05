@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem,Button, Modal, ModalBody } from 'reactstrap';
+import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem,Button, Modal, ModalBody,ModalHeader } from 'reactstrap';
 import{NavLink} from'react-router-dom';
 import LoginPage from './Login';
 import styles from './styles/Cart.module.css'
@@ -130,13 +130,15 @@ class NavBar extends Component{
                         
                         </Collapse>
                     <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}  >
+                   
                         <ModalBody>
                             <LoginPage />
                         </ModalBody>
                     </Modal>
                     <Modal isOpen={this.state.isRegModalOpen} toggle={this.toggleRegModal}  >
+                    <ModalHeader toggle={this.toggleRegModal} >Sign Up</ModalHeader>
                         <ModalBody>
-                            <RegisterPage />
+                            <RegisterPage postUser={this.props.postUser}users={this.props.users.users} resetSignUpForm={this.props.resetSignUpForm} toggle={this.toggleRegModal} />
                         </ModalBody>
                     </Modal>
             </Navbar>

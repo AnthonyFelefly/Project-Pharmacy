@@ -8,7 +8,7 @@ import { Messages } from './messages';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 
-import { InitialAddCategory, InitialDeleteCategory, InitialMessage,InitialAddProduct, InitialDeleteProduct } from './forms';
+import { InitialAddCategory, InitialDeleteCategory, InitialMessage,InitialAddProduct, InitialDeleteProduct, InitialUserUp } from './forms';
 
 
 export const ConfigureStore=()=>{
@@ -25,7 +25,8 @@ export const ConfigureStore=()=>{
                 product: InitialAddProduct,
                 category:InitialAddCategory,
                 dcategory:InitialDeleteCategory,
-                dproduct:InitialDeleteProduct
+                dproduct:InitialDeleteProduct,
+                signup:InitialUserUp
             })
 
         }),

@@ -1,5 +1,7 @@
 import * as ActionTypes from './ActionTypes';
 import {baseUrl} from "../shared/baseUrl";
+
+//PRODUCT FUNCTIONS
 export const addProduct=(product)=>({
     type:ActionTypes.ADD_PRODUCT,
     payload:product
@@ -62,34 +64,6 @@ export const deleteProduct=(productId)=>(dispatch)=>{
     .catch(error=>{ console.log("Delete Products ",error.message);
             alert("Your Product could not be deleted\nError: "+error.message);});
 }
-export const deleteCategory=(categoryId)=>(dispatch)=>{
-    return fetch(baseUrl+'categories/'+categoryId,{
-        method:'DELETE',
-        headers:{
-            'Content-Type':'application/json'
-        },
-        credentials:'same-origin'
-    }).then(response=>{
-        if(response.ok){
-            return response;
-        }else{
-            var error=new Error('Error '+response.status+': '+response.statusText);
-             error.response=response;
-             throw error;
-         }
-    },
-    error=>{
-        var errmess=new Error(error.message);
-        throw errmess;
-    }) .then(response=>response.json())
-    .then(response=>{dispatch(fetchCategories())})
-    .catch(error=>{ console.log("Delete Categories ",error.message);
-            alert("This Category could not be deleted\nError: "+error.message);});
-}
-
-
-
-
 
 export const fetchProducts=()=>(dispatch)=>{
     dispatch(productsLoading(true));
@@ -127,6 +101,35 @@ export const addProducts=(products)=>({
     type: ActionTypes.ADD_PRODUCTS,
     payload:products
 });
+
+
+
+//CATEGORY FUNCTIONS
+export const deleteCategory=(categoryId)=>(dispatch)=>{
+    return fetch(baseUrl+'categories/'+categoryId,{
+        method:'DELETE',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        credentials:'same-origin'
+    }).then(response=>{
+        if(response.ok){
+            return response;
+        }else{
+            var error=new Error('Error '+response.status+': '+response.statusText);
+             error.response=response;
+             throw error;
+         }
+    },
+    error=>{
+        var errmess=new Error(error.message);
+        throw errmess;
+    }) .then(response=>response.json())
+    .then(response=>{dispatch(fetchCategories())})
+    .catch(error=>{ console.log("Delete Categories ",error.message);
+            alert("This Category could not be deleted\nError: "+error.message);});
+}
+
 export const addCategory=(category)=>({
     type:ActionTypes.ADD_CATEGORY,
     payload:category
@@ -194,52 +197,7 @@ export const addCategories=(categories)=>({
     payload:categories
 });
 
-export const fetchUsers=()=>(dispatch)=>{
-    dispatch(usersLoading(true));
-   return fetch(baseUrl+"users")
-   .then(response=>{
-    if(response.ok){
-        return response;
-    }else{
-        var error=new Error('Error '+response.status+': '+response.statusText);
-         error.response=response;
-         throw error;
-     }
-},
-error=>{
-    var errmess=new Error(error.message);
-    throw errmess;
-})
-   .then(response=>response.json())
-   .then(users=>dispatch(addUsers(users)))
-   .catch(error=>dispatch(usersFailed(error.message)));
-;
-    
-}
-
-
-export const usersLoading=()=>({
-    type: ActionTypes.USERS_LOADING
-});
-
-export const usersFailed=(errmess)=>({
-    type:ActionTypes.USERS_FAILED,
-    payload:errmess
-});
-export const addUsers=(users)=>({
-    type: ActionTypes.ADD_USERS,
-    payload:users
-});
-
-
-export const loginRequest=(idUser)=>({
-    type:ActionTypes.LOGIN_REQUEST,
-    payload:idUser
-});
-
-
-
-
+//CART FUNCTIONS
 export const addToCart=(productId)=>({
     type:ActionTypes.ADD_TO_CART,
     payload:{
@@ -267,7 +225,7 @@ export const loadCurrentItem=(product)=>({
     payload:product
 });
 
-
+//MESSAGES FUNCTIONS
 
 export const fetchMessages=()=>(dispatch)=>{
     dispatch(messagesLoading(true));
@@ -369,3 +327,89 @@ export const deleteMessage=(messageId)=>(dispatch)=>{
     .catch(error=>{ console.log("Delete Message ",error.message);
             alert("This Message could not be deleted\nError: "+error.message);});
 }
+
+
+//USERS FUNCTIONS
+
+
+export const fetchUsers=()=>(dispatch)=>{
+    dispatch(usersLoading(true));
+   return fetch(baseUrl+"users")
+   .then(response=>{
+    if(response.ok){
+        return response;
+    }else{
+        var error=new Error('Error '+response.status+': '+response.statusText);
+         error.response=response;
+         throw error;
+     }
+},
+error=>{
+    var errmess=new Error(error.message);
+    throw errmess;
+})
+   .then(response=>response.json())
+   .then(users=>dispatch(addUsers(users)))
+   .catch(error=>dispatch(usersFailed(error.message)));
+;
+    
+}
+
+
+export const usersLoading=()=>({
+    type: ActionTypes.USERS_LOADING
+});
+
+export const usersFailed=(errmess)=>({
+    type:ActionTypes.USERS_FAILED,
+    payload:errmess
+});
+export const addUsers=(users)=>({
+    type: ActionTypes.ADD_USERS,
+    payload:users
+});
+export const postUser=(firstName,lastName,password,email,telnum,dateOfBirth)=>(dispatch)=>{
+    const newUser={
+            firstName:firstName,
+            lastName:lastName,
+            password:password,
+            email:email,
+            telnum:telnum,
+            dateOfBirth:dateOfBirth,
+    };
+    newUser.type = 0;
+    newUser.dateOfDelete=null;
+    return fetch(baseUrl+'users',{
+        method:'POST',
+        body: JSON.stringify(newUser),
+        headers:{
+            'Content-Type':'application/json'
+        },
+        credentials:'same-origin'
+    }).then(response=>{
+        if(response.ok){
+            return response;
+        }else{
+            var error=new Error('Error '+response.status+': '+response.statusText);
+             error.response=response;
+             throw error;
+         }
+    },
+    error=>{
+        var errmess=new Error(error.message);
+        throw errmess;
+    }) .then(response=>response.json())
+    .then(user=>{dispatch(addUser(user))})
+    .catch(error=>{ console.log("Sign up ",error.message);
+            alert("You couldn't Sign up\nError: "+error.message);});
+}
+export const addUser=(user)=>({
+    type:ActionTypes.ADD_USER,
+    payload:user
+});
+
+
+export const loginRequest=(idUser)=>({
+    type:ActionTypes.LOGIN_REQUEST,
+    payload:idUser
+});

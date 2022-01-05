@@ -11,7 +11,8 @@ import Contact from "./ContactComponent";
 import {Switch,Route,Redirect,useParams, withRouter} from'react-router-dom';
 import {connect} from 'react-redux';
 import { postProduct ,fetchProducts,fetchCategories,fetchUsers
-  ,postCategory,deleteProduct,deleteCategory, addToCart,removeFromCart,adjust_qty, postMessage, fetchMessages, deleteMessage} from '../redux/ActionCreators';
+  ,postCategory,deleteProduct,deleteCategory, addToCart,removeFromCart,adjust_qty, 
+  postMessage, fetchMessages, deleteMessage, postUser} from '../redux/ActionCreators';
 import {actions} from 'react-redux-form';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
@@ -31,6 +32,7 @@ const mapDispatchToProps=(dispatch)=>({
   postMessage:(firstName,lastName,telnum,email,flag,contactMethod,message)=>{dispatch(postMessage(firstName,lastName,telnum,email,flag,contactMethod,message))},
   postProduct:(productName,category,description,application,quantity,price,image)=> dispatch(postProduct(productName,category,description,application,quantity,price,image)),
   postCategory:(categoryName)=> dispatch(postCategory(categoryName)),
+  postUser:(firstName,lastName,password,email,telnum,date)=>{dispatch(postUser(firstName,lastName,password,email,telnum,date))},
   fetchProducts: () => { dispatch(fetchProducts())},
   fetchCategories: () => { dispatch(fetchCategories())},
   fetchUsers: () => { dispatch(fetchUsers())},
@@ -45,7 +47,8 @@ const mapDispatchToProps=(dispatch)=>({
   resetCategoryForm:()=>{dispatch(actions.reset('category'))},
   resetProductForm:()=>{dispatch(actions.reset('product'))},
   resetDeleteCategoryForm:()=>{dispatch(actions.reset('dcategory'))},
-  resetDeleteProductForm:()=>{dispatch(actions.reset('dproduct'))}
+  resetDeleteProductForm:()=>{dispatch(actions.reset('dproduct'))},
+  resetSignUpForm:()=>{dispatch(actions.reset('signup'))}
 });
 class Main extends Component {
   constructor(props){
@@ -133,9 +136,11 @@ class Main extends Component {
       
       
       <div className="col-sm-full">
-        <NavBar className="col-sm-full ml-2" categories={this.props.categories.categories}  cart={this.props.products.cart}
+        <NavBar className="col-sm-full ml-2" categories={this.props.categories.categories} users={this.props.users} cart={this.props.products.cart}
         categoriesLoading={this.props.categories.isLoading}
-        categoriesErrMess={this.props.categories.errMess}/>
+        categoriesErrMess={this.props.categories.errMess}
+        resetSignUpForm={this.props.resetSignUpForm}
+        postUser={this.props.postUser}/>
         <Switch>
           <Route path="/home" component={HomePage}/>
           <Route path="/cart" >
