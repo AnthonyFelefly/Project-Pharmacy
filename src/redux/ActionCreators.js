@@ -156,8 +156,8 @@ export const postCategory=(categoryName)=>(dispatch)=>{
         throw errmess;
     }) .then(response=>response.json())
     .then(response=>dispatch(addCategory(response)))
-    .catch(error=>{ console.log("Post Products ",error.message);
-            alert("Your Product could not be added\nError: "+error.message);});
+    .catch(error=>{ console.log("Post Category ",error.message);
+            alert("Your Category could not be added\nError: "+error.message);});
 }
 
 export const fetchCategories=()=>(dispatch)=>{
@@ -266,3 +266,106 @@ export const loadCurrentItem=(product)=>({
     type:ActionTypes.LOAD_CURRENT_ITEM,
     payload:product
 });
+
+
+
+export const fetchMessages=()=>(dispatch)=>{
+    dispatch(messagesLoading(true));
+   return fetch(baseUrl+"messages")
+   .then(response=>{
+       if(response.ok){
+           return response;
+       }else{
+           var error=new Error('Error '+response.status+': '+response.statusText);
+            error.response=response;
+            throw error;
+        }
+   },
+   error=>{
+       var errmess=new Error(error.message);
+       throw errmess;
+   })
+   .then(response=>response.json())
+   .then(messages=>dispatch(addMessages(messages)))
+   .catch(error=>dispatch(messagesFailed(error.message)));
+
+
+}
+
+
+export const messagesLoading=()=>({
+    type: ActionTypes.MESSAGES_LOADING
+});
+
+export const messagesFailed=(errmess)=>({
+    type:ActionTypes.MESSAGES_FAILED,
+    payload:errmess
+});
+export const addMessages=(messages)=>({
+    type: ActionTypes.ADD_MESSAGES,
+    payload:messages
+});
+
+export const addMessage=(message)=>({
+    type:ActionTypes.ADD_MESSAGE,
+    payload:message
+});
+export const postMessage=(firstName,lastName,telnum,email,flag,contactMethod,message)=>(dispatch)=>{
+    const newMessage={
+            firstName:firstName,
+            lastName:lastName,
+            telnum:telnum,
+            email:email,
+            flag:flag,
+            contactMethod:contactMethod,
+            message:message
+    };
+    newMessage.date = new Date().toDateString();
+    return fetch(baseUrl+'messages',{
+        method:'POST',
+        body: JSON.stringify(newMessage),
+        headers:{
+            'Content-Type':'application/json'
+        },
+        credentials:'same-origin'
+    }).then(response=>{
+        if(response.ok){
+            return response;
+        }else{
+            var error=new Error('Error '+response.status+': '+response.statusText);
+             error.response=response;
+             throw error;
+         }
+    },
+    error=>{
+        var errmess=new Error(error.message);
+        throw errmess;
+    }) .then(response=>response.json())
+    .then(response=>{dispatch(addMessage(response))})
+    .catch(error=>{ console.log("Post Message ",error.message);
+            alert("Your Message could not be sent\nError: "+error.message);});
+}
+export const deleteMessage=(messageId)=>(dispatch)=>{
+    return fetch(baseUrl+'messages/'+messageId,{
+        method:'DELETE',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        credentials:'same-origin'
+    }).then(response=>{
+        if(response.ok){
+            return response;
+        }else{
+            var error=new Error('Error '+response.status+': '+response.statusText);
+             error.response=response;
+             throw error;
+         }
+    },
+    error=>{
+        var errmess=new Error(error.message);
+        throw errmess;
+    }) .then(response=>response.json())
+    .then(response=>{dispatch(fetchMessages())})
+    .catch(error=>{ console.log("Delete Message ",error.message);
+            alert("This Message could not be deleted\nError: "+error.message);});
+}

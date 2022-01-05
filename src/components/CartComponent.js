@@ -31,7 +31,7 @@ const Cart = ({cart,removeFromCart,adjust_qty}) => {
         <h4 className={styles.summary__title}>Cart Summary</h4>
         <div className={styles.summary__price}>
           <span>TOTAL: ({totalItems} items)</span>
-          <span>$ {totalPrice}</span>
+          <span>$ {totalPrice.toFixed(2)}</span>
         </div>
         <MDBBtn   className=" teal accent-4 ml-auto mr-auto " position="absolute">Proceed To Checkout</MDBBtn>
       </div>

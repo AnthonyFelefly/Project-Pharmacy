@@ -11,26 +11,33 @@ import Contact from "./ContactComponent";
 import {Switch,Route,Redirect,useParams, withRouter} from'react-router-dom';
 import {connect} from 'react-redux';
 import { postProduct ,fetchProducts,fetchCategories,fetchUsers
-  ,postCategory,deleteProduct,deleteCategory, addToCart,removeFromCart,adjust_qty} from '../redux/ActionCreators';
+  ,postCategory,deleteProduct,deleteCategory, addToCart,removeFromCart,adjust_qty, postMessage, fetchMessages, deleteMessage} from '../redux/ActionCreators';
 import {actions} from 'react-redux-form';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
 import Cart from './CartComponent';
+import AllMessages from './MessagesComponent';
+
+
 const mapStateToProps=state=>{
   return {
     products: state.products,
     categories: state.categories,
     users: state.users,
+    messages: state.messages
   }
 }
 const mapDispatchToProps=(dispatch)=>({
+  postMessage:(firstName,lastName,telnum,email,flag,contactMethod,message)=>{dispatch(postMessage(firstName,lastName,telnum,email,flag,contactMethod,message))},
   postProduct:(productName,category,description,application,quantity,price,image)=> dispatch(postProduct(productName,category,description,application,quantity,price,image)),
   postCategory:(categoryName)=> dispatch(postCategory(categoryName)),
   fetchProducts: () => { dispatch(fetchProducts())},
   fetchCategories: () => { dispatch(fetchCategories())},
   fetchUsers: () => { dispatch(fetchUsers())},
+  fetchMessages:()=>{dispatch(fetchMessages())},
   deleteProduct:(productId)=>{dispatch(deleteProduct(productId))},
   deleteCategory:(categoryId)=>{dispatch(deleteCategory(categoryId))},
+  deleteMessage:(messageId)=>{dispatch(deleteMessage(messageId))},
   addToCart:(productId)=>{dispatch(addToCart(productId))},
   removeFromCart:(productId)=>{dispatch(removeFromCart(productId))},
   adjust_qty:(productId,value)=>{dispatch(adjust_qty(productId,value))},
@@ -49,6 +56,7 @@ class Main extends Component {
     this.props.fetchProducts();
     this.props.fetchCategories();
     this.props.fetchUsers();
+    this.props.fetchMessages();
     
     
    
@@ -133,6 +141,10 @@ class Main extends Component {
           <Route path="/cart" >
             <Cart  cart={this.props.products.cart} removeFromCart={this.props.removeFromCart} adjust_qty={this.props.adjust_qty}></Cart>  
           </Route>
+          <Route path="/messages" >
+            <AllMessages  messages={this.props.messages.messages} isLoading={this.props.messages.isLoading}
+            errMess={this.props.messages.errMess} deleteMessage={this.props.deleteMessage}></AllMessages>  
+          </Route>
           <Route exact path='/catalogue'>
           <Catalogue products={this.props.products.products} categ={this.props.categories.categories}
             productsLoading={this.props.products.isLoading}
@@ -151,7 +163,7 @@ class Main extends Component {
             <ProductWithId/>
           </Route>
           <Route exact path="/contactus">
-            <Contact resetMessageForm={this.props.resetMessageForm}/>
+            <Contact resetMessageForm={this.props.resetMessageForm} postMessage={this.props.postMessage}/>
           </Route>
           <Route exact path="/admin">
             <AdminPage categories={this.props.categories.categories} deleteCategory={this.props.deleteCategory} resetDeleteCategoryForm={this.props.resetDeleteCategoryForm}

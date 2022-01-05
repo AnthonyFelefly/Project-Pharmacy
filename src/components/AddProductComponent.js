@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import { Card, CardImg, CardBody, Button, Modal, ModalHeader, ModalBody,
-    Label, Row, Col, CardTitle, CardText } from "reactstrap";
+    Label, Row, Col, CardTitle } from "reactstrap";
 import { Control, Form, Errors } from 'react-redux-form';
 import { baseUrl } from '../shared/baseUrl';
 
@@ -31,7 +31,7 @@ class AddProductC extends Component {
         this.setState({image:file})
     }
     handleUpload(values,category){
-        let file=this.state.image
+        let file=this.state.image  
         let reader=new FileReader();
         reader.readAsDataURL(file[0]);
         reader.onload=(e)=>{
@@ -70,7 +70,7 @@ class AddProductC extends Component {
             return(
         <>
         
-            <Card  elevation={5} className="col-sm-auto col-md-5 m-4" onClick={this.toggleModal}>
+            <Card  elevation={5} className="col-sm-auto col-md-2 m-4" onClick={this.toggleModal}>
                 <CardImg className="mt-2" style={{width:"sm-100px md-350px",height:"sm-100px md-350px"}} src={baseUrl+"/images/AddProduct.png"} alt="Add a new Product" />
                 <CardBody>
                     <CardTitle style={{"font-size":"medium","font-family": "Verdana"}}>Add A New Product</CardTitle>

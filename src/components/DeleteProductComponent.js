@@ -43,7 +43,7 @@ export class DeleteProductC extends Component {
             return(
         <>
         
-            <Card  elevation={5} className="col-sm-auto col-md-5 m-4" onClick={this.toggleModal}>
+            <Card  elevation={5} className="col-sm-auto col-md-2 m-4" onClick={this.toggleModal}>
             <CardImg className="mt-2" style={{width:"sm-100px md-350px",height:"sm-100px md-350px"}} src={baseUrl+"/images/deleteProduct.png"} alt="Add a new Product" />
                 <CardBody>
                     <CardTitle style={{"font-size":"medium","font-family": "Verdana"}}>Delete A Product</CardTitle>

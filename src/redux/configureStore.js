@@ -4,6 +4,7 @@ import {Products} from './products';
 import {Categories} from './categories';
 import {Users} from './users';
 import {UsersTypes} from './usersTypes';
+import { Messages } from './messages';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 
@@ -17,6 +18,7 @@ export const ConfigureStore=()=>{
             categories: Categories,
             users: Users,
             usersTypes: UsersTypes,
+            messages:Messages,
             
             ...createForms({
                 message: InitialMessage,
