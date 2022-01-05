@@ -12,7 +12,7 @@ import {Switch,Route,Redirect,useParams, withRouter} from'react-router-dom';
 import {connect} from 'react-redux';
 import { postProduct ,fetchProducts,fetchCategories,fetchUsers
   ,postCategory,deleteProduct,deleteCategory, addToCart,removeFromCart,adjust_qty, 
-  postMessage, fetchMessages, deleteMessage, postUser} from '../redux/ActionCreators';
+  postMessage, fetchMessages, deleteMessage, postUser, login} from '../redux/ActionCreators';
 import {actions} from 'react-redux-form';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
@@ -25,7 +25,8 @@ const mapStateToProps=state=>{
     products: state.products,
     categories: state.categories,
     users: state.users,
-    messages: state.messages
+    messages: state.messages,
+    auth:state.auth
   }
 }
 const mapDispatchToProps=(dispatch)=>({
@@ -40,6 +41,7 @@ const mapDispatchToProps=(dispatch)=>({
   deleteProduct:(productId)=>{dispatch(deleteProduct(productId))},
   deleteCategory:(categoryId)=>{dispatch(deleteCategory(categoryId))},
   deleteMessage:(messageId)=>{dispatch(deleteMessage(messageId))},
+  login:(user)=>{dispatch(login(user))},
   addToCart:(productId)=>{dispatch(addToCart(productId))},
   removeFromCart:(productId)=>{dispatch(removeFromCart(productId))},
   adjust_qty:(productId,value)=>{dispatch(adjust_qty(productId,value))},
@@ -48,7 +50,8 @@ const mapDispatchToProps=(dispatch)=>({
   resetProductForm:()=>{dispatch(actions.reset('product'))},
   resetDeleteCategoryForm:()=>{dispatch(actions.reset('dcategory'))},
   resetDeleteProductForm:()=>{dispatch(actions.reset('dproduct'))},
-  resetSignUpForm:()=>{dispatch(actions.reset('signup'))}
+  resetSignUpForm:()=>{dispatch(actions.reset('signup'))},
+  resetSignInForm:()=>{dispatch(actions.reset('signin'))}
 });
 class Main extends Component {
   constructor(props){
@@ -140,6 +143,7 @@ class Main extends Component {
         categoriesLoading={this.props.categories.isLoading}
         categoriesErrMess={this.props.categories.errMess}
         resetSignUpForm={this.props.resetSignUpForm}
+        resetSignInForm={this.props.resetSignInForm}
         postUser={this.props.postUser}/>
         <Switch>
           <Route path="/home" component={HomePage}/>

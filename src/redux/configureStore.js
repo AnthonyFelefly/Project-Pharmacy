@@ -8,7 +8,9 @@ import { Messages } from './messages';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 
-import { InitialAddCategory, InitialDeleteCategory, InitialMessage,InitialAddProduct, InitialDeleteProduct, InitialUserUp } from './forms';
+import { InitialAddCategory, InitialDeleteCategory, InitialMessage,InitialAddProduct, 
+    InitialDeleteProduct, InitialSignUp, InitialSignIn,  } from './forms';
+import { Auth } from './auth';
 
 
 export const ConfigureStore=()=>{
@@ -19,6 +21,7 @@ export const ConfigureStore=()=>{
             users: Users,
             usersTypes: UsersTypes,
             messages:Messages,
+            auth:Auth,
             
             ...createForms({
                 message: InitialMessage,
@@ -26,7 +29,8 @@ export const ConfigureStore=()=>{
                 category:InitialAddCategory,
                 dcategory:InitialDeleteCategory,
                 dproduct:InitialDeleteProduct,
-                signup:InitialUserUp
+                signup:InitialSignUp,
+                signin:InitialSignIn
             })
 
         }),

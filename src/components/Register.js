@@ -14,9 +14,6 @@ const validDate=(val)=>(!val)||(Number(d.getFullYear())-Number(val.substr(0,4))>
 class RegisterPage extends Component {
     constructor(props){
         super(props);
-        this.state={
-            isModelOpen:false,
-        };
         this.handleSubmit = this.handleSubmit.bind(this);
       
     }
@@ -155,7 +152,7 @@ class RegisterPage extends Component {
                    
                     
                    
-                    <Button type="submit" value="submit" color="primary">Submit</Button>                            
+                    <Button type="submit" value="submit" className=" teal accent-4">Submit</Button>                            
                 </Form> 
 </>);
     }

@@ -4,6 +4,7 @@ import{NavLink} from'react-router-dom';
 import LoginPage from './Login';
 import styles from './styles/Cart.module.css'
 import RegisterPage from './Register';
+import SignInForm from './SignIn';
 import {
     MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem
     } from "mdbreact";
@@ -130,13 +131,13 @@ class NavBar extends Component{
                         
                         </Collapse>
                     <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}  >
-                   
+                        <ModalHeader toggle={this.toggleModal} >Sign In</ModalHeader>
                         <ModalBody>
-                            <LoginPage />
+                            <SignInForm toggle={this.toggleModal}  users={this.props.users.users} resetSignInForm={this.props.resetSignInForm}/>
                         </ModalBody>
                     </Modal>
                     <Modal isOpen={this.state.isRegModalOpen} toggle={this.toggleRegModal}  >
-                    <ModalHeader toggle={this.toggleRegModal} >Sign Up</ModalHeader>
+                        <ModalHeader toggle={this.toggleRegModal} >Sign Up</ModalHeader>
                         <ModalBody>
                             <RegisterPage postUser={this.props.postUser}users={this.props.users.users} resetSignUpForm={this.props.resetSignUpForm} toggle={this.toggleRegModal} />
                         </ModalBody>

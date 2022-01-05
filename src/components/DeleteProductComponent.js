@@ -76,7 +76,7 @@ export class DeleteProductC extends Component {
                                 </Row>
                    
                    
-                    <Button type="submit" value="submit" color="primary">Submit</Button>                            
+                    <Button type="submit" value="submit"className=" teal accent-4">Submit</Button>                            
                 </Form> 
             </ModalBody>
         </Modal>

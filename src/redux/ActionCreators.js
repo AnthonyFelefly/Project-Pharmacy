@@ -399,7 +399,7 @@ export const postUser=(firstName,lastName,password,email,telnum,dateOfBirth)=>(d
         var errmess=new Error(error.message);
         throw errmess;
     }) .then(response=>response.json())
-    .then(user=>{dispatch(addUser(user))})
+    .then(user=>{dispatch(addUser(user));dispatch(login(user))})
     .catch(error=>{ console.log("Sign up ",error.message);
             alert("You couldn't Sign up\nError: "+error.message);});
 }
@@ -409,7 +409,10 @@ export const addUser=(user)=>({
 });
 
 
-export const loginRequest=(idUser)=>({
-    type:ActionTypes.LOGIN_REQUEST,
-    payload:idUser
+export const login=(user)=>({
+    type:ActionTypes.LOGIN,
+    payload:user
+});
+export const logout=()=>({
+    type:ActionTypes.LOGOUT
 });
