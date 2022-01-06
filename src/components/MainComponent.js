@@ -12,7 +12,7 @@ import {Switch,Route,Redirect,useParams, withRouter} from'react-router-dom';
 import {connect} from 'react-redux';
 import { postProduct ,fetchProducts,fetchCategories,fetchUsers
   ,postCategory,deleteProduct,deleteCategory, addToCart,removeFromCart,adjust_qty, 
-  postMessage, fetchMessages, deleteMessage, postUser, login} from '../redux/ActionCreators';
+  postMessage, fetchMessages, deleteMessage, postUser, login, logout} from '../redux/ActionCreators';
 import {actions} from 'react-redux-form';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
@@ -42,6 +42,7 @@ const mapDispatchToProps=(dispatch)=>({
   deleteCategory:(categoryId)=>{dispatch(deleteCategory(categoryId))},
   deleteMessage:(messageId)=>{dispatch(deleteMessage(messageId))},
   login:(user)=>{dispatch(login(user))},
+  logout:()=>{dispatch(logout())},
   addToCart:(productId)=>{dispatch(addToCart(productId))},
   removeFromCart:(productId)=>{dispatch(removeFromCart(productId))},
   adjust_qty:(productId,value)=>{dispatch(adjust_qty(productId,value))},
@@ -144,7 +145,9 @@ class Main extends Component {
         categoriesErrMess={this.props.categories.errMess}
         resetSignUpForm={this.props.resetSignUpForm}
         resetSignInForm={this.props.resetSignInForm}
-        postUser={this.props.postUser}/>
+        postUser={this.props.postUser}
+        login={this.props.login} logout={this.props.logout}
+        auth={this.props.auth}/>
         <Switch>
           <Route path="/home" component={HomePage}/>
           <Route path="/cart" >
@@ -160,7 +163,8 @@ class Main extends Component {
             productsErrMess={this.props.products.errMess}
             add={this.props.addToCart}
             categoriesLoading={this.props.categories.isLoading}
-            categoriesErrMess={this.props.categories.errMess}/>
+            categoriesErrMess={this.props.categories.errMess}
+            />
             
             </Route>
           <Route exact path='/catalogue/:catId' >

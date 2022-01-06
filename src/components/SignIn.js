@@ -19,10 +19,13 @@ class SignInForm extends Component {
          
     }
     else{
-        if (this.props.users.filter((user)=>user.password===values.password)[0]===undefined){
+        var user=this.props.users.filter((user)=>user.email===values.email)[0];
+        
+        if (user.password!=values.password){
             alert("The pasword is incorrect! Please Try Again");
-        }else{    
-      alert("Registration successful");
+        }else{  
+            this.props.login(user);  
+     
         this.props.resetSignInForm();
         this.props.toggle();
         } 
