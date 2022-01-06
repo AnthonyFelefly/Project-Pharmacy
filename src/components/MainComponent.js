@@ -179,7 +179,7 @@ class Main extends Component {
             <Contact resetMessageForm={this.props.resetMessageForm} postMessage={this.props.postMessage}/>
           </Route>
           <Route exact path="/admin">
-            <AdminPage categories={this.props.categories.categories} deleteCategory={this.props.deleteCategory} resetDeleteCategoryForm={this.props.resetDeleteCategoryForm}
+            <AdminPage auth={this.props.auth} categories={this.props.categories.categories} deleteCategory={this.props.deleteCategory} resetDeleteCategoryForm={this.props.resetDeleteCategoryForm}
             products={this.props.products.products} postCategory={this.props.postCategory} resetCategoryForm={this.props.resetCategoryForm}
             postProduct={this.props.postProduct} addCategory={this.props.addCategory} resetProductForm={this.props.resetProductForm}
             resetDeleteProductForm={this.props.resetDeleteProductForm} deleteProduct={ this.props.deleteProduct}/>

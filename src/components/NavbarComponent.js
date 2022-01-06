@@ -1,8 +1,9 @@
 import React,{Component} from 'react';
 import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem,Button, Modal, ModalBody,ModalHeader, Row } from 'reactstrap';
-import{NavLink} from'react-router-dom';
+import{Link, NavLink} from'react-router-dom';
 import styles from './styles/Cart.module.css'
 import RegisterPage from './Register';
+
 import SignInForm from './SignIn';
 import {
     MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem
@@ -212,15 +213,19 @@ class NavBar extends Component{
                             </NavLink>
                             <NavItem className='nav-link' onClick={this.toggleLogoutModal} float="right">
                                 <Button className="teal lighten-1" style={{padding:"8px 32px"}}>
-                                <span className="fa fa-user-plus"></span> Log Out
+                                <span className="fa fa-sign-out"></span> Log Out
                                 </Button>
                             </NavItem>
                             <Modal isOpen={this.state.isLogoutModalOpen} toggle={this.toggleLogoutModal}  >
                         <ModalHeader toggle={this.toggleLogoutModal} >Are you sure you want to Logout?</ModalHeader>
                         <ModalBody>
                             <Row>
-                        <Button className=" teal accent-4 col-sm-auto col-md-5 ml-auto mr-auto"  onClick={this.ConfirmLogout}>Yes</Button>
-                        <Button className=" teal accent-4  col-sm-auto col-md-5 ml-auto mr-auto" onClick={this.toggleLogoutModal}>No</Button>
+                            <Link className=" col-sm-auto col-md-5 ml-auto mr-auto  " to="/home" >
+                        <Button  className=" teal accent-4 col-md-12 ml-auto mr-auto" onClick={this.ConfirmLogout}>Yes</Button>
+                        </Link>
+                        <div className=" col-sm-auto col-md-5 ml-auto mr-auto" >
+                        <Button className=" teal accent-4 col-md-12 ml-auto mr-auto "  onClick={this.toggleLogoutModal}>No</Button>
+                        </div>
                         </Row>
                         </ModalBody>
                         </Modal>
@@ -287,15 +292,19 @@ class NavBar extends Component{
                             </NavLink>
                             <NavItem className='nav-link' onClick={this.toggleLogoutModal} float="right">
                                 <Button className="teal lighten-1" style={{padding:"8px 32px"}}>
-                                <span className="fa fa-user-plus"></span> Log Out
+                                <span className="fa fa-sign-out"></span> Log Out
                                 </Button>
                             </NavItem>
                             <Modal isOpen={this.state.isLogoutModalOpen} toggle={this.toggleLogoutModal}  >
                         <ModalHeader toggle={this.toggleLogoutModal} >Are you sure you want to Logout?</ModalHeader>
                         <ModalBody>
                             <Row>
-                        <Button className=" teal accent-4 col-sm-auto col-md-5 ml-auto mr-auto"  onClick={this.ConfirmLogout}>Yes</Button>
-                        <Button className=" teal accent-4  col-sm-auto col-md-5 ml-auto mr-auto" onClick={this.toggleLogoutModal}>No</Button>
+                                <Link className=" col-sm-auto col-md-5 ml-auto mr-auto  " to="/home" >
+                        <Button  className=" teal accent-4 col-md-12 ml-auto mr-auto" onClick={this.ConfirmLogout}>Yes</Button>
+                        </Link>
+                        <div className=" col-sm-auto col-md-5 ml-auto mr-auto" >
+                        <Button className=" teal accent-4 col-md-12 ml-auto mr-auto "  onClick={this.toggleLogoutModal}>No</Button>
+                        </div>
                         </Row>
                         </ModalBody>
                         </Modal>
