@@ -2,8 +2,8 @@ import { MDBBtn } from "mdbreact";
 import React, { useState,useEffect } from "react";
 import styles from "./styles/Cart.module.css";
 
-
 import CartItem from "./CartItem";
+import { Link } from "react-router-dom";
 
 const Cart = ({cart,removeFromCart,adjust_qty}) => {
   const [totalPrice,setTotalPrice]=useState(0);
@@ -33,7 +33,9 @@ const Cart = ({cart,removeFromCart,adjust_qty}) => {
           <span>TOTAL: ({totalItems} items)</span>
           <span>$ {totalPrice.toFixed(2)}</span>
         </div>
+        <Link to="/checkout">
         <MDBBtn   className=" teal accent-4 ml-auto mr-auto " position="absolute">Proceed To Checkout</MDBBtn>
+        </Link>
       </div>
     </div>
   );

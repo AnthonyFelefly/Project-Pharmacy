@@ -41,3 +41,10 @@ export const InitialSignIn={
     password:""
 
 }
+export const InitialCheckout={
+    city:"",
+    details:"",
+    floor:"",
+    contactMethod:"Tel.",
+    addComments:"",
+}

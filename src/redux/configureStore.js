@@ -7,10 +7,10 @@ import {UsersTypes} from './usersTypes';
 import { Messages } from './messages';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
-
 import { InitialAddCategory, InitialDeleteCategory, InitialMessage,InitialAddProduct, 
-    InitialDeleteProduct, InitialSignUp, InitialSignIn,  } from './forms';
+    InitialDeleteProduct, InitialSignUp, InitialSignIn, InitialCheckout,  } from './forms';
 import { Auth } from './auth';
+import { Orders } from './orders';
 
 
 export const ConfigureStore=()=>{
@@ -22,6 +22,7 @@ export const ConfigureStore=()=>{
             usersTypes: UsersTypes,
             messages:Messages,
             auth:Auth,
+            orders:Orders,
             
             ...createForms({
                 message: InitialMessage,
@@ -30,7 +31,8 @@ export const ConfigureStore=()=>{
                 dcategory:InitialDeleteCategory,
                 dproduct:InitialDeleteProduct,
                 signup:InitialSignUp,
-                signin:InitialSignIn
+                signin:InitialSignIn,
+                checkout:InitialCheckout
             })
 
         }),

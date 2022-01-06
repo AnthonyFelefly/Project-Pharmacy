@@ -416,3 +416,80 @@ export const login=(user)=>({
 export const logout=()=>({
     type:ActionTypes.LOGOUT
 });
+
+//ORDERS FUNCTIONS
+
+export const addOrder=(order)=>({
+    type:ActionTypes.ADD_ORDER,
+    payload:order
+});
+export const postOrder=(userId,city,details,floor,contactMethod,addComments,totalPrice)=>(dispatch)=>{
+    const newUser={
+            userId:userId,
+            city:city,
+            details:details,
+            floor:floor,
+            contactMethod:contactMethod,
+            addComments:addComments,
+            totalPrice:totalPrice,
+    };
+    newUser.date=new Date().toDateString();
+    return fetch(baseUrl+'orders',{
+        method:'POST',
+        body: JSON.stringify(newUser),
+        headers:{
+            'Content-Type':'application/json'
+        },
+        credentials:'same-origin'
+    }).then(response=>{
+        if(response.ok){
+            return response;
+        }else{
+            var error=new Error('Error '+response.status+': '+response.statusText);
+             error.response=response;
+             throw error;
+         }
+    },
+    error=>{
+        var errmess=new Error(error.message);
+        throw errmess;
+    }) .then(response=>response.json())
+    .then(user=>{dispatch(addOrder(user))})
+    .catch(error=>{ console.log("Post Order ",error.message);
+            alert("Your Order Couldn't be placed\nError: "+error.message);});
+}
+
+
+export const fetchOrders=()=>(dispatch)=>{
+    dispatch(ordersLoading(true));
+   return fetch(baseUrl+"orders")
+   .then(response=>{
+    if(response.ok){
+        return response;
+    }else{
+        var error=new Error('Error '+response.status+': '+response.statusText);
+         error.response=response;
+         throw error;
+     }
+},
+error=>{
+    var errmess=new Error(error.message);
+    throw errmess;
+})
+   .then(response=>response.json())
+   .then(orders=>dispatch(addOrders(orders)))
+   .catch(error=>dispatch(ordersFailed(error.message)));
+;
+    
+}
+export const ordersLoading=()=>({
+    type: ActionTypes.ORDERS_LOADING
+});
+export const ordersFailed=(errmess)=>({
+    type:ActionTypes.ORDERS_FAILED,
+    payload:errmess
+});
+export const addOrders=(orders)=>({
+    type: ActionTypes.ADD_ORDERS,
+    payload:orders
+});

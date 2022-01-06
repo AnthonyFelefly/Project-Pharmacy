@@ -12,12 +12,14 @@ import {Switch,Route,Redirect,useParams, withRouter} from'react-router-dom';
 import {connect} from 'react-redux';
 import { postProduct ,fetchProducts,fetchCategories,fetchUsers
   ,postCategory,deleteProduct,deleteCategory, addToCart,removeFromCart,adjust_qty, 
-  postMessage, fetchMessages, deleteMessage, postUser, login, logout} from '../redux/ActionCreators';
+  postMessage, fetchMessages, deleteMessage, postUser, login, logout, postOrder, fetchOrders} from '../redux/ActionCreators';
 import {actions} from 'react-redux-form';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
 import Cart from './CartComponent';
 import AllMessages from './MessagesComponent';
+import Checkout from './CheckoutComponent';
+
 
 
 const mapStateToProps=state=>{
@@ -26,18 +28,21 @@ const mapStateToProps=state=>{
     categories: state.categories,
     users: state.users,
     messages: state.messages,
-    auth:state.auth
+    auth:state.auth,
+    orders:state.orders
   }
 }
 const mapDispatchToProps=(dispatch)=>({
   postMessage:(firstName,lastName,telnum,email,flag,contactMethod,message)=>{dispatch(postMessage(firstName,lastName,telnum,email,flag,contactMethod,message))},
   postProduct:(productName,category,description,application,quantity,price,image)=> dispatch(postProduct(productName,category,description,application,quantity,price,image)),
   postCategory:(categoryName)=> dispatch(postCategory(categoryName)),
+  postOrder:(userId,city,details,floor,contactMethod,addComments,totalPrice)=>{dispatch(postOrder(userId,city,details,floor,contactMethod,addComments,totalPrice))},
   postUser:(firstName,lastName,password,email,telnum,date)=>{dispatch(postUser(firstName,lastName,password,email,telnum,date))},
   fetchProducts: () => { dispatch(fetchProducts())},
   fetchCategories: () => { dispatch(fetchCategories())},
   fetchUsers: () => { dispatch(fetchUsers())},
   fetchMessages:()=>{dispatch(fetchMessages())},
+  fetchOrders:()=>{dispatch(fetchOrders())},
   deleteProduct:(productId)=>{dispatch(deleteProduct(productId))},
   deleteCategory:(categoryId)=>{dispatch(deleteCategory(categoryId))},
   deleteMessage:(messageId)=>{dispatch(deleteMessage(messageId))},
@@ -52,7 +57,8 @@ const mapDispatchToProps=(dispatch)=>({
   resetDeleteCategoryForm:()=>{dispatch(actions.reset('dcategory'))},
   resetDeleteProductForm:()=>{dispatch(actions.reset('dproduct'))},
   resetSignUpForm:()=>{dispatch(actions.reset('signup'))},
-  resetSignInForm:()=>{dispatch(actions.reset('signin'))}
+  resetSignInForm:()=>{dispatch(actions.reset('signin'))},
+  resetCheckoutForm:()=>{dispatch(actions.reset('checkout'))}
 });
 class Main extends Component {
   constructor(props){
@@ -64,7 +70,7 @@ class Main extends Component {
     this.props.fetchCategories();
     this.props.fetchUsers();
     this.props.fetchMessages();
-    
+    this.props.fetchOrders();
     
    
     
@@ -176,7 +182,10 @@ class Main extends Component {
             <ProductWithId/>
           </Route>
           <Route exact path="/contactus">
-            <Contact resetMessageForm={this.props.resetMessageForm} postMessage={this.props.postMessage}/>
+           <Contact resetMessageForm={this.props.resetMessageForm} postMessage={this.props.postMessage}/> 
+          </Route>
+          <Route exact path="/checkout">
+          <Checkout resetCheckoutForm={this.props.resetCheckoutForm} postOrder={this.props.postOrder} auth={this.props.auth} cart={this.props.products.cart}/>
           </Route>
           <Route exact path="/admin">
             <AdminPage auth={this.props.auth} categories={this.props.categories.categories} deleteCategory={this.props.deleteCategory} resetDeleteCategoryForm={this.props.resetDeleteCategoryForm}
