@@ -12,15 +12,13 @@ import {Switch,Route,Redirect,useParams, withRouter} from'react-router-dom';
 import {connect} from 'react-redux';
 import { postProduct ,fetchProducts,fetchCategories,fetchUsers
   ,postCategory,deleteProduct,deleteCategory, addToCart,removeFromCart,adjust_qty, 
-  postMessage, fetchMessages, deleteMessage, postUser, login, logout, postOrder, fetchOrders} from '../redux/ActionCreators';
+  postMessage, fetchMessages, deleteMessage, postUser, login, logout, postOrder, fetchOrders, postProdOrder, fetchProdOrders} from '../redux/ActionCreators';
 import {actions} from 'react-redux-form';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
 import Cart from './CartComponent';
 import AllMessages from './MessagesComponent';
 import Checkout from './CheckoutComponent';
-
-
 
 const mapStateToProps=state=>{
   return {
@@ -29,7 +27,8 @@ const mapStateToProps=state=>{
     users: state.users,
     messages: state.messages,
     auth:state.auth,
-    orders:state.orders
+    orders:state.orders,
+    prodOrder:state.prodOrder
   }
 }
 const mapDispatchToProps=(dispatch)=>({
@@ -38,11 +37,13 @@ const mapDispatchToProps=(dispatch)=>({
   postCategory:(categoryName)=> dispatch(postCategory(categoryName)),
   postOrder:(userId,city,details,floor,contactMethod,addComments,totalPrice)=>{dispatch(postOrder(userId,city,details,floor,contactMethod,addComments,totalPrice))},
   postUser:(firstName,lastName,password,email,telnum,date)=>{dispatch(postUser(firstName,lastName,password,email,telnum,date))},
+  postProdOrder:(orderId,productId,productPrice,quantity)=>{dispatch(postProdOrder(orderId,productId,productPrice,quantity))},
   fetchProducts: () => { dispatch(fetchProducts())},
   fetchCategories: () => { dispatch(fetchCategories())},
   fetchUsers: () => { dispatch(fetchUsers())},
   fetchMessages:()=>{dispatch(fetchMessages())},
   fetchOrders:()=>{dispatch(fetchOrders())},
+  fetchProdOrders:()=>{dispatch(fetchProdOrders())},
   deleteProduct:(productId)=>{dispatch(deleteProduct(productId))},
   deleteCategory:(categoryId)=>{dispatch(deleteCategory(categoryId))},
   deleteMessage:(messageId)=>{dispatch(deleteMessage(messageId))},
@@ -71,6 +72,8 @@ class Main extends Component {
     this.props.fetchUsers();
     this.props.fetchMessages();
     this.props.fetchOrders();
+    this.props.fetchProdOrders();
+    
     
    
     
@@ -157,7 +160,7 @@ class Main extends Component {
         <Switch>
           <Route path="/home" component={HomePage}/>
           <Route path="/cart" >
-            <Cart  cart={this.props.products.cart} removeFromCart={this.props.removeFromCart} adjust_qty={this.props.adjust_qty}></Cart>  
+            <Cart auth={this.props.auth} cart={this.props.products.cart} removeFromCart={this.props.removeFromCart} adjust_qty={this.props.adjust_qty}></Cart>  
           </Route>
           <Route path="/messages" >
             <AllMessages  messages={this.props.messages.messages} isLoading={this.props.messages.isLoading}
@@ -185,7 +188,11 @@ class Main extends Component {
            <Contact resetMessageForm={this.props.resetMessageForm} postMessage={this.props.postMessage}/> 
           </Route>
           <Route exact path="/checkout">
-          <Checkout resetCheckoutForm={this.props.resetCheckoutForm} postOrder={this.props.postOrder} auth={this.props.auth} cart={this.props.products.cart}/>
+          <Checkout  fetchOrders={this.props.fetchOrders}postProdOrder={this.props.postProdOrder} 
+          orders={this.props.orders} removeFromCart={this.props.removeFromCart}
+           resetCheckoutForm={this.props.resetCheckoutForm} postOrder={this.props.postOrder} 
+           auth={this.props.auth} cart={this.props.products.cart}  ordersLoading={this.props.orders.isLoading}
+           ordersErrMess={this.props.orders.errMess}/>
           </Route>
           <Route exact path="/admin">
             <AdminPage auth={this.props.auth} categories={this.props.categories.categories} deleteCategory={this.props.deleteCategory} resetDeleteCategoryForm={this.props.resetDeleteCategoryForm}

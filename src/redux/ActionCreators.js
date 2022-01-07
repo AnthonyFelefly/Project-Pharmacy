@@ -493,3 +493,80 @@ export const addOrders=(orders)=>({
     type: ActionTypes.ADD_ORDERS,
     payload:orders
 });
+
+//PRODORDER FUNCTIONS
+
+export const addProdOrder=(prodorder)=>({
+    type:ActionTypes.ADD_PRODORDER,
+    payload:prodorder
+});
+export const postProdOrder=(orderId,productId,productPrice,quantity)=>(dispatch)=>{
+    const newProdOrder={
+            orderId:orderId,
+            productId:productId,
+            productPrice:productPrice,
+            quantity:quantity
+    };
+    return fetch(baseUrl+'prodorder',{
+        method:'POST',
+        body: JSON.stringify(newProdOrder),
+        headers:{
+            'Content-Type':'application/json'
+        },
+        credentials:'same-origin'
+    }).then(response=>{
+        if(response.ok){
+            return response;
+        }else{
+            var error=new Error('Error '+response.status+': '+response.statusText);
+             error.response=response;
+             throw error;
+         }
+    },
+    error=>{
+        var errmess=new Error(error.message);
+        throw errmess;
+    }) .then(response=>response.json())
+    .then(response=>{dispatch(addProdOrder(response))})
+    .catch(error=>{ console.log("Post ProdOrder ",error.message);
+            alert("Your Order details couldn't be added\nError: "+error.message);});
+}
+
+
+export const fetchProdOrders=()=>(dispatch)=>{
+    dispatch(prodOrdersLoading(true));
+   return fetch(baseUrl+"prodorder")
+   .then(response=>{
+       if(response.ok){
+           return response;
+       }else{
+           var error=new Error('Error '+response.status+': '+response.statusText);
+            error.response=response;
+            throw error;
+        }
+   },
+   error=>{
+       var errmess=new Error(error.message);
+       throw errmess;
+   })
+   .then(response=>response.json())
+   .then(prodOrders=>dispatch(addProdOrders(prodOrders)))
+   .catch(error=>dispatch(prodOrdersFailed(error.message)));
+
+
+}
+
+
+export const prodOrdersLoading=()=>({
+    type: ActionTypes.PRODORDERS_LOADING
+});
+
+export const prodOrdersFailed=(errmess)=>({
+    type:ActionTypes.PRODORDERS_FAILED,
+    payload:errmess
+});
+export const addProdOrders=(prodOrders)=>({
+    type: ActionTypes.ADD_PRODORDERS,
+    payload:prodOrders
+});
+

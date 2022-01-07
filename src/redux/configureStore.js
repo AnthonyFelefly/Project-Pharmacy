@@ -11,6 +11,7 @@ import { InitialAddCategory, InitialDeleteCategory, InitialMessage,InitialAddPro
     InitialDeleteProduct, InitialSignUp, InitialSignIn, InitialCheckout,  } from './forms';
 import { Auth } from './auth';
 import { Orders } from './orders';
+import { ProdOrder } from './prodOrder';
 
 
 export const ConfigureStore=()=>{
@@ -23,6 +24,7 @@ export const ConfigureStore=()=>{
             messages:Messages,
             auth:Auth,
             orders:Orders,
+            prodOrder:ProdOrder,
             
             ...createForms({
                 message: InitialMessage,

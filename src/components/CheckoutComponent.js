@@ -1,7 +1,8 @@
 import React,{Component} from 'react';
 import { Link } from 'react-router-dom';
-import { Breadcrumb, BreadcrumbItem,Button,Label,Col,CardImg,Card,CardText,Row, CardHeader } from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem,Button,Label,Col,CardImg,Card,CardText,Row, CardHeader, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import {Control,Form, Errors,actions} from "react-redux-form";
+
 const required=(val)=>val&&val.length;//check if the legnth of value is greater then zero
 const maxLength=(len)=>((val)=>(!(val)||(val.length <=len )));
 const minLength=(len)=>((val)=>(!val)||((val)&&(val.length >=len )));
@@ -10,7 +11,10 @@ const isNumber=(val)=>(!val)||(!isNaN(Number(val)));//to check if the value is a
 class Checkout extends Component{
     constructor(props){
         super(props);
+        this.state={
+            isModalOpen:false,}
         this.handleSubmit=this.handleSubmit.bind(this);
+        this.handleCart=this.handleCart.bind(this);
     }
     handleSubmit(values){
         var totalPrice=0;
@@ -19,8 +23,99 @@ class Checkout extends Component{
         totalPrice=totalPrice.toFixed(2);
         this.props.postOrder(this.props.auth.currentUser.id,values.city,values.details,values.floor,values.contactMethod,values.addComments,totalPrice);
         this.props.resetCheckoutForm();
+        this.props.fetchOrders();
+        this.setState({
+            isModalOpen: !this.state.isModalOpen
+          });
+         
+        
+        
+            
+        
+    }
+    handleCart(){
+       
+        
+        
+        let orderId=this.props.orders.orders[this.props.orders.orders.length-1].id;
+        this.props.cart.map((product)=>this.props.postProdOrder(orderId,product.id,product.price,product.quantity));
+        this.props.cart.map((product)=>this.props.removeFromCart(product.id));
+
     }
     render(){
+        if(this.props.auth.signed!=true){
+            return(
+               
+                <>
+                
+                
+                <Modal isOpen={true}   >
+                    <Row>
+                        <ModalHeader className="col-sm-auto col-md-auto mr-auto ml-auto" ><p>You Should Sign In to Checkout</p>
+                             </ModalHeader>
+                             </Row>
+                             <Row className="col-sm-auto col-md-auto mr-auto ml-auto">
+                        <ModalBody>
+                        <Link to="/cart">
+                            <Button className=" teal accent-4 col-sm-auto col-md-auto  ">Okay</Button>
+                        </Link>
+                    </ModalBody>
+                    </Row>
+                </Modal>
+                
+                    
+                </>
+            )
+
+        }
+        if(this.props.cart.length===0){
+            return(
+               
+                <>
+                
+                
+                <Modal isOpen={true}   >
+                    <Row>
+                        <ModalHeader className="col-sm-auto col-md-auto mr-auto ml-auto" ><p>Your Card Is empty You should select a Product</p>
+                             </ModalHeader>
+                             </Row>
+                             <Row className="col-sm-auto col-md-auto mr-auto ml-auto">
+                        <ModalBody>
+                        <Link to="/catalogue">
+                            <Button className=" teal accent-4 col-sm-auto col-md-auto  ">Okay</Button>
+                        </Link>
+                    </ModalBody>
+                    </Row>
+                </Modal>
+                
+                    
+                </>
+            )
+
+        }
+        if (this.props.ordersLoading){
+            return(
+                <div className='container'>
+                    <div className='row'>
+                    <div className='col-6 ml-auto  m-5'>
+                        <span className='fa fa-spinner fa-pulse fa-3x fa-fw text-primary'></span>
+                        <p>Submitting Your Order Please Wait...</p>
+                     </div>
+                       
+                    </div>
+                </div>)
+
+        }
+        else if(this.props.ordersErrMess){
+            return(
+                <div className='container'>
+                    <div className="row">
+                        <h4>{this.props.prodErrMess}</h4>
+                    </div>
+
+                </div>
+            )
+        }
         return(
             <>
             
@@ -136,6 +231,28 @@ class Checkout extends Component{
                 </Col>
             </Row>
         </Form>
+        <>
+                
+                
+                <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}   >
+                    <Row>
+                        <ModalHeader className="col-sm-auto col-md-10 mr-auto ml-auto" >
+                            <h5 className='m-2'>Your Confirmation Will be sent 
+                                To you Via your Preferred Method </h5>
+                        </ModalHeader>
+                             </Row>
+                             <Row className="col-sm-auto col-md-auto mr-auto ml-auto">
+                        <ModalBody>
+                        <Link to="/home">
+                            <Button className=" teal accent-4 col-sm-auto col-md-auto  " onClick={()=>this.handleCart()}>Okay</Button>
+                        </Link>
+                    </ModalBody>
+                    </Row>
+                </Modal>
+                
+                    
+                </>
+        
         
     
 </div>
