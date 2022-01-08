@@ -27,6 +27,16 @@ export const InitialDeleteProduct={
     product:null,
     agree:false
 }
+export const InitialAdjustProductQtty={
+    product:null,
+    quantity:"",
+    agree:false
+}
+export const InitialAdjustProductPrice={
+    product:null,
+    price:"",
+    agree:false
+}
 export const InitialSignUp={
     firstName:"",
     lastName:"",

@@ -23,7 +23,10 @@ class SignInForm extends Component {
         
         if (user.password!==values.password){
             alert("The pasword is incorrect! Please Try Again");
-        }else{  
+
+        }else if(user.dateOfDelete!==null){alert("Your Account is Banned, contact Us for Information!");this.props.resetSignInForm();}
+        else{ 
+            
             this.props.login(user);  
      
         this.props.resetSignInForm();

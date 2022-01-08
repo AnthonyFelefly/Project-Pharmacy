@@ -64,7 +64,41 @@ export const deleteProduct=(productId)=>(dispatch)=>{
     .catch(error=>{ console.log("Delete Products ",error.message);
             alert("Your Product could not be deleted\nError: "+error.message);});
 }
-
+export const putProduct=(id,productName,category,description,application,quantity,price,image)=>(dispatch)=>{
+    dispatch(productsLoading(true))
+    const updatedProduct={
+            name:productName,
+            category:category,
+            description:description,
+            image:image,
+            application:application,
+            quantity:quantity,
+            price:price
+    };
+    return fetch(baseUrl+'products/'+id,{
+        method:'PUT',
+        body: JSON.stringify(updatedProduct),
+        headers:{
+            'Content-Type':'application/json'
+        },
+        credentials:'same-origin'
+    }).then(response=>{
+        if(response.ok){
+            return response;
+        }else{
+            var error=new Error('Error '+response.status+': '+response.statusText);
+             error.response=response;
+             throw error;
+         }
+    },
+    error=>{
+        var errmess=new Error(error.message);
+        throw errmess;
+    }).then(response=>response.json())
+    .then(response=>{dispatch(fetchProducts())})
+    .catch(error=>{ console.log("Put Products ",error.message);
+            alert("Your Product could not be updated\nError: "+error.message);});
+}
 export const fetchProducts=()=>(dispatch)=>{
     dispatch(productsLoading(true));
    return fetch(baseUrl+"products")
@@ -402,6 +436,41 @@ export const postUser=(firstName,lastName,password,email,telnum,dateOfBirth)=>(d
     .then(user=>{dispatch(addUser(user));dispatch(login(user))})
     .catch(error=>{ console.log("Sign up ",error.message);
             alert("You couldn't Sign up\nError: "+error.message);});
+}
+export const putUser=(id,firstName,lastName,password,email,telnum,dateOfBirth)=>(dispatch)=>{
+    const updatedUser={
+            firstName:firstName,
+            lastName:lastName,
+            password:password,
+            email:email,
+            telnum:telnum,
+            dateOfBirth:dateOfBirth,
+    };
+    updatedUser.type = 0;
+    updatedUser.dateOfDelete=new Date().toDateString();
+    return fetch(baseUrl+'users/'+id,{
+        method:'PUT',
+        body: JSON.stringify(updatedUser),
+        headers:{
+            'Content-Type':'application/json'
+        },
+        credentials:'same-origin'
+    }).then(response=>{
+        if(response.ok){
+            return response;
+        }else{
+            var error=new Error('Error '+response.status+': '+response.statusText);
+             error.response=response;
+             throw error;
+         }
+    },
+    error=>{
+        var errmess=new Error(error.message);
+        throw errmess;
+    }).then(response=>response.json())
+    .then(user=>{dispatch(fetchUsers())})
+    .catch(error=>{ console.log("Delete User Error ",error.message);
+            alert("The user couldn't be deleted\nError: "+error.message);});
 }
 export const addUser=(user)=>({
     type:ActionTypes.ADD_USER,

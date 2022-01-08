@@ -8,7 +8,7 @@ import { Messages } from './messages';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import { InitialAddCategory, InitialDeleteCategory, InitialMessage,InitialAddProduct, 
-    InitialDeleteProduct, InitialSignUp, InitialSignIn, InitialCheckout,  } from './forms';
+    InitialDeleteProduct, InitialSignUp, InitialSignIn, InitialCheckout, InitialAdjustProductQtty, InitialAdjustProductPrice,  } from './forms';
 import { Auth } from './auth';
 import { Orders } from './orders';
 import { ProdOrder } from './prodOrder';
@@ -34,7 +34,9 @@ export const ConfigureStore=()=>{
                 dproduct:InitialDeleteProduct,
                 signup:InitialSignUp,
                 signin:InitialSignIn,
-                checkout:InitialCheckout
+                checkout:InitialCheckout,
+                adjustqtty:InitialAdjustProductQtty,
+                adjustprice:InitialAdjustProductPrice,
             })
 
         }),

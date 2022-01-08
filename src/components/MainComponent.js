@@ -12,7 +12,8 @@ import {Switch,Route,Redirect,useParams, withRouter} from'react-router-dom';
 import {connect} from 'react-redux';
 import { postProduct ,fetchProducts,fetchCategories,fetchUsers
   ,postCategory,deleteProduct,deleteCategory, addToCart,removeFromCart,adjust_qty, 
-  postMessage, fetchMessages, deleteMessage, postUser, login, logout, postOrder, fetchOrders, postProdOrder, fetchProdOrders, deleteProdOrder, deleteOrder} from '../redux/ActionCreators';
+  postMessage, fetchMessages, deleteMessage, postUser, login, logout, postOrder, fetchOrders, 
+  postProdOrder, fetchProdOrders, deleteProdOrder, deleteOrder, putProduct, putUser} from '../redux/ActionCreators';
 import {actions} from 'react-redux-form';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
@@ -21,6 +22,7 @@ import AllMessages from './MessagesComponent';
 import Checkout from './CheckoutComponent';
 import OrdersC from './Orders';
 import OrderDetails from './OrderDetail';
+import UserComponent from './UsersComponent';
 
 
 const mapStateToProps=state=>{
@@ -35,6 +37,8 @@ const mapStateToProps=state=>{
   }
 }
 const mapDispatchToProps=(dispatch)=>({
+  putUser:(id,firstName,lastName,password,email,telnum,date)=>{dispatch(putUser(id,firstName,lastName,password,email,telnum,date))},
+  putProduct:(id,productName,category,description,application,quantity,price,image)=> dispatch(putProduct(id,productName,category,description,application,quantity,price,image)),
   postMessage:(firstName,lastName,telnum,email,flag,contactMethod,message)=>{dispatch(postMessage(firstName,lastName,telnum,email,flag,contactMethod,message))},
   postProduct:(productName,category,description,application,quantity,price,image)=> dispatch(postProduct(productName,category,description,application,quantity,price,image)),
   postCategory:(categoryName)=> dispatch(postCategory(categoryName)),
@@ -64,7 +68,9 @@ const mapDispatchToProps=(dispatch)=>({
   resetDeleteProductForm:()=>{dispatch(actions.reset('dproduct'))},
   resetSignUpForm:()=>{dispatch(actions.reset('signup'))},
   resetSignInForm:()=>{dispatch(actions.reset('signin'))},
-  resetCheckoutForm:()=>{dispatch(actions.reset('checkout'))}
+  resetCheckoutForm:()=>{dispatch(actions.reset('checkout'))},
+  resetQttyForm:()=>{dispatch(actions.reset('adjustqtty'))},
+  resetPriceForm:()=>{dispatch(actions.reset('adjustprice'))}
 });
 class Main extends Component {
  
@@ -113,7 +119,10 @@ class Main extends Component {
       //const cat=this.props.categories.categories.filter((categ)=>categ.id===parseInt(catId,10));
       return(
         <>
-        <OrderDetails order={order} isLoading={this.props.orders.isLoading} errMess={this.props.orders.errMess} productsOrder={productsOrder} products={this.props.products.products}/>
+        <OrderDetails  auth={this.props.auth} productsLoading={this.props.products.isLoading}
+          productsErrMess={this.props.products.errMess} order={order} isLoading={this.props.orders.isLoading} errMess={this.props.orders.errMess}
+         productsOrder={productsOrder} products={this.props.products.products}
+         deleteOrder={this.props.deleteOrder} deleteProdOrder={this.props.deleteProdOrder} putProduct={this.props.putProduct}/>
            
         </>
 
@@ -184,12 +193,15 @@ class Main extends Component {
             <AllMessages  auth={this.props.auth}messages={this.props.messages.messages} isLoading={this.props.messages.isLoading}
             errMess={this.props.messages.errMess} deleteMessage={this.props.deleteMessage}></AllMessages>  
           </Route>
+          <Route path="/users" >
+            <UserComponent auth={this.props.auth}putUser={this.props.putUser} users={this.props.users} ></UserComponent>
+          </Route>
           <Route exact path="/orders" >
             <OrdersC auth={this.props.auth} orders={this.props.orders.orders} isLoading={this.props.orders.isLoading}
             errMess={this.props.orders.errMess} />  
           </Route>
           <Route exact path="/orders/:OrderId" >
-            <OrderWithId/>
+            <OrderWithId />
           </Route>
           <Route exact path='/catalogue'>
           <Catalogue products={this.props.products.products} categ={this.props.categories.categories}
@@ -222,8 +234,9 @@ class Main extends Component {
           <Route exact path="/admin">
             <AdminPage auth={this.props.auth} categories={this.props.categories.categories} deleteCategory={this.props.deleteCategory} resetDeleteCategoryForm={this.props.resetDeleteCategoryForm}
             products={this.props.products.products} postCategory={this.props.postCategory} resetCategoryForm={this.props.resetCategoryForm}
-            postProduct={this.props.postProduct} addCategory={this.props.addCategory} resetProductForm={this.props.resetProductForm}
-            resetDeleteProductForm={this.props.resetDeleteProductForm} deleteProduct={ this.props.deleteProduct}/>
+            postProduct={this.props.postProduct} productsLoading={this.props.products.isLoading} productsErrMess={this.props.products.errMess}
+             addCategory={this.props.addCategory} resetProductForm={this.props.resetProductForm}
+            resetDeleteProductForm={this.props.resetDeleteProductForm} resetQttyForm={this.props.resetQttyForm} resetPriceForm={this.props.resetPriceForm} putProduct={this.props.putProduct} deleteProduct={ this.props.deleteProduct}/>
           </Route>
           <Route path="/aboutus" component={AboutPage}/>
           <Redirect to="/home" />
