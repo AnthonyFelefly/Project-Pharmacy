@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import { Link } from 'react-router-dom';
-import { Breadcrumb, BreadcrumbItem,Button,Label,Col,CardImg,Card,CardText,Row, CardHeader, Modal, ModalHeader, ModalBody } from 'reactstrap';
-import {Control,Form, Errors,actions} from "react-redux-form";
+import { Breadcrumb, BreadcrumbItem,Button,Label,Col,Card,Row, CardHeader, Modal, ModalHeader, ModalBody } from 'reactstrap';
+import {Control,Form, Errors} from "react-redux-form";
 
 const required=(val)=>val&&val.length;//check if the legnth of value is greater then zero
 const maxLength=(len)=>((val)=>(!(val)||(val.length <=len )));
@@ -43,7 +43,7 @@ class Checkout extends Component{
 
     }
     render(){
-        if(this.props.auth.signed!=true){
+        if(this.props.auth.signed!==true){
             return(
                
                 <>

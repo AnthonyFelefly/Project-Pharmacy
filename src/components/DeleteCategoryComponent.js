@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import {Button, Modal, ModalHeader, ModalBody,
     Label, Row, Col, Card, CardTitle, CardBody, CardImg } from "reactstrap";
-import { Control, Form, Errors } from 'react-redux-form';
+import { Control, Form} from 'react-redux-form';
 import { baseUrl } from '../shared/baseUrl';
 
 export class DeleteCategoryC extends Component {

@@ -1,6 +1,6 @@
-import React,{useState,useEffect} from "react";
+import React,{useState} from "react";
 import styles from "./styles/CartItem.module.css";
-import { baseUrl } from "../shared/baseUrl";
+
 
 const CartItem = ({itemData,rmFromCart,adjust_qty}) => {
   const [input,setInput]=useState(itemData.quantity)

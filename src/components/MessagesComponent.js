@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { Button, Modal, ModalBody, ModalHeader, Row } from "reactstrap";
 import { baseUrl } from "../shared/baseUrl";
 import { Loading } from "./LoadingComponent";
 import styles from "./styles/CartItem.module.css";
@@ -40,7 +42,7 @@ const MessageItem = ({itemData,deleteMessage}) => {
 
 
 
-const AllMessages = ({messages,isLoading,errMess,deleteMessage}) => {
+const AllMessages = ({messages,isLoading,errMess,deleteMessage,auth}) => {
   if (isLoading){
     return(
         <div className='container'>
@@ -59,6 +61,31 @@ else if(errMess){
 
         </div>
     )
+}
+if(auth.type!==1){
+           
+  return(
+     
+      <>
+      
+      
+      <Modal isOpen={true}   >
+          <Row>
+              <ModalHeader className="col-sm-auto col-md-auto mr-auto ml-auto" ><p>UNAUTHORIZED ACCESS!!!</p>
+                   Redirecting you to Home page</ModalHeader>
+                   </Row>
+                   <Row className="col-sm-auto col-md-auto mr-auto ml-auto">
+              <ModalBody>
+              <Link to="/home">
+                  <Button className=" teal accent-4 col-sm-auto col-md-auto  ">Okay</Button>
+              </Link>
+          </ModalBody>
+          </Row>
+      </Modal>
+      
+          
+      </>
+  )
 }
   
   return (

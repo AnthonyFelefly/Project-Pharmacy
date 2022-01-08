@@ -7,11 +7,12 @@ import DeleteProductC from "./DeleteProductComponent";
 import { Button, Modal, ModalBody, ModalHeader, Row } from "reactstrap";
 import ViewMessagesC from "./ViewMessages";
 import { Link } from "react-router-dom";
+import ViewOrdersC from "./ViewOrders";
 
 
 class AdminPage extends Component{
     render(){
-        if(this.props.auth.type!=1){
+        if(this.props.auth.type!==1){
            
             return(
                
@@ -47,6 +48,7 @@ class AdminPage extends Component{
       <DeleteProductC className="col-md-3 m-2" products={this.props.products} resetDeleteProductForm={this.props.resetDeleteProductForm} deleteProduct={ this.props.deleteProduct}/>
       <DeleteCategoryC className="col-md-3 m-2"categories={this.props.categories} products={this.props.products} deleteCategory={this.props.deleteCategory} deleteProduct={ this.props.deleteProduct} resetDeleteCategoryForm={this.props.resetDeleteCategoryForm} />
       <ViewMessagesC className="col-md-3 m-2"/>
+      <ViewOrdersC className="col-md-3 m-2"/>
       </Row></div>);
     }
 }

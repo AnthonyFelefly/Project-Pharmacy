@@ -6,7 +6,6 @@ import { baseUrl } from '../shared/baseUrl';
 const required=(val)=>val&&val.length;//check if the legnth of value is greater then zero
 const maxLength=(len)=>((val)=>(!(val)||(val.length <=len )));
 const minLength=(len)=>((val)=>(!val)||((val)&&(val.length >=len )));
-const isNumber=(val)=>(!val)||(!isNaN(Number(val)));//to check if the value is a number
 class AddCategoryC extends Component {
     constructor(props){
         super(props);

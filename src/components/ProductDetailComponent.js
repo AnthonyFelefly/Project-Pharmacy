@@ -3,7 +3,6 @@ import {Card,CardImg,CardBody,CardTitle,CardSubtitle,Breadcrumb,BreadcrumbItem} 
 import { Link } from 'react-router-dom';
 import "../App.css";
 import {Loading} from "./LoadingComponent";
-import {baseUrl} from "../shared/baseUrl";
 import { MDBBtn } from 'mdbreact';
 
 

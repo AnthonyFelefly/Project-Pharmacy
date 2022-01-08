@@ -12,13 +12,16 @@ import {Switch,Route,Redirect,useParams, withRouter} from'react-router-dom';
 import {connect} from 'react-redux';
 import { postProduct ,fetchProducts,fetchCategories,fetchUsers
   ,postCategory,deleteProduct,deleteCategory, addToCart,removeFromCart,adjust_qty, 
-  postMessage, fetchMessages, deleteMessage, postUser, login, logout, postOrder, fetchOrders, postProdOrder, fetchProdOrders} from '../redux/ActionCreators';
+  postMessage, fetchMessages, deleteMessage, postUser, login, logout, postOrder, fetchOrders, postProdOrder, fetchProdOrders, deleteProdOrder, deleteOrder} from '../redux/ActionCreators';
 import {actions} from 'react-redux-form';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
 import Cart from './CartComponent';
 import AllMessages from './MessagesComponent';
 import Checkout from './CheckoutComponent';
+import OrdersC from './Orders';
+import OrderDetails from './OrderDetail';
+
 
 const mapStateToProps=state=>{
   return {
@@ -47,6 +50,8 @@ const mapDispatchToProps=(dispatch)=>({
   deleteProduct:(productId)=>{dispatch(deleteProduct(productId))},
   deleteCategory:(categoryId)=>{dispatch(deleteCategory(categoryId))},
   deleteMessage:(messageId)=>{dispatch(deleteMessage(messageId))},
+  deleteProdOrder:(prodOrderId)=>{dispatch(deleteProdOrder(prodOrderId))},
+  deleteOrder:(orderId)=>{dispatch(deleteOrder(orderId))},
   login:(user)=>{dispatch(login(user))},
   logout:()=>{dispatch(logout())},
   addToCart:(productId)=>{dispatch(addToCart(productId))},
@@ -62,10 +67,7 @@ const mapDispatchToProps=(dispatch)=>({
   resetCheckoutForm:()=>{dispatch(actions.reset('checkout'))}
 });
 class Main extends Component {
-  constructor(props){
-    super(props);
-    
-  }
+ 
   componentDidMount(){
     this.props.fetchProducts();
     this.props.fetchCategories();
@@ -78,7 +80,7 @@ class Main extends Component {
    
     
   }
-  
+
  
   render() {
     const HomePage=()=>{
@@ -97,6 +99,22 @@ class Main extends Component {
           categoriesLoading={this.props.categories.isLoading}
           categoriesErrMess={this.props.categories.errMess}
            />
+        </>
+
+      );
+
+    } 
+    const OrderWithId=()=>{
+      let {OrderId}=useParams();
+      
+      let order=this.props.orders.orders.filter((order)=>order.id===parseInt(OrderId,10))[0];
+      let productsOrder=this.props.prodOrder.prodOrder.filter((prodorder)=>prodorder.orderId===parseInt(OrderId,10))
+
+      //const cat=this.props.categories.categories.filter((categ)=>categ.id===parseInt(catId,10));
+      return(
+        <>
+        <OrderDetails order={order} isLoading={this.props.orders.isLoading} errMess={this.props.orders.errMess} productsOrder={productsOrder} products={this.props.products.products}/>
+           
         </>
 
       );
@@ -163,8 +181,15 @@ class Main extends Component {
             <Cart auth={this.props.auth} cart={this.props.products.cart} removeFromCart={this.props.removeFromCart} adjust_qty={this.props.adjust_qty}></Cart>  
           </Route>
           <Route path="/messages" >
-            <AllMessages  messages={this.props.messages.messages} isLoading={this.props.messages.isLoading}
+            <AllMessages  auth={this.props.auth}messages={this.props.messages.messages} isLoading={this.props.messages.isLoading}
             errMess={this.props.messages.errMess} deleteMessage={this.props.deleteMessage}></AllMessages>  
+          </Route>
+          <Route exact path="/orders" >
+            <OrdersC auth={this.props.auth} orders={this.props.orders.orders} isLoading={this.props.orders.isLoading}
+            errMess={this.props.orders.errMess} />  
+          </Route>
+          <Route exact path="/orders/:OrderId" >
+            <OrderWithId/>
           </Route>
           <Route exact path='/catalogue'>
           <Catalogue products={this.props.products.products} categ={this.props.categories.categories}

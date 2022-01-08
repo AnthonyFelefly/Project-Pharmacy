@@ -35,7 +35,7 @@ export const postProduct=(productName,category,description,application,quantity,
     error=>{
         var errmess=new Error(error.message);
         throw errmess;
-    }) .then(response=>response.json())
+    }).then(response=>response.json())
     .then(response=>{dispatch(addProduct(response));console.log(response)})
     .catch(error=>{ console.log("Post Products ",error.message);
             alert("Your Product could not be added\nError: "+error.message);});
@@ -59,7 +59,7 @@ export const deleteProduct=(productId)=>(dispatch)=>{
     error=>{
         var errmess=new Error(error.message);
         throw errmess;
-    }) .then(response=>response.json())
+    }).then(response=>response.json())
     .then(response=>{dispatch(fetchProducts())})
     .catch(error=>{ console.log("Delete Products ",error.message);
             alert("Your Product could not be deleted\nError: "+error.message);});
@@ -124,7 +124,7 @@ export const deleteCategory=(categoryId)=>(dispatch)=>{
     error=>{
         var errmess=new Error(error.message);
         throw errmess;
-    }) .then(response=>response.json())
+    }).then(response=>response.json())
     .then(response=>{dispatch(fetchCategories())})
     .catch(error=>{ console.log("Delete Categories ",error.message);
             alert("This Category could not be deleted\nError: "+error.message);});
@@ -157,7 +157,7 @@ export const postCategory=(categoryName)=>(dispatch)=>{
     error=>{
         var errmess=new Error(error.message);
         throw errmess;
-    }) .then(response=>response.json())
+    }).then(response=>response.json())
     .then(response=>dispatch(addCategory(response)))
     .catch(error=>{ console.log("Post Category ",error.message);
             alert("Your Category could not be added\nError: "+error.message);});
@@ -298,7 +298,7 @@ export const postMessage=(firstName,lastName,telnum,email,flag,contactMethod,mes
     error=>{
         var errmess=new Error(error.message);
         throw errmess;
-    }) .then(response=>response.json())
+    }).then(response=>response.json())
     .then(response=>{dispatch(addMessage(response))})
     .catch(error=>{ console.log("Post Message ",error.message);
             alert("Your Message could not be sent\nError: "+error.message);});
@@ -322,7 +322,7 @@ export const deleteMessage=(messageId)=>(dispatch)=>{
     error=>{
         var errmess=new Error(error.message);
         throw errmess;
-    }) .then(response=>response.json())
+    }).then(response=>response.json())
     .then(response=>{dispatch(fetchMessages())})
     .catch(error=>{ console.log("Delete Message ",error.message);
             alert("This Message could not be deleted\nError: "+error.message);});
@@ -398,7 +398,7 @@ export const postUser=(firstName,lastName,password,email,telnum,dateOfBirth)=>(d
     error=>{
         var errmess=new Error(error.message);
         throw errmess;
-    }) .then(response=>response.json())
+    }).then(response=>response.json())
     .then(user=>{dispatch(addUser(user));dispatch(login(user))})
     .catch(error=>{ console.log("Sign up ",error.message);
             alert("You couldn't Sign up\nError: "+error.message);});
@@ -453,7 +453,7 @@ export const postOrder=(userId,city,details,floor,contactMethod,addComments,tota
     error=>{
         var errmess=new Error(error.message);
         throw errmess;
-    }) .then(response=>response.json())
+    }).then(response=>response.json())
     .then(user=>{dispatch(addOrder(user))})
     .catch(error=>{ console.log("Post Order ",error.message);
             alert("Your Order Couldn't be placed\nError: "+error.message);});
@@ -493,6 +493,32 @@ export const addOrders=(orders)=>({
     type: ActionTypes.ADD_ORDERS,
     payload:orders
 });
+export const deleteOrder=(orderId)=>(dispatch)=>{
+    return fetch(baseUrl+'orders/'+orderId,{
+        method:'DELETE',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        credentials:'same-origin'
+    }).then(response=>{
+        if(response.ok){
+            return response;
+        }else{
+            var error=new Error('Error '+response.status+': '+response.statusText);
+             error.response=response;
+             throw error;
+         }
+    },
+    error=>{
+        var errmess=new Error(error.message);
+        throw errmess;
+    }).then(response=>response.json())
+    .then(response=>{dispatch(fetchOrders())})
+    .catch(error=>{ console.log("Delete Order ",error.message);
+            alert("This Order could not be deleted\nError: "+error.message);});
+}
+
+
 
 //PRODORDER FUNCTIONS
 
@@ -526,7 +552,7 @@ export const postProdOrder=(orderId,productId,productPrice,quantity)=>(dispatch)
     error=>{
         var errmess=new Error(error.message);
         throw errmess;
-    }) .then(response=>response.json())
+    }).then(response=>response.json())
     .then(response=>{dispatch(addProdOrder(response))})
     .catch(error=>{ console.log("Post ProdOrder ",error.message);
             alert("Your Order details couldn't be added\nError: "+error.message);});
@@ -554,6 +580,30 @@ export const fetchProdOrders=()=>(dispatch)=>{
    .catch(error=>dispatch(prodOrdersFailed(error.message)));
 
 
+}
+export const deleteProdOrder=(prodOrderId)=>(dispatch)=>{
+    return fetch(baseUrl+'prodorder/'+prodOrderId,{
+        method:'DELETE',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        credentials:'same-origin'
+    }).then(response=>{
+        if(response.ok){
+            return response;
+        }else{
+            var error=new Error('Error '+response.status+': '+response.statusText);
+             error.response=response;
+             throw error;
+         }
+    },
+    error=>{
+        var errmess=new Error(error.message);
+        throw errmess;
+    }).then(response=>response.json())
+    .then(response=>{dispatch(fetchProdOrders())})
+    .catch(error=>{ console.log("Delete ProdOrder ",error.message);
+            alert("This ProdOrder could not be deleted\nError: "+error.message);});
 }
 
 
