@@ -56,6 +56,12 @@ import {Loading} from './LoadingComponent';
             )
 
         });
+        if(props.products.length===0 || props.categ.length===0){
+
+            return(
+                <div></div>
+            )
+        }
         if (props.productsLoading){
             return(
                 <div className='container'>
