@@ -16,7 +16,7 @@ export const postProduct=(productName,category,description,application,quantity,
             quantity:quantity,
             price:price
     };
-    return fetch(baseUrl+'products',{
+    return fetch(baseUrl+'products/',{
         method:'POST',
         body: JSON.stringify(newProduct),
         headers:{
@@ -41,8 +41,10 @@ export const postProduct=(productName,category,description,application,quantity,
             alert("Your Product could not be added\nError: "+error.message);});
 }
 export const deleteProduct=(productId)=>(dispatch)=>{
+    //alert(productId);
     return fetch(baseUrl+'products/'+productId,{
         method:'DELETE',
+        
         headers:{
             'Content-Type':'application/json'
         },
@@ -58,6 +60,7 @@ export const deleteProduct=(productId)=>(dispatch)=>{
     },
     error=>{
         var errmess=new Error(error.message);
+        console.log("testttt123")
         throw errmess;
     }).then(response=>response.json())
     .then(response=>{dispatch(fetchProducts())})
