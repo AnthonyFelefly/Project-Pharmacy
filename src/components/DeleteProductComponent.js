@@ -30,8 +30,8 @@ export class DeleteProductC extends Component {
 
         }
         const productToDelete=this.props.products.filter(prod=>prod.name===values.product)[0];
-        console.log(productToDelete.id);
-        this.props.deleteProduct(productToDelete.id);
+        console.log(productToDelete._id);
+        this.props.deleteProduct(productToDelete._id);
       this.props.resetDeleteProductForm(); 
       this.toggleModal();
     }

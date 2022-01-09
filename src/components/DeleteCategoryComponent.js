@@ -30,11 +30,11 @@ export class DeleteCategoryC extends Component {
          }
       
         const categoryToDelete=this.props.categories.filter(cat=>cat.description===values.category)[0];
-        const productsAssociated=this.props.products.filter(prod=>prod.category===categoryToDelete.id);
+        const productsAssociated=this.props.products.filter(prod=>prod.category===categoryToDelete._id);
         productsAssociated.map(prod=>{
-            this.props.deleteProduct(prod.id);
+            this.props.deleteProduct(prod._id);
         })
-        this.props.deleteCategory(categoryToDelete.id);
+        this.props.deleteCategory(categoryToDelete._id);
         alert("Your Category was Succesfully Deleted")
       this.props.resetDeleteCategoryForm();
       this.toggleModal();

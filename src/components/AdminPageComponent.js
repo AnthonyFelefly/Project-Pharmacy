@@ -37,7 +37,7 @@ class AdminPage extends Component{
                 </div>
             )
         }
-        if(this.props.auth.type!==1){
+      /*   if(this.props.auth.type!==1){
            
             return(
                
@@ -61,7 +61,7 @@ class AdminPage extends Component{
                     
                 </>
             )
-        }
+        } */
         return(
         <div>
         <Row className="ml-2">

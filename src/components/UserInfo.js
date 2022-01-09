@@ -33,7 +33,7 @@ class UserInfo extends Component{
                         </div>
                         <div class="widget-49-meeting-info">
                             <span class="widget-49-pro-title">{this.props.user.firstName+" "+this.props.user.lastName}</span>
-                            <span class="widget-49-meeting-time">User Id: {this.props.user.id}</span>
+                            <span class="widget-49-meeting-time">User Id: {this.props.user._id}</span>
                         </div>
                     </div>
                     <ul class="widget-49-meeting-points">
@@ -55,7 +55,7 @@ class UserInfo extends Component{
               <Button className=" teal accent-4 col-md-12 ml-auto mr-auto "  onClick={this.toggleModal}>No</Button>
               </div>
               <div className=" col-sm-auto col-md-5 ml-auto mr-auto  "  >
-                <Button  className=" teal accent-4 col-md-12 ml-auto mr-auto" onClick={()=>{this.toggleModal();this.props.putUser(this.props.user.id,this.props.user.firstName,this.props.user.lastName,this.props.user.password,this.props.user.email,this.props.user.telnum,this.props.user.dateOfBirth)}} >Yes</Button>
+                <Button  className=" teal accent-4 col-md-12 ml-auto mr-auto" onClick={()=>{this.toggleModal();this.props.putUser(this.props.user._id,this.props.user.firstName,this.props.user.lastName,this.props.user.password,this.props.user.email,this.props.user.telnum,this.props.user.dateOfBirth)}} >Yes</Button>
               </div>
 
             </Row>

@@ -21,7 +21,7 @@ class Checkout extends Component{
         this.props.cart.map((product)=>totalPrice+=product.price*product.quantity);
 
         totalPrice=totalPrice.toFixed(2);
-        this.props.postOrder(this.props.auth.currentUser.id,values.city,values.details,values.floor,values.contactMethod,values.addComments,totalPrice);
+        this.props.postOrder(this.props.auth.currentUser._id,values.city,values.details,values.floor,values.contactMethod,values.addComments,totalPrice);
         this.props.resetCheckoutForm();
         this.props.fetchOrders();
         this.setState({
@@ -37,9 +37,9 @@ class Checkout extends Component{
        
         
         
-        let orderId=this.props.orders.orders[this.props.orders.orders.length-1].id;
-        this.props.cart.map((product)=>this.props.postProdOrder(orderId,product.id,product.price,product.quantity));
-        this.props.cart.map((product)=>this.props.removeFromCart(product.id));
+        let orderId=this.props.orders.orders[this.props.orders.orders.length-1]._id;
+        this.props.cart.map((product)=>this.props.postProdOrder(orderId,product._id,product.price,product.quantity));
+        this.props.cart.map((product)=>this.props.removeFromCart(product._id));
 
     }
     render(){

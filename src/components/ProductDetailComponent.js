@@ -34,7 +34,7 @@ import { MDBBtn } from 'mdbreact';
                     <CardImg width="100%"  src={product.image} alt={product.name} />
                     <CardTitle className="m-1">{product.name}</CardTitle>
                     <CardSubtitle className="m-1">{categ.description}</CardSubtitle>
-                    <MDBBtn    className=" teal accent-4 mt-4 ml-auto mr-auto " onClick={()=>add(product.id)}style={{width:"150px"}} position="absolute">Add To Cart</MDBBtn>
+                    <MDBBtn    className=" teal accent-4 mt-4 ml-auto mr-auto " onClick={()=>add(product._id)}style={{width:"150px"}} position="absolute">Add To Cart</MDBBtn>
                 </Card>
                 </div>
                 </>
@@ -140,7 +140,7 @@ import { MDBBtn } from 'mdbreact';
                 <div className='container col-sm-6 ml-0 mt-2'>
                      <Breadcrumb>
 
-                        <BreadcrumbItem><Link to={`/catalogue/${categ.id}`}>Products{'>'} {categ.description}</Link></BreadcrumbItem>
+                        <BreadcrumbItem><Link to={`/catalogue/${categ._id}`}>Products{'>'} {categ.description}</Link></BreadcrumbItem>
                         <BreadcrumbItem active>{product.name}</BreadcrumbItem>
                     </Breadcrumb>
                     </div>
