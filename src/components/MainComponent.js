@@ -96,10 +96,12 @@ class Main extends Component {
     }
     const ProductByCategory=()=>{
       let {catId}=useParams();
-      const cat=this.props.categories.categories.filter((categ)=>categ.id===parseInt(catId,10));
+      const cat=this.props.categories.categories.filter((categ)=>categ._id===(catId));
+      //return(<div></div>)
+      //alert(cat)
       return(
         <>
-        <Catalogue add={this.props.addToCart} products={this.props.products.products.filter((product)=>product.category===cat[0].id)} categ={cat}
+        <Catalogue add={this.props.addToCart} products={this.props.products.products.filter((product)=>product.category===cat[0]._id)} categ={cat}
           productsLoading={this.props.products.isLoading}
           productsErrMess={this.props.products.errMess}
           categoriesLoading={this.props.categories.isLoading}
@@ -113,10 +115,10 @@ class Main extends Component {
     const OrderWithId=()=>{
       let {OrderId}=useParams();
       
-      let order=this.props.orders.orders.filter((order)=>order.id===parseInt(OrderId,10))[0];
-      let productsOrder=this.props.prodOrder.prodOrder.filter((prodorder)=>prodorder.orderId===parseInt(OrderId,10))
+      let order=this.props.orders.orders.filter((order)=>order._id===(OrderId))[0];
+      let productsOrder=this.props.prodOrder.prodOrder.filter((prodorder)=>prodorder.orderId===(OrderId))
 
-      //const cat=this.props.categories.categories.filter((categ)=>categ.id===parseInt(catId,10));
+      //const cat=this.props.categories.categories.filter((categ)=>categ._id===parseInt(catId,10));
       return(
         <>
         <OrderDetails  auth={this.props.auth} productsLoading={this.props.products.isLoading}
@@ -131,8 +133,8 @@ class Main extends Component {
     } 
     const ProductWithId=()=>{
       let {catId,productId}=useParams();
-      const cat=this.props.categories.categories.filter((categ)=>categ.id===parseInt(catId,10))[0];
-      const product=this.props.products.products.filter((product)=>product.id===parseInt(productId,10))[0];
+      const cat=this.props.categories.categories.filter((categ)=>categ._id===(catId))[0];
+      const product=this.props.products.products.filter((product)=>product._id===(productId))[0];
       return(
         <>
         <ProductDetail product={product} categ={cat} add={this.props.addToCart} 

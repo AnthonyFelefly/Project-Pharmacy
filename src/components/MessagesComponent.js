@@ -31,7 +31,7 @@ const MessageItem = ({itemData,deleteMessage}) => {
         </p>
       </div>
       <div className={styles.cartItem__actions}>
-        <button onClick={()=>{deleteMessage(itemData.id);alert("Messsage succesfully deleted")}} className={styles.actions__deleteItemBtn}>
+        <button onClick={()=>{deleteMessage(itemData._id);alert("Messsage succesfully deleted")}} className={styles.actions__deleteItemBtn}>
           <span className="fas fa-dumpster"></span>
         </button>
       </div>
@@ -92,7 +92,7 @@ if(auth.type!==1){
     <div className={styles.cart}>
       <div className={styles.cart__items}>
         {messages.map(item=>
-        <MessageItem key={item.id} itemData={item} deleteMessage={deleteMessage}  />
+        <MessageItem key={item._id} itemData={item} deleteMessage={deleteMessage}  />
         )}
       </div>
     </div>

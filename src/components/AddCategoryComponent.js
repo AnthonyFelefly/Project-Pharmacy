@@ -56,7 +56,7 @@ class AddCategoryC extends Component {
                             validators={{
                                 required,
                                 minLength: minLength(3),
-                                maxLength: maxLength(15)
+                                maxLength: maxLength(30)
                             }} 
                         />
                         <Errors className="text-danger" model=".categoryName" show="touched"

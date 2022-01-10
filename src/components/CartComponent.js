@@ -24,7 +24,7 @@ const Cart = ({cart,removeFromCart,adjust_qty}) => {
     <div className={styles.cart}>
       <div className={styles.cart__items}>
         {cart.map(item=>
-        <CartItem key={item.id} itemData={item} rmFromCart={removeFromCart} adjust_qty={adjust_qty} />
+        <CartItem key={item._id} itemData={item} rmFromCart={removeFromCart} adjust_qty={adjust_qty} />
         )}
       </div>
       <div className={styles.cart__summary}>

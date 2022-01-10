@@ -6,8 +6,8 @@ import {Loading} from './LoadingComponent';
 
     
     function RenderCatalogueItem({ product,categ,isLoading,errMess,add}){
-        console.log(product.id);
-        const category=(categ.filter((cat)=>cat.id===product.category)[0]);
+        console.log(product._id);
+        const category=(categ.filter((cat)=>cat._id===product.category)[0]);
         if (isLoading){
             return(
                 <div className='container'>
@@ -37,8 +37,8 @@ import {Loading} from './LoadingComponent';
                     <CardText>{category.description}</CardText>
                     <div className="text-center">
                         <Row>
-                    <MDBBtn    className=" teal accent-4 ml-auto mr-auto " onClick={()=>add(product.id)}style={{width:"150px"}} position="absolute">Add To Cart</MDBBtn>
-                    <Link to={`/catalogue/${category.id}/${product.id}`} >  
+                    <MDBBtn    className=" teal accent-4 ml-auto mr-auto " onClick={()=>add(product._id)}style={{width:"150px"}} position="absolute">Add To Cart</MDBBtn>
+                    <Link to={`/catalogue/${category._id}/${product._id}`} >  
                     <MDBBtn   className=" teal accent-4 ml-auto mr-auto " style={{width:"150px"}} position="absolute" >See Details</MDBBtn>
                     </Link>
                     </Row>
@@ -50,7 +50,7 @@ import {Loading} from './LoadingComponent';
     const Catalogue =(props)=>{
         const menu=props.products.map((product)=>{
             return(
-                <div key={product.id} className="col-12 col-md-3 m-4 ">
+                <div key={product._id} className="col-12 col-md-3 m-4 ">
                 <RenderCatalogueItem product={product} categ={props.categ}  add={props.add}isLoading={props.productsLoading} errMess={props.productsErrMess} />
                 </div>
             )

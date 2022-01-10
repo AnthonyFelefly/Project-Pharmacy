@@ -52,7 +52,7 @@ class AddProductC extends Component {
 
         }
         const cat=this.props.categories.filter((categ)=>categ.description===values.category)[0];
-        const category=cat.id;
+        const category=cat._id;
         if (this.props.products.filter((product)=>product.name===values.productName)[0]!=null){
             alert("This product already exist, please add a non existing product");    
         }

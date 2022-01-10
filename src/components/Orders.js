@@ -9,11 +9,11 @@ class OrdersC extends Component{
 
         const listOrders=this.props.orders.map(order=>
             
-            <div key={order.id} className="col-12 col-md-3 m-4 ">
-            <Link to={`/orders/${order.id}`}>
+            <div key={order._id} className="col-12 col-md-3 m-4 ">
+            <Link to={`/orders/${order._id}`}>
             <Card>
                 <CardBody className="mr-auto ml-auto">
-                    Order #{order.id}
+                    Order #{order._id}
                 </CardBody>
             </Card>
             </Link>

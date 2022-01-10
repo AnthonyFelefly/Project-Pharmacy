@@ -23,8 +23,8 @@ class OrderDetails extends Component{
     });
   }
   confirmProceed(){
-    this.props.productsOrder.map(item=>this.props.deleteProdOrder(item.id))
-    this.props.deleteOrder(this.props.order.id);
+    this.props.productsOrder.map(item=>this.props.deleteProdOrder(item._id))
+    this.props.deleteOrder(this.props.order._id);
   }
   render(){
     if(this.props.auth.type!==1){
@@ -101,7 +101,7 @@ class OrderDetails extends Component{
     <div className={styles.cart}>
        <div className={styles.cart__items}>
          {this.props.productsOrder.map(item=>
-        <OrderItem key={item.productId} itemData={this.props.products.filter(product=>product.id===item.productId)[0]} orderData={item}  />
+        <OrderItem key={item.productId} itemData={this.props.products.filter(product=>product._id===item.productId)[0]} orderData={item}  />
         )} 
       </div> 
       <Card  style={{"width": "500px","object-fit": "contain","height":"full"}}>
@@ -114,7 +114,7 @@ class OrderDetails extends Component{
             <span style={{"font-size":"medium"}}>{this.props.order.city}</span>
             </CardText>
             <CardText><span  style={{"font-size":"medium","fontWeight":"bold","color":"teal"}}>Adress Detail: </span>
-            <span className="col-md-9" style={{"font-size":"medium"}}>{this.props.order.details} AAAAAAAAAAAAAAAAAAAAAAAAAand I dont think it would be okay to play som bullshit</span>
+            <span className="col-md-9" style={{"font-size":"medium"}}>{this.props.order.details}</span>
             </CardText>
             <CardText><span  style={{"font-size":"medium","fontWeight":"bold","color":"teal"}}>Floor: </span>
             <span style={{"font-size":"medium"}}>{this.props.order.floor}</span>

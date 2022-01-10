@@ -6,7 +6,7 @@ const CartItem = ({itemData,rmFromCart,adjust_qty}) => {
   const [input,setInput]=useState(itemData.quantity)
   const onChangeHandler=(e)=>{
     setInput(e.target.value);
-    adjust_qty(itemData.id,e.target.value);
+    adjust_qty(itemData._id,e.target.value);
 
   }
 
@@ -28,7 +28,7 @@ const CartItem = ({itemData,rmFromCart,adjust_qty}) => {
           <label htmlFor="qty">Qty</label>
           <input min="1" type="number" id="qty" name="qty" value={itemData.quantity} onChange={onChangeHandler}/>
         </div>
-        <button onClick={()=>rmFromCart(itemData.id)} className={styles.actions__deleteItemBtn}>
+        <button onClick={()=>rmFromCart(itemData._id)} className={styles.actions__deleteItemBtn}>
           <span className="fas fa-dumpster"></span>
         </button>
       </div>

@@ -74,7 +74,7 @@ class NavBar extends Component{
        
         const categoryDropDown=this.props.categories.map((cat)=>{
             return(
-                <NavLink to={`/catalogue/${cat.id}`}>
+                <NavLink to={`/catalogue/${cat._id}`}>
                       <MDBDropdownItem>{cat.description}</MDBDropdownItem>
                 </NavLink>
             );});

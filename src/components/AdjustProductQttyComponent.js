@@ -31,7 +31,7 @@ export class AdjustProductQttyC extends Component {
 
         }
         const prod=this.props.products.filter(prod=>prod.name===values.product)[0];
-        this.props.putProduct(prod.id,prod.name,prod.category,prod.description,prod.application,values.quantity,prod.price,prod.image)
+        this.props.putProduct(prod._id,prod.name,prod.category,prod.description,prod.application,values.quantity,prod.price,prod.image)
         
         this.props.resetQttyForm(); 
         this.toggleModal();
